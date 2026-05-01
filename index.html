@@ -1106,11 +1106,9 @@ fetch('/content.json')
     setText('cms-fact-beach', c.intro.facts.beach);
     setText('cms-fact-view', c.intro.facts.view);
 
-    /* AMENITIES */
+    /* AMENITIES — heading only, list stays in HTML to preserve SVG icons */
     setText('cms-am-overtitle', c.amenities.overtitle);
     setText('cms-am-heading', c.amenities.heading);
-    var amList = document.getElementById('cms-am-list');
-    if(amList){ amList.innerHTML = c.amenities.items.map(function(i){ return '<li>'+i+'</li>'; }).join(''); }
 
     /* SITGES — heading/sub only, grid stays in HTML to preserve SVG icons */
     setText('cms-sitges-heading', c.sitges.heading);
@@ -1119,13 +1117,8 @@ fetch('/content.json')
     /* GALLERY — heading only, images stay in HTML to preserve scroll JS */
     setText('cms-gal-heading', c.gallery.heading);
 
-    /* REVIEWS */
+    /* REVIEWS — heading only, cards stay in HTML to preserve styling */
     setText('cms-rev-heading', c.reviews.heading);
-    var revWrap = document.getElementById('cms-rev-list');
-    if(revWrap){ revWrap.innerHTML = c.reviews.items.map(function(r){
-      var stars = '★'.repeat(r.stars)+'☆'.repeat(5-r.stars);
-      return '<div class="rev-card"><div class="rev-stars">'+stars+'</div><p class="rev-text">"'+r.text+'"</p><div class="rev-meta"><strong>'+r.name+'</strong><span>'+r.location+' · '+r.date+'</span></div></div>';
-    }).join(''); }
 
     /* BOOKING */
     setText('cms-bk-minstay', c.booking.minStay);
