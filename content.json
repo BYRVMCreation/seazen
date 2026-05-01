@@ -1,0 +1,106 @@
+{
+  "hero": {
+    "title1": "SeaZen",
+    "title2": "Sitges",
+    "subtitle": "Sitges, Spain — Seafront Apartment",
+    "image": "hero.jpg",
+    "imageMobile": "hero-mobile.jpg",
+    "cta": "Discover the apartment"
+  },
+  "intro": {
+    "overtitle": "The Apartment",
+    "heading1": "A curated retreat",
+    "heading2": "above the Mediterranean",
+    "para1": "SeaZen is a light-filled seafront apartment in the heart of Sitges — one of Spain's most beloved coastal towns. Perched above the promenade with uninterrupted sea views, every detail has been considered for those who appreciate calm, quality and space.",
+    "para2": "Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.",
+    "facts": {
+      "size": "120 m²",
+      "guests": "4 Guests",
+      "bedrooms": "2 Bedrooms",
+      "price": "€250 / night",
+      "beach": "50 m to beach",
+      "view": "Sea view"
+    }
+  },
+  "amenities": {
+    "overtitle": "Everything you could need",
+    "heading": "Thoughtfully equipped",
+    "items": [
+      "Sea view terrace",
+      "Fully equipped kitchen",
+      "Air conditioning",
+      "High-speed Wi-Fi",
+      "Smart TV & streaming",
+      "King-size beds",
+      "Premium linen & towels",
+      "Washing machine & dryer",
+      "Daily cleaning available",
+      "Contactless check-in",
+      "Private parking",
+      "Lift access"
+    ]
+  },
+  "sitges": {
+    "heading": "Sitges awaits",
+    "subtitle": "Step outside and discover one of the Mediterranean's most vibrant and charming towns.",
+    "items": [
+      { "icon": "🏖", "title": "Beaches", "desc": "17 golden sandy beaches within walking distance" },
+      { "icon": "🍷", "title": "Seafood & Tapas", "desc": "World-class restaurants along the promenade" },
+      { "icon": "🎨", "title": "Art & Culture", "desc": "Museums, galleries and the famous Carnival" },
+      { "icon": "⛵", "title": "Watersports", "desc": "Sailing, paddleboarding and diving" },
+      { "icon": "🌿", "title": "Hiking", "desc": "Scenic trails through Garraf Natural Park" },
+      { "icon": "🚂", "title": "Barcelona", "desc": "35 min by train to the city centre" }
+    ]
+  },
+  "gallery": {
+    "heading": "Take a closer look",
+    "images": [
+      { "src": "bedroom.jpg", "alt": "Master bedroom" },
+      { "src": "bathroom.jpg", "alt": "Bathroom" },
+      { "src": "dining.jpg", "alt": "Dining area" },
+      { "src": "kitchen.jpg", "alt": "Kitchen" },
+      { "src": "office.jpg", "alt": "Home office" },
+      { "src": "bedroom2.jpg", "alt": "Second bedroom" },
+      { "src": "kitchen2.jpg", "alt": "Kitchen island" }
+    ]
+  },
+  "reviews": {
+    "heading": "What our guests say",
+    "items": [
+      {
+        "name": "Sophie & James",
+        "location": "London, UK",
+        "date": "March 2025",
+        "stars": 5,
+        "text": "An absolutely stunning apartment. The sea views are breathtaking and the space is beautifully designed. We didn't want to leave. Sitges itself is magical — we'll definitely be back."
+      },
+      {
+        "name": "Marie-Claire D.",
+        "location": "Paris, France",
+        "date": "February 2025",
+        "stars": 5,
+        "text": "Perfect in every way. The apartment is exactly as shown — even better in person. Spotlessly clean, incredibly comfortable, and the location on the seafront is unbeatable. Highly recommend."
+      }
+    ]
+  },
+  "booking": {
+    "minStay": "3 nights",
+    "checkin": "15:00",
+    "checkout": "11:00",
+    "pets": "not permitted",
+    "smoking": "outside only"
+  },
+  "contact": {
+    "phone": "+34 600 000 000",
+    "email": "hello@seazen.com",
+    "instagram": "@seazen.sitges",
+    "instagramUrl": "https://instagram.com"
+  },
+  "newsletter": {
+    "heading": "Stay in the loop",
+    "sub": "Be the first to hear about availability and special offers."
+  },
+  "footer": {
+    "copy": "© 2025 SeaZen. All rights reserved."
+  }
+}
