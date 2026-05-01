@@ -10,91 +10,48 @@
   :root { --a:#66484e; --tx:#1c1916; --mid:#6d6260; --bg:#f5f5f5; --bdr:rgba(28,25,22,.1); }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.75; color: var(--tx); background: var(--bg); }
-
-  .back-bar {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(245,245,245,.97); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--bdr);
-    padding: 14px 48px;
-  }
-  .back-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--a); text-decoration: none;
-    transition: gap .2s;
-  }
+  .back-bar { position: sticky; top: 0; z-index: 100; background: rgba(245,245,245,.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--bdr); padding: 14px 48px; }
+  .back-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--a); text-decoration: none; transition: gap .2s; }
   .back-btn:hover { gap: 12px; }
   .back-btn svg { width: 14px; height: 14px; }
-
   .wrap { max-width: 720px; margin: 0 auto; padding: clamp(40px,6vw,80px) 24px clamp(60px,8vw,120px); }
   .ot { font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: var(--a); display: block; margin-bottom: 16px; }
   h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(32px,4vw,52px); line-height: 1.15; margin-bottom: 8px; }
   .updated { font-size: 12px; color: var(--mid); margin-bottom: 48px; }
   h2 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 22px; margin: 40px 0 12px; }
-  p { margin-bottom: 16px; color: var(--mid); }
-  ul { padding-left: 20px; margin-bottom: 16px; color: var(--mid); }
-  ul li { margin-bottom: 6px; }
+  p { margin-bottom: 16px; color: var(--mid); white-space: pre-line; }
   a { color: var(--a); }
   hr { border: none; border-top: 1px solid var(--bdr); margin: 48px 0; }
-
   .footer-note { font-size: 12px; color: var(--mid); text-align: center; padding: 24px; border-top: 1px solid var(--bdr); }
   .footer-note a { color: var(--a); text-decoration: none; }
 </style>
 </head>
 <body>
-
 <div class="back-bar">
   <a class="back-btn" href="index.html">
     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
     Back to SeaZen
   </a>
 </div>
-
 <div class="wrap">
   <span class="ot">Legal</span>
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 1 January 2025</p>
-
-  <p>SeaZen ("we", "us", or "our") is committed to protecting your personal information. This Privacy Policy explains what data we collect, how we use it, and your rights regarding that data.</p>
-
-  <h2>1. Information We Collect</h2>
-  <p>When you use our website or submit a booking request, we may collect the following information:</p>
-  <ul>
-    <li>Name, email address, and phone number</li>
-    <li>Booking dates, guest count, and special requests</li>
-    <li>Device and browser information (via cookies)</li>
-    <li>How you found us (referral source)</li>
-  </ul>
-
-  <h2>2. How We Use Your Information</h2>
-  <p>We use your data solely to:</p>
-  <ul>
-    <li>Process and confirm your reservation enquiry</li>
-    <li>Communicate booking details and updates</li>
-    <li>Improve our website experience</li>
-    <li>Send occasional newsletters, only if you have opted in</li>
-  </ul>
-
-  <h2>3. Data Sharing</h2>
-  <p>We do not sell, rent, or trade your personal data. We may share it with trusted third-party services (e.g. booking platforms) strictly to fulfil your reservation.</p>
-
-  <h2>4. Cookies</h2>
-  <p>Our website uses cookies to remember your preferences and analyse site traffic. You may disable cookies in your browser settings; however, some features may not function correctly.</p>
-
-  <h2>5. Data Retention</h2>
-  <p>We retain your personal data for as long as necessary to fulfil the purposes outlined above, or as required by law. You may request deletion at any time.</p>
-
-  <h2>6. Your Rights</h2>
-  <p>Under applicable data protection law you have the right to access, correct, or delete your personal data. To exercise these rights, contact us at <a href="mailto:hello@seazen.com">hello@seazen.com</a>.</p>
-
-  <h2>7. Contact</h2>
-  <p>SeaZen · Sitges, Spain · <a href="mailto:hello@seazen.com">hello@seazen.com</a></p>
-
+  <h1 id="policy-title">Privacy Policy</h1>
+  <p class="updated" id="policy-updated">Last updated: 1 January 2025</p>
+  <div id="policy-sections"></div>
   <hr>
-  <p style="font-size:13px;color:var(--mid);">This is a placeholder privacy policy. Please replace this with a legally reviewed document before going live.</p>
+  <p style="font-size:13px;color:var(--mid);">Please replace this with a legally reviewed document before going live.</p>
 </div>
-
 <div class="footer-note">&copy; 2025 SeaZen · <a href="terms.html">Terms</a> · <a href="cancellation.html">Cancellation</a></div>
-
+<script>
+fetch('/privacy.json').then(function(r){ return r.json(); }).then(function(d){
+  document.getElementById('policy-title').textContent = d.title;
+  document.getElementById('policy-updated').textContent = 'Last updated: ' + d.updated;
+  document.title = d.title + ' — SeaZen';
+  var html = d.sections.map(function(s){
+    return '<h2>'+s.heading+'</h2><p>'+s.content+'</p>';
+  }).join('');
+  document.getElementById('policy-sections').innerHTML = html;
+}).catch(function(){});
+</script>
 </body>
 </html>
