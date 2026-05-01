@@ -8,6 +8,51 @@ public_folder: "/images"
 site_url: https://your-site.netlify.app
 
 collections:
+  - name: "legal"
+    label: "Legal Pages"
+    files:
+      - name: "privacy"
+        label: "Privacy Policy"
+        file: "privacy.json"
+        format: json
+        fields:
+          - { label: "Page title", name: "title", widget: "string", default: "Privacy Policy" }
+          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2025" }
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Content", name: "content", widget: "text" }
+
+      - name: "terms"
+        label: "Terms & Conditions"
+        file: "terms.json"
+        format: json
+        fields:
+          - { label: "Page title", name: "title", widget: "string", default: "Terms & Conditions" }
+          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2025" }
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Content", name: "content", widget: "text" }
+
+      - name: "cancellation"
+        label: "Cancellation Policy"
+        file: "cancellation.json"
+        format: json
+        fields:
+          - { label: "Page title", name: "title", widget: "string", default: "Cancellation Policy" }
+          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2025" }
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Content", name: "content", widget: "text" }
+
   - name: "settings"
     label: "Site Settings"
     files:
