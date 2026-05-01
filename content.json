@@ -1,9 +1,11 @@
 {
-  "contact": {
-    "phone": "+34 600 000 000",
-    "email": "hello@seazen.com",
-    "instagram": "@seazen.sitges",
-    "instagramUrl": "https://instagram.com"
+  "hero": {
+    "title1": "Where the sea",
+    "title2": "meets stillness",
+    "subtitle": "Sitges, Spain — Seafront Apartment",
+    "image": "hero.jpg",
+    "imageMobile": "hero-mobile.jpg",
+    "cta": "Discover the apartment"
   },
   "intro": {
     "overtitle": "The Apartment",
@@ -19,39 +21,6 @@
       "beach": "50 m to beach",
       "view": "Sea view"
     }
-  },
-  "gallery": {
-    "heading": "Take a closer look",
-    "images": [
-      {
-        "src": "bedroom.jpg",
-        "alt": "Master bedroom"
-      },
-      {
-        "src": "bathroom.jpg",
-        "alt": "Bathroom"
-      },
-      {
-        "src": "dining.jpg",
-        "alt": "Dining area"
-      },
-      {
-        "src": "kitchen.jpg",
-        "alt": "Kitchen"
-      },
-      {
-        "src": "office.jpg",
-        "alt": "Home office"
-      },
-      {
-        "src": "bedroom2.jpg",
-        "alt": "Second bedroom"
-      },
-      {
-        "src": "kitchen2.jpg",
-        "alt": "Kitchen island"
-      }
-    ]
   },
   "amenities": {
     "overtitle": "Everything you could need",
@@ -75,56 +44,25 @@
     "heading": "Sitges awaits",
     "subtitle": "Step outside and discover one of the Mediterranean's most vibrant and charming towns.",
     "items": [
-      {
-        "icon": "🏖",
-        "title": "Beaches",
-        "desc": "17 golden sandy beaches within walking distance"
-      },
-      {
-        "icon": "🍷",
-        "title": "Seafood & Tapas",
-        "desc": "World-class restaurants along the promenade"
-      },
-      {
-        "icon": "🎨",
-        "title": "Art & Culture",
-        "desc": "Museums, galleries and the famous Carnival"
-      },
-      {
-        "icon": "⛵",
-        "title": "Watersports",
-        "desc": "Sailing, paddleboarding and diving"
-      },
-      {
-        "icon": "🌿",
-        "title": "Hiking",
-        "desc": "Scenic trails through Garraf Natural Park"
-      },
-      {
-        "icon": "🚂",
-        "title": "Barcelona",
-        "desc": "35 min by train to the city centre"
-      }
+      { "icon": "🏖", "title": "Beaches", "desc": "17 golden sandy beaches within walking distance" },
+      { "icon": "🍷", "title": "Seafood & Tapas", "desc": "World-class restaurants along the promenade" },
+      { "icon": "🎨", "title": "Art & Culture", "desc": "Museums, galleries and the famous Carnival" },
+      { "icon": "⛵", "title": "Watersports", "desc": "Sailing, paddleboarding and diving" },
+      { "icon": "🌿", "title": "Hiking", "desc": "Scenic trails through Garraf Natural Park" },
+      { "icon": "🚂", "title": "Barcelona", "desc": "35 min by train to the city centre" }
     ]
   },
-  "booking": {
-    "minStay": "3 nights",
-    "checkin": "15:00",
-    "checkout": "11:00",
-    "pets": "not permitted",
-    "smoking": "outside only"
-  },
-  "newsletter": {
-    "heading": "Stay in the loop",
-    "sub": "Be the first to hear about availability and special offers."
-  },
-  "hero": {
-    "title1": "SeaZen",
-    "title2": "Sitges",
-    "subtitle": "Sitges, Spain — Seafront Apartment",
-    "image": "hero.jpg",
-    "imageMobile": "hero-mobile.jpg",
-    "cta": "Discover the apartment"
+  "gallery": {
+    "heading": "Take a closer look",
+    "images": [
+      { "src": "bedroom.jpg", "alt": "Master bedroom" },
+      { "src": "bathroom.jpg", "alt": "Bathroom" },
+      { "src": "dining.jpg", "alt": "Dining area" },
+      { "src": "kitchen.jpg", "alt": "Kitchen" },
+      { "src": "office.jpg", "alt": "Home office" },
+      { "src": "bedroom2.jpg", "alt": "Second bedroom" },
+      { "src": "kitchen2.jpg", "alt": "Kitchen island" }
+    ]
   },
   "reviews": {
     "heading": "What our guests say",
@@ -145,7 +83,24 @@
       }
     ]
   },
+  "booking": {
+    "minStay": "3 nights",
+    "checkin": "15:00",
+    "checkout": "11:00",
+    "pets": "not permitted",
+    "smoking": "outside only"
+  },
+  "contact": {
+    "phone": "+34 600 000 000",
+    "email": "hello@seazen.com",
+    "instagram": "@seazen.sitges",
+    "instagramUrl": "https://instagram.com"
+  },
+  "newsletter": {
+    "heading": "Stay in the loop",
+    "sub": "Be the first to hear about availability and special offers."
+  },
   "footer": {
-    "copy": "© 2026 SeaZen. All rights reserved."
+    "copy": "© 2025 SeaZen. All rights reserved."
   }
 }
