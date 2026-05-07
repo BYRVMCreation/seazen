@@ -1,12 +1,30 @@
 {
   "title": "Cancellation Policy",
-  "updated": "1 January 2025",
+  "updated": "7 May 2026",
   "sections": [
-    { "heading": "1. Cancellation by Guest", "content": "All cancellation requests must be submitted in writing to hello@seazen.com. The cancellation date is the date on which SeaZen receives written notice.\n\nMore than 90 days: Full refund of deposit (less €150 admin fee)\n60–90 days: 50% of total rental fee refunded\n30–59 days: 25% of total rental fee refunded\nLess than 30 days: No refund" },
-    { "heading": "2. Cancellation by SeaZen", "content": "In the unlikely event that SeaZen must cancel a confirmed reservation, guests will receive a full refund of all amounts paid. SeaZen will make every effort to suggest alternative dates or a property." },
-    { "heading": "3. Force Majeure", "content": "SeaZen shall not be liable for cancellations caused by events beyond its reasonable control, including natural disasters, governmental restrictions, or pandemic-related travel bans. In such cases, SeaZen will offer a credit or rescheduling wherever possible." },
-    { "heading": "4. Travel Insurance", "content": "We strongly recommend that all guests purchase comprehensive travel insurance that covers cancellation, curtailment, and personal liability." },
-    { "heading": "5. Changes to Booking", "content": "Date changes are subject to availability and must be requested in writing. A €75 amendment fee applies. Changes within 30 days of arrival are treated as a cancellation and re-booking." },
-    { "heading": "6. Contact", "content": "For cancellations or amendments, please contact us at hello@seazen.com or call +34 600 000 000." }
+    {
+      "heading": "1. Cancellation by Guest",
+      "content": "All cancellation requests must be submitted in writing to stay@seazen.es. The cancellation date is the date on which SeaZen receives written notice.\n\nMore than 42 days: Full refund of deposit\n41-28 days: 75% of total rental fee refunded\n27–14 days: 50% of total rental fee refunded\nLess than 13 days: No refund"
+    },
+    {
+      "heading": "2. Cancellation by SeaZen",
+      "content": "In the unlikely event that SeaZen must cancel a confirmed reservation, guests will receive a full refund of all amounts paid. SeaZen will make every effort to suggest alternative dates or another property."
+    },
+    {
+      "heading": "3. Force Majeure",
+      "content": "SeaZen shall not be liable for cancellations caused by events beyond its reasonable control, including natural disasters, governmental restrictions, or pandemic-related travel bans. In such cases, SeaZen will offer a credit or rescheduling wherever possible."
+    },
+    {
+      "heading": "4. Travel Insurance",
+      "content": "We strongly recommend that all guests purchase comprehensive travel insurance that covers cancellation, curtailment, and personal liability."
+    },
+    {
+      "heading": "5. Changes to Booking",
+      "content": "Date changes are subject to availability and must be requested in writing. A €75 amendment fee applies. Changes within 28 days of arrival are treated as a cancellation and re-booking."
+    },
+    {
+      "heading": "6. Contact",
+      "content": "For cancellations or amendments, please contact us at stay@seazen.es or call +34 604 243 746."
+    }
   ]
 }
