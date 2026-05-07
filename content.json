@@ -1,23 +1,23 @@
 {
   "contact": {
-    "phone": "+34 600 000 000",
-    "email": "hello@seazen.com",
-    "instagram": "@seazen.sitges",
-    "instagramUrl": "https://instagram.com"
+    "phone": "+34 604 234 746",
+    "email": "stay@seazen.es",
+    "instagram": "@",
+    "instagramUrl": "instagram.com"
   },
   "intro": {
-    "overtitle": "The Apartment",
+    "overtitle": "The penthouse",
     "heading1": "A curated retreat",
     "heading2": "above the Mediterranean",
-    "para1": "SeaZen is a light-filled seafront apartment in the heart of Sitges — one of Spain's most beloved coastal towns. Perched above the promenade with uninterrupted sea views, every detail has been considered for those who appreciate calm, quality and space.",
-    "para2": "Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.",
+    "para1": "SeaZen is a light-filled seafront penthouse in the Old Town of Sitges — one of Barcelona's most beloved coastal towns. Perched above the promenade with uninterrupted sea views, every detail has been considered for those who appreciate quality and the good life.",
+    "para2": "Whether you're seeking a romantic escape, a family retreat or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.",
     "facts": {
-      "size": "120 m²",
-      "guests": "4 Guests",
-      "bedrooms": "2 Bedrooms",
-      "price": "€250 / night",
+      "size": "60 m² of indoor space and 60m2 of terrace",
+      "guests": "2 Guests",
+      "bedrooms": "1 Bedroom",
+      "price": "€320 / night",
       "beach": "50 m to beach",
-      "view": "Sea view"
+      "view": "Sea views"
     }
   },
   "gallery": {
@@ -57,17 +57,17 @@
     "overtitle": "Everything you could need",
     "heading": "Thoughtfully equipped",
     "items": [
-      "Sea view terrace",
+      "Terrace with sea views",
       "Fully equipped kitchen",
-      "Air conditioning",
+      "Air conditioning & underfloor heating",
       "High-speed Wi-Fi",
       "Smart TV & streaming",
-      "King-size beds",
+      "King-size bed",
       "Premium linen & towels",
       "Washing machine & dryer",
-      "Daily cleaning available",
+      "Extra services available upon request",
       "Contactless check-in",
-      "Private parking",
+      "free parking along the promenade or paid parking in a public parking nearby",
       "Lift access"
     ]
   },
@@ -83,12 +83,12 @@
       {
         "icon": "🍷",
         "title": "Seafood & Tapas",
-        "desc": "World-class restaurants along the promenade"
+        "desc": "Cozy restaurants & bars along the promenade"
       },
       {
         "icon": "🎨",
         "title": "Art & Culture",
-        "desc": "Museums, galleries and the famous Carnival"
+        "desc": "Museums, galleries and the famous Fim Festival, Carnival & Pride"
       },
       {
         "icon": "⛵",
@@ -103,28 +103,28 @@
       {
         "icon": "🚂",
         "title": "Barcelona",
-        "desc": "35 min by train to the city centre"
+        "desc": "only 35 min by direct train to the city centre"
       }
     ]
   },
   "booking": {
-    "minStay": "3 nights",
+    "minStay": "5 nights",
     "checkin": "15:00",
     "checkout": "11:00",
     "pets": "not permitted",
-    "smoking": "outside only"
+    "smoking": "not allowed"
   },
   "newsletter": {
     "heading": "Stay in the loop",
-    "sub": "Be the first to hear about availability and special offers."
+    "sub": "Be the first to hear about availability and special offers"
   },
   "hero": {
-    "title1": "Where the sea",
-    "title2": "meets stillness",
-    "subtitle": "Sitges, Spain — Seafront Apartment",
+    "title1": "High above the sea, far beyond the ordinary",
+    "title2": "Where every day is a Zenday",
+    "subtitle": "Sitges (Barcelona) — stylish seafront penthouse",
     "image": "hero.jpg",
     "imageMobile": "hero-mobile.jpg",
-    "cta": "Discover the apartment"
+    "cta": "Discover SeaZen"
   },
   "reviews": {
     "heading": "What our guests say",
