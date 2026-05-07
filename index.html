@@ -790,11 +790,9 @@ h2.sh {
             --ldg-bnb-font-family: 'Inter', sans-serif;
           }
           #lodgify-book-now-box { width: 100%; }
-          /* force left alignment & remove internal offset */
-          [class*="BookNowBox"],
-          [class*="book-now-box"] { margin-left: 0 !important; padding-left: 0 !important; }
-          [class*="BookNowBox"] > div,
-          [class*="book-now-box"] > div { box-shadow: none !important; background: transparent !important; padding: 0 !important; border-radius: 0 !important; margin-left: 0 !important; }
+          #lodgify-book-now-box > *,
+          #lodgify-book-now-box > * > *,
+          #lodgify-book-now-box > * > * > * { margin-left: 0 !important; padding-left: 0 !important; box-shadow: none !important; border-radius: 0 !important; background: transparent !important; width: 100% !important; max-width: 100% !important; }
           /* more breathing room in date / input rows */
           [class*="BookNowBox"] input,
           [class*="BookNowBox"] select,
@@ -815,7 +813,7 @@ h2.sh {
           [class*="BookNowBox"] [class*="error"],
           [class*="book-now-box"] [class*="error"] { font-family: 'Inter', sans-serif !important; font-size: 11px !important; }
         </style>
-        <div style="margin-left:-14px; width:calc(100% + 14px);">
+        <div style="margin-left:-14px; width:calc(100% + 28px); overflow:hidden;">
         <div
           id="lodgify-book-now-box"
           data-rental-id="796627"
