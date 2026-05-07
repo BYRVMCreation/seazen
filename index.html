@@ -663,14 +663,15 @@ h2.sh {
 <section id="fp">
   <div class="fp-head rv">
     <div>
-      <span class="ot">Floor Plan</span>
+      <span id="cms-fp-overtitle" class="ot">Floor Plan</span>
       <span class="rule" style="margin-bottom:16px"></span>
-      <h2 class="sh">120 m² of refined space</h2>
+      <h2 id="cms-fp-heading" class="sh">120 m² of refined space</h2>
     </div>
-    <p class="bt" style="max-width:300px;">Two bedrooms, open-plan living, full kitchen, and a sea-facing wraparound terrace.</p>
+    <p id="cms-fp-desc" class="bt" style="max-width:300px;">Two bedrooms, open-plan living, full kitchen, and a sea-facing wraparound terrace.</p>
   </div>
   <div class="fp-img rv d1">
-    <svg viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif">
+    <img id="cms-fp-image" src="" alt="Floor plan" style="display:none;width:100%;height:auto;object-fit:contain;">
+    <svg id="cms-fp-svg" viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif">
       <rect x="40" y="40" width="820" height="460" fill="none" stroke="#1c1916" stroke-width="2.5"/>
       <line x1="320" y1="40" x2="320" y2="320" stroke="#1c1916" stroke-width="2"/>
       <line x1="620" y1="40" x2="620" y2="500" stroke="#1c1916" stroke-width="2"/>
@@ -1114,6 +1115,20 @@ fetch('/content.json')
 
     /* GALLERY — heading only, images stay in HTML to preserve scroll JS */
     setText('cms-gal-heading', c.gallery.heading);
+
+    /* FLOOR PLAN */
+    if (c.floorplan) {
+      setText('cms-fp-overtitle', c.floorplan.overtitle);
+      setText('cms-fp-heading', c.floorplan.heading);
+      setText('cms-fp-desc', c.floorplan.desc);
+      if (c.floorplan.image) {
+        var fpImg = document.getElementById('cms-fp-image');
+        var fpSvg = document.getElementById('cms-fp-svg');
+        fpImg.src = c.floorplan.image;
+        fpImg.style.display = 'block';
+        if (fpSvg) fpSvg.style.display = 'none';
+      }
+    }
 
     /* REVIEWS — heading only, cards stay in HTML to preserve styling */
     setText('cms-rev-heading', c.reviews.heading);
