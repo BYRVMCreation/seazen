@@ -122,6 +122,16 @@ collections:
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Description", name: "desc", widget: "string" }
 
+          # ── FLOOR PLAN ────────────────────────────
+          - label: "Floor Plan"
+            name: "floorplan"
+            widget: "object"
+            fields:
+              - { label: "Overtitle", name: "overtitle", widget: "string", default: "Floor Plan" }
+              - { label: "Heading (e.g. 120 m² of refined space)", name: "heading", widget: "string", default: "120 m² of refined space" }
+              - { label: "Description (right column)", name: "desc", widget: "text", default: "Two bedrooms, open-plan living, full kitchen, and a sea-facing wraparound terrace." }
+              - { label: "Floor plan image", name: "image", widget: "image" }
+
           # ── GALLERY ───────────────────────────────
           - label: "Gallery"
             name: "gallery"
