@@ -43,9 +43,20 @@
     "desc": "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.",
     "image": "/loft-as-proposed-with-dims-rev-d.jpg"
   },
+  "strips": {
+    "strip1": "dining.jpg",
+    "strip2": "bedroom.jpg"
+  },
   "amenities": {
     "overtitle": "Amenities",
     "heading": "Everything you could need",
+    "photos": [
+      "kitchen2.jpg",
+      "bathroom.jpg",
+      "bedroom.jpg",
+      "dining.jpg",
+      "kitchen.jpg"
+    ],
     "items": [
       "Sea view terrace",
       "Fully equipped kitchen",
@@ -80,7 +91,14 @@
     "checkin": "15:00",
     "checkout": "11:00",
     "pets": "not permitted",
-    "smoking": "not permitted"
+    "smoking": "not permitted",
+    "photos": [
+      "bedroom.jpg",
+      "bathroom.jpg",
+      "dining.jpg",
+      "kitchen.jpg",
+      "office.jpg"
+    ]
   },
   "lodgify": {
     "rentalId": "796627",

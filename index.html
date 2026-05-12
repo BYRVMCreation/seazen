@@ -884,6 +884,21 @@ fetch('/content.json')
     setText('cms-nl-sub',            c.newsletter.sub);
     setText('cms-nl-btn',            c.newsletter.buttonLabel);
     setPlaceholder('nl-input-email', c.newsletter.emailPlaceholder);
+    /* STRIP IMAGES */
+    if(c.strips){
+      var st1=document.getElementById('s1'); if(st1&&c.strips.strip1) st1.style.backgroundImage='url('+c.strips.strip1+')';
+      var st2=document.getElementById('s2'); if(st2&&c.strips.strip2) st2.style.backgroundImage='url('+c.strips.strip2+')';
+    }
+    /* AMENITIES PHOTOS */
+    if(c.amenities&&c.amenities.photos){
+      var amSlides=document.querySelectorAll('.am-photo');
+      c.amenities.photos.forEach(function(src,i){ if(amSlides[i]) amSlides[i].src=src; });
+    }
+    /* BOOKING CAROUSEL PHOTOS */
+    if(c.booking&&c.booking.photos){
+      var bkSlides=document.querySelectorAll('.bk-car-slide');
+      c.booking.photos.forEach(function(src,i){ if(bkSlides[i]) bkSlides[i].src=src; });
+    }
     /* #13 — FOOTER */
     setText('cms-footer-copy', c.footer.copy);
   })
