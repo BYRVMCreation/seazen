@@ -35,22 +35,34 @@
 </div>
 <div class="wrap">
   <span class="ot">Legal</span>
-  <h1 id="policy-title">Cancellation Policy</h1>
-  <p class="updated" id="policy-updated">Last updated: 1 January 2025</p>
-  <div id="policy-sections"></div>
-  <hr>
-  <p style="font-size:13px;color:var(--mid);">Please replace this with a legally reviewed document before going live.</p>
+  <h1>Cancellation Policy</h1>
+  <p class="updated">Last updated: 1 January 2026</p>
+  <h2>1. Cancellation by Guest</h2>
+  <p>All cancellation requests must be submitted in writing to <a href="mailto:stay@seazen.es">stay@seazen.es</a>. The cancellation date is the date on which SeaZen receives written notice.
+
+More than 90 days: Full refund of deposit (less €150 admin fee)
+60–90 days: 50% of total rental fee refunded
+30–59 days: 25% of total rental fee refunded
+Less than 30 days: No refund</p>
+  <h2>2. Cancellation by SeaZen</h2>
+  <p>In the unlikely event that SeaZen must cancel a confirmed reservation, guests will receive a full refund of all amounts paid. SeaZen will make every effort to suggest alternative dates or a property.</p>
+  <h2>3. Force Majeure</h2>
+  <p>SeaZen shall not be liable for cancellations caused by events beyond its reasonable control, including natural disasters, governmental restrictions, or pandemic-related travel bans. In such cases, SeaZen will offer a credit or rescheduling wherever possible.</p>
+  <h2>4. Travel Insurance</h2>
+  <p>We strongly recommend that all guests purchase comprehensive travel insurance that covers cancellation, curtailment, and personal liability.</p>
+  <h2>5. Changes to Booking</h2>
+  <p>Date changes are subject to availability and must be requested in writing. A €75 amendment fee applies. Changes within 30 days of arrival are treated as a cancellation and re-booking.</p>
+  <h2>6. Contact</h2>
+  <p>For cancellations or amendments, please contact us at <a href="mailto:stay@seazen.es">stay@seazen.es</a> or call <a href="tel:+34646374279">+34 646 37 42 79</a>.</p>
 </div>
-<div class="footer-note">&copy; 2025 SeaZen · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+<div class="footer-note">
+  <span id="footer-copy">&copy; 2026 SeaZen. All rights reserved.</span>
+  &nbsp;&middot;&nbsp;
+  <a href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms</a>
+</div>
 <script>
-fetch('/cancellation.json').then(function(r){ return r.json(); }).then(function(d){
-  document.getElementById('policy-title').textContent = d.title;
-  document.getElementById('policy-updated').textContent = 'Last updated: ' + d.updated;
-  document.title = d.title + ' — SeaZen';
-  var html = d.sections.map(function(s){
-    return '<h2>'+s.heading+'</h2><p>'+s.content+'</p>';
-  }).join('');
-  document.getElementById('policy-sections').innerHTML = html;
+fetch('./content.json').then(function(r){return r.json();}).then(function(c){
+  if(c.footer&&c.footer.copy) document.getElementById('footer-copy').textContent=c.footer.copy;
 }).catch(function(){});
 </script>
 </body>

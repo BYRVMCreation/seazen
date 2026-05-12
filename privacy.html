@@ -35,22 +35,31 @@
 </div>
 <div class="wrap">
   <span class="ot">Legal</span>
-  <h1 id="policy-title">Privacy Policy</h1>
-  <p class="updated" id="policy-updated">Last updated: 1 January 2025</p>
-  <div id="policy-sections"></div>
-  <hr>
-  <p style="font-size:13px;color:var(--mid);">Please replace this with a legally reviewed document before going live.</p>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 1 January 2026</p>
+  <h2>1. Information We Collect</h2>
+  <p>When you use our website or submit a booking request, we may collect your name, email address, phone number, booking dates, guest count, special requests, device and browser information, and how you found us.</p>
+  <h2>2. How We Use Your Information</h2>
+  <p>We use your data solely to process and confirm your reservation enquiry, communicate booking details and updates, improve our website experience, and send occasional newsletters if you have opted in.</p>
+  <h2>3. Data Sharing</h2>
+  <p>We do not sell, rent, or trade your personal data. We may share it with trusted third-party services (e.g. booking platforms) strictly to fulfil your reservation.</p>
+  <h2>4. Cookies</h2>
+  <p>Our website uses cookies to remember your preferences and analyse site traffic. You may disable cookies in your browser settings; however, some features may not function correctly.</p>
+  <h2>5. Data Retention</h2>
+  <p>We retain your personal data for as long as necessary to fulfil the purposes outlined above, or as required by law. You may request deletion at any time.</p>
+  <h2>6. Your Rights</h2>
+  <p>Under applicable data protection law you have the right to access, correct, or delete your personal data. To exercise these rights, contact us at <a href="mailto:stay@seazen.es">stay@seazen.es</a>.</p>
+  <h2>7. Contact</h2>
+  <p>SeaZen · Sitges, Spain · <a href="mailto:stay@seazen.es">stay@seazen.es</a></p>
 </div>
-<div class="footer-note">&copy; 2025 SeaZen · <a href="terms.html">Terms</a> · <a href="cancellation.html">Cancellation</a></div>
+<div class="footer-note">
+  <span id="footer-copy">&copy; 2026 SeaZen. All rights reserved.</span>
+  &nbsp;&middot;&nbsp;
+  <a href="terms.html">Terms</a> &nbsp;&middot;&nbsp; <a href="cancellation.html">Cancellation</a>
+</div>
 <script>
-fetch('/privacy.json').then(function(r){ return r.json(); }).then(function(d){
-  document.getElementById('policy-title').textContent = d.title;
-  document.getElementById('policy-updated').textContent = 'Last updated: ' + d.updated;
-  document.title = d.title + ' — SeaZen';
-  var html = d.sections.map(function(s){
-    return '<h2>'+s.heading+'</h2><p>'+s.content+'</p>';
-  }).join('');
-  document.getElementById('policy-sections').innerHTML = html;
+fetch('./content.json').then(function(r){return r.json();}).then(function(c){
+  if(c.footer&&c.footer.copy) document.getElementById('footer-copy').textContent=c.footer.copy;
 }).catch(function(){});
 </script>
 </body>

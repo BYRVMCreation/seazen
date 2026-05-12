@@ -35,22 +35,35 @@
 </div>
 <div class="wrap">
   <span class="ot">Legal</span>
-  <h1 id="policy-title">Terms &amp; Conditions</h1>
-  <p class="updated" id="policy-updated">Last updated: 1 January 2025</p>
-  <div id="policy-sections"></div>
-  <hr>
-  <p style="font-size:13px;color:var(--mid);">Please replace this with a legally reviewed document before going live.</p>
+  <h1>Terms &amp; Conditions</h1>
+  <p class="updated">Last updated: 1 January 2026</p>
+  <h2>1. Booking &amp; Confirmation</h2>
+  <p>All reservations are treated as enquiries until confirmed in writing by SeaZen. A booking is only confirmed upon receipt of the agreed deposit. SeaZen reserves the right to decline any booking request.</p>
+  <h2>2. Payment</h2>
+  <p>A deposit of 30% of the total rental fee is due within 7 days of confirmation. The remaining balance is due 60 days before the arrival date. Payment methods: bank transfer or credit card (processing fees may apply).</p>
+  <h2>3. Minimum Stay</h2>
+  <p>A minimum stay of 3 nights applies during standard periods. A minimum of 7 nights applies during high season (July, August, and public holidays). Shorter stays may be available on request.</p>
+  <h2>4. Guest Responsibilities</h2>
+  <p>Guests are responsible for the property and its contents during their stay. Any damage beyond normal wear and tear will be charged to the guest. The property is non-smoking. Pets are permitted only with prior written consent.</p>
+  <h2>5. Occupancy</h2>
+  <p>The maximum occupancy stated in the property listing must not be exceeded. Unauthorised guests or events are strictly prohibited.</p>
+  <h2>6. Check-in &amp; Check-out</h2>
+  <p>Check-in: from 16:00. Check-out: by 11:00. Early check-in and late check-out may be arranged subject to availability.</p>
+  <h2>7. Liability</h2>
+  <p>SeaZen shall not be liable for any loss, injury, or damage to persons or property during the rental period. Guests are advised to arrange appropriate travel and personal insurance.</p>
+  <h2>8. Governing Law</h2>
+  <p>These terms are governed by the laws of Spain. Any disputes shall be subject to the exclusive jurisdiction of the courts of Catalonia.</p>
+  <h2>9. Contact</h2>
+  <p>SeaZen · Sitges, Spain · <a href="mailto:stay@seazen.es">stay@seazen.es</a></p>
 </div>
-<div class="footer-note">&copy; 2025 SeaZen · <a href="privacy.html">Privacy</a> · <a href="cancellation.html">Cancellation</a></div>
+<div class="footer-note">
+  <span id="footer-copy">&copy; 2026 SeaZen. All rights reserved.</span>
+  &nbsp;&middot;&nbsp;
+  <a href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="cancellation.html">Cancellation</a>
+</div>
 <script>
-fetch('/terms.json').then(function(r){ return r.json(); }).then(function(d){
-  document.getElementById('policy-title').textContent = d.title;
-  document.getElementById('policy-updated').textContent = 'Last updated: ' + d.updated;
-  document.title = d.title + ' — SeaZen';
-  var html = d.sections.map(function(s){
-    return '<h2>'+s.heading+'</h2><p>'+s.content+'</p>';
-  }).join('');
-  document.getElementById('policy-sections').innerHTML = html;
+fetch('./content.json').then(function(r){return r.json();}).then(function(c){
+  if(c.footer&&c.footer.copy) document.getElementById('footer-copy').textContent=c.footer.copy;
 }).catch(function(){});
 </script>
 </body>

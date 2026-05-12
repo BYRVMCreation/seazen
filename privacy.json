@@ -1,34 +1,13 @@
 {
   "title": "Privacy Policy",
-  "updated": "7 May 2026",
+  "updated": "1 January 2025",
   "sections": [
-    {
-      "heading": "1. Information We Collect",
-      "content": "When you use our website or submit a booking request, we may collect your name, email address, phone number, booking dates, guest count, special requests, device and browser information, and how you found us."
-    },
-    {
-      "heading": "2. How We Use Your Information",
-      "content": "We use your data solely to process and confirm your reservation enquiry, communicate booking details and updates, improve our website experience, and send occasional newsletters if you have opted in."
-    },
-    {
-      "heading": "3. Data Sharing",
-      "content": "We do not sell, rent, or trade your personal data. We may share it with trusted third-party services (e.g. booking platforms) strictly to fulfill your reservation."
-    },
-    {
-      "heading": "4. Cookies",
-      "content": "Our website uses cookies to remember your preferences and analyse site traffic. You may disable cookies in your browser settings; however, some features may not function correctly."
-    },
-    {
-      "heading": "5. Data Retention",
-      "content": "We retain your personal data for as long as necessary to fulfil the purposes outlined above, or as required by law. You may request deletion at any time."
-    },
-    {
-      "heading": "6. Your Rights",
-      "content": "Under applicable data protection law you have the right to access, correct, or delete your personal data. To exercise these rights, contact us at stay@seazen.es"
-    },
-    {
-      "heading": "7. Contact",
-      "content": "SeaZen · Sitges, Spain · stay@seazen.es"
-    }
+    { "heading": "1. Information We Collect", "content": "When you use our website or submit a booking request, we may collect your name, email address, phone number, booking dates, guest count, special requests, device and browser information, and how you found us." },
+    { "heading": "2. How We Use Your Information", "content": "We use your data solely to process and confirm your reservation enquiry, communicate booking details and updates, improve our website experience, and send occasional newsletters if you have opted in." },
+    { "heading": "3. Data Sharing", "content": "We do not sell, rent, or trade your personal data. We may share it with trusted third-party services (e.g. booking platforms) strictly to fulfil your reservation." },
+    { "heading": "4. Cookies", "content": "Our website uses cookies to remember your preferences and analyse site traffic. You may disable cookies in your browser settings; however, some features may not function correctly." },
+    { "heading": "5. Data Retention", "content": "We retain your personal data for as long as necessary to fulfil the purposes outlined above, or as required by law. You may request deletion at any time." },
+    { "heading": "6. Your Rights", "content": "Under applicable data protection law you have the right to access, correct, or delete your personal data. To exercise these rights, contact us at hello@seazen.com." },
+    { "heading": "7. Contact", "content": "SeaZen · Sitges, Spain · hello@seazen.com" }
   ]
 }
