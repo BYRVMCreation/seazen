@@ -1,15 +1,15 @@
 {
-  "contact": {
-    "phone": "+34 646 37 42 79",
-    "email": "stay@seazen.es"
-  },
   "nav": {
-    "logo": "/uploads/chatgpt-image-may-12-2026-at-03_13_03-pm.png",
+    "logo": "uploads/logo.png",
     "apartment": "The Apartment",
     "amenities": "Amenities",
     "gallery": "Gallery",
     "floorplan": "Floor Plan",
     "book": "Book Now"
+  },
+  "contact": {
+    "phone": "+34 646 37 42 79",
+    "email": "stay@seazen.es"
   },
   "intro": {
     "overtitle": "The penthouse",
@@ -29,47 +29,24 @@
   "gallery": {
     "heading": "Take a closer look",
     "images": [
-      {
-        "src": "bedroom.jpg",
-        "alt": "Master bedroom"
-      },
-      {
-        "src": "bathroom.jpg",
-        "alt": "Bathroom"
-      },
-      {
-        "src": "dining.jpg",
-        "alt": "Dining area"
-      },
-      {
-        "src": "kitchen.jpg",
-        "alt": "Kitchen"
-      },
-      {
-        "src": "office.jpg",
-        "alt": "Home office"
-      },
-      {
-        "src": "bedroom2.jpg",
-        "alt": "Second bedroom"
-      },
-      {
-        "src": "kitchen2.jpg",
-        "alt": "Kitchen island"
-      }
+      { "src": "bedroom.jpg", "alt": "Master bedroom" },
+      { "src": "bathroom.jpg", "alt": "Bathroom" },
+      { "src": "dining.jpg", "alt": "Dining area" },
+      { "src": "kitchen.jpg", "alt": "Kitchen" },
+      { "src": "office.jpg", "alt": "Home office" },
+      { "src": "bedroom2.jpg", "alt": "Second bedroom" },
+      { "src": "kitchen2.jpg", "alt": "Kitchen island" }
     ]
   },
   "floorplan": {
     "overtitle": "Floor Plan",
     "heading": "100 m² of refined space",
     "desc": "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.",
-    "image": "/uploads/untitled-2.png"
+    "image": "/loft-as-proposed-with-dims-rev-d.jpg"
   },
-  "lodgify": {
-    "rentalId": "796627",
-    "websiteId": "648843",
-    "slug": "didier-dewyn",
-    "language": "en"
+  "strips": {
+    "strip1": "dining.jpg",
+    "strip2": "bedroom.jpg"
   },
   "amenities": {
     "overtitle": "Amenities",
@@ -89,47 +66,19 @@
       "Smart TV & streaming",
       "King-size beds",
       "Premium linen & towels",
-      "Washing machine & dryer",
-      "Daily cleaning available",
-      "Contactless check-in",
-      "Private parking",
-      "Lift access"
+      "Contactless check-in"
     ]
   },
   "sitges": {
     "heading": "Sitges awaits",
     "subtitle": "Step outside and discover one of the Mediterranean's most vibrant and charming towns.",
     "items": [
-      {
-        "icon": "🏖",
-        "title": "Beaches",
-        "desc": "17 golden sandy beaches within walking distance"
-      },
-      {
-        "icon": "🍷",
-        "title": "Seafood & Tapas",
-        "desc": "World-class restaurants along the promenade"
-      },
-      {
-        "icon": "🎨",
-        "title": "Art & Culture",
-        "desc": "Museums, galleries and the famous Carnival"
-      },
-      {
-        "icon": "⛵",
-        "title": "Watersports",
-        "desc": "Sailing, paddleboarding and diving"
-      },
-      {
-        "icon": "🌿",
-        "title": "Hiking",
-        "desc": "Scenic trails through Garraf Natural Park"
-      },
-      {
-        "icon": "🚂",
-        "title": "Barcelona",
-        "desc": "35 min by train to the city centre"
-      }
+      { "icon": "🏖", "title": "Beaches", "desc": "17 golden sandy beaches within walking distance" },
+      { "icon": "🍷", "title": "Seafood & Tapas", "desc": "World-class restaurants along the promenade" },
+      { "icon": "🎨", "title": "Art & Culture", "desc": "Museums, galleries and the famous Carnival" },
+      { "icon": "⛵", "title": "Watersports", "desc": "Sailing, paddleboarding and diving" },
+      { "icon": "🌿", "title": "Hiking", "desc": "Scenic trails through Garraf Natural Park" },
+      { "icon": "🚂", "title": "Barcelona", "desc": "35 min by train to the city centre" }
     ]
   },
   "booking": {
@@ -148,11 +97,15 @@
       "office.jpg"
     ]
   },
+  "lodgify": {
+    "rentalId": "796627",
+    "websiteId": "648843",
+    "slug": "didier-dewyn",
+    "language": "en"
+  },
   "newsletter": {
     "overtitle": "Stay in touch",
-    "heading": "Stay in the loop",
     "sub": "Be the first to hear about availability and special offers.",
-    "namePlaceholder": "First name",
     "emailPlaceholder": "Email address",
     "buttonLabel": "Subscribe"
   },
@@ -184,12 +137,8 @@
       }
     ]
   },
-  "strips": {
-    "strip1": "dining.jpg",
-    "strip2": "bedroom.jpg"
-  },
   "footer": {
     "copy": "© 2026 SeaZen. All rights reserved.",
-    "logo": "/uploads/logo-seazen.png"
+    "logo": "uploads/logo-white.png"
   }
 }

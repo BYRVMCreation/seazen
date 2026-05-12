@@ -113,8 +113,8 @@ a, button, input, select, textarea { cursor: auto; }
 .h-ot { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-bottom: 18px; font-weight: 400; }
 #hero-body h1 {
   font-family: 'Cormorant Garamond', serif; font-weight: 300;
-  font-size: clamp(38px, 5.2vw, 72px); line-height: 1.07;
-  margin-bottom: 18px;
+  font-size: clamp(38px, 5.2vw, 72px); line-height: 1.25;
+  margin-bottom: 24px;
 }
 /* #2 — second title line: normal weight, not italic */
 #hero-body h1 span { font-style: normal; }
@@ -367,6 +367,7 @@ h2.sh {
   <ul class="nl-right">
     <li><a class="nlink" id="cms-nav-fp" href="#fp">Floor Plan</a></li>
     <li><a class="nlink pill" id="cms-nav-book" href="#booking">Book Now</a></li>
+    <li><button id="lang-switch" class="lang-btn" onclick="toggleLanguage()" style="background:none;border:1px solid var(--bdr);color:var(--tx);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;padding:6px 12px;cursor:pointer;margin-left:10px;">ES</button></li>
   </ul>
 </nav>
 
@@ -703,7 +704,6 @@ h2.sh {
   <div class="w">
     <div class="nl-in rv">
       <span class="ot" style="text-align:center;display:block" id="cms-nl-overtitle">Stay in touch</span>
-      <h2 id="cms-nl-heading">Stay in the loop</h2>
       <p id="cms-nl-sub" class="nl-sub">Be the first to hear about availability and special offers.</p>
       <form class="nl-form" onsubmit="return false;">
         <div class="nl-row">
@@ -805,118 +805,375 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList
 </script>
 <script src="https://app.lodgify.com/book-now-box/stable/renderBookNowBox.js" defer></script>
 <script>
-fetch('/content.json')
-  .then(function(r){return r.json();})
-  .then(function(c){
-    /* #1 — NAV */
-    if(c.nav){
-      if(c.nav.logo){
-        var navLogoImg = document.querySelector('.nav-logo img');
-        if(navLogoImg) navLogoImg.src = c.nav.logo;
-      }
-      setText('cms-nav-apt',       c.nav.apartment);
-      setText('cms-nav-amenities', c.nav.amenities);
-      setText('cms-nav-gallery',   c.nav.gallery);
-      setText('cms-nav-fp',        c.nav.floorplan);
-      setText('cms-nav-book',      c.nav.book);
-    }
-    /* HERO */
-    setText('cms-hero-title1',   c.hero.title1);
-    setText('cms-hero-title2',   c.hero.title2);
-    setText('cms-hero-subtitle', c.hero.subtitle);
-    setText('cms-hero-subtext',  c.hero.subtext);
-    setText('cms-hero-cta',      c.hero.cta);
-    if(c.hero.image) document.getElementById('hero-img').style.backgroundImage='url('+c.hero.image+')';
-    /* INTRO */
-    setText('cms-intro-overtitle', c.intro.overtitle);
-    setText('cms-intro-h1',        c.intro.heading1);
-    setText('cms-intro-h2',        c.intro.heading2);
-    setText('cms-intro-p1',        c.intro.para1);
-    setText('cms-intro-p2',        c.intro.para2);
-    setText('cms-fact-size',       c.intro.facts.size);
-    setText('cms-fact-guests',     c.intro.facts.guests);
-    setText('cms-fact-beds',       c.intro.facts.bedrooms);
-    setText('cms-fact-terrace',    c.intro.facts.terrace);
-    setText('cms-fact-beach',      c.intro.facts.beach);
-    setText('cms-fact-view',       c.intro.facts.view);
-    /* AMENITIES */
-    setText('cms-am-overtitle', c.amenities.overtitle);
-    setText('cms-am-heading',   c.amenities.heading);
-    /* SITGES */
-    setText('cms-sitges-heading', c.sitges.heading);
-    setText('cms-sitges-sub',     c.sitges.subtitle);
-    /* GALLERY */
-    setText('cms-gal-heading', c.gallery.heading);
-    /* FLOOR PLAN */
-    if(c.floorplan){
-      setText('cms-fp-overtitle', c.floorplan.overtitle);
-      setText('cms-fp-heading',   c.floorplan.heading);
-      setText('cms-fp-desc',      c.floorplan.desc);
-      if(c.floorplan.image){
-        var fi=document.getElementById('cms-fp-image');
-        var fs=document.getElementById('cms-fp-svg');
-        fi.src=c.floorplan.image; fi.style.display='block';
-        if(fs) fs.style.display='none';
-      }
-    }
-    /* REVIEWS */
-    setText('cms-rev-heading', c.reviews.heading);
-    /* #7 — BOOKING */
-    setText('cms-bk-heading',  c.booking.heading);
-    setText('cms-bk-desc',     c.booking.desc);
-    setText('cms-bk-minstay',  c.booking.minStay);
-    setText('cms-bk-checkin',  c.booking.checkin);
-    setText('cms-bk-checkout', c.booking.checkout);
-    setText('cms-bk-pets',     c.booking.pets);
-    setText('cms-bk-smoking',  c.booking.smoking);
-    /* #7 — LODGIFY config from CMS */
-    if(c.lodgify){
-      var ldg=document.getElementById('lodgify-book-now-box');
-      if(ldg){
-        if(c.lodgify.rentalId)  ldg.setAttribute('data-rental-id',      c.lodgify.rentalId);
-        if(c.lodgify.websiteId) ldg.setAttribute('data-website-id',     c.lodgify.websiteId);
-        if(c.lodgify.slug)      ldg.setAttribute('data-slug',           c.lodgify.slug);
-        if(c.lodgify.language)  ldg.setAttribute('data-language-code',  c.lodgify.language);
-      }
-    }
-    /* CONTACT */
-    setContact('cms-contact-phone', c.contact.phone, 'tel:'+c.contact.phone.replace(/\s/g,''));
-    setContact('cms-contact-email', c.contact.email, 'mailto:'+c.contact.email);
-    /* #9 — NEWSLETTER */
-    setText('cms-nl-overtitle',      c.newsletter.overtitle);
-    setText('cms-nl-heading',        c.newsletter.heading);
-    setText('cms-nl-sub',            c.newsletter.sub);
-    setText('cms-nl-btn',            c.newsletter.buttonLabel);
-    setPlaceholder('nl-input-email', c.newsletter.emailPlaceholder);
-    /* STRIP IMAGES */
-    if(c.strips){
-      var st1=document.getElementById('s1'); if(st1&&c.strips.strip1) st1.style.backgroundImage='url('+c.strips.strip1+')';
-      var st2=document.getElementById('s2'); if(st2&&c.strips.strip2) st2.style.backgroundImage='url('+c.strips.strip2+')';
-    }
-    /* AMENITIES PHOTOS */
-    if(c.amenities&&c.amenities.photos){
-      var amSlides=document.querySelectorAll('.am-photo');
-      c.amenities.photos.forEach(function(src,i){ if(amSlides[i]) amSlides[i].src=src; });
-    }
-    /* BOOKING CAROUSEL PHOTOS */
-    if(c.booking&&c.booking.photos){
-      var bkSlides=document.querySelectorAll('.bk-car-slide');
-      c.booking.photos.forEach(function(src,i){ if(bkSlides[i]) bkSlides[i].src=src; });
-    }
-    /* #13 — FOOTER */
-    if(c.footer){
-      setText('cms-footer-copy', c.footer.copy);
-      if(c.footer.logo){
-        var footerLogoImg = document.querySelector('.f-logo img');
-        if(footerLogoImg) footerLogoImg.src = c.footer.logo;
-      }
-    }
-  })
-  .catch(function(){});
-
 function setText(id,val){var el=document.getElementById(id);if(el&&val!=null)el.textContent=val;}
 function setContact(id,text,href){var el=document.getElementById(id);if(el){if(text)el.textContent=text;if(href)el.href=href;}}
 function setPlaceholder(id,val){var el=document.getElementById(id);if(el&&val)el.placeholder=val;}
+
+/* LANGUAGE SWITCHER WITH AUTO-TRANSLATION */
+var currentLang = localStorage.getItem('lang') || 'en';
+var cachedContent = null;
+
+function detectLanguage(){
+  var saved = localStorage.getItem('lang');
+  if(saved) return saved;
+  var userLang = navigator.language || navigator.userLanguage;
+  if(userLang && userLang.toLowerCase().startsWith('es')) return 'es';
+  return 'en';
+}
+
+// Simple translation dictionary for common phrases
+var translationDict = {
+  // Navigation
+  "The Apartment": "El Apartamento",
+  "Amenities": "Servicios", 
+  "Gallery": "Galería",
+  "Floor Plan": "Plano",
+  "Book Now": "Reservar",
+  // Hero
+  "high above the sea": "sobre el mar",
+  "far beyond the ordinary": "más allá de lo ordinario",
+  "Sitges (Barcelona) - seafront luxury penthouse": "Sitges (Barcelona) - ático de lujo frente al mar",
+  "A private penthouse with uninterrupted sea views, designed for those who appreciate the art of doing nothing.": "Un ático privado con vistas ininterrumpidas al mar, diseñado para quienes aprecian el arte de no hacer nada.",
+  "Discover the penthouse": "Descubra el ático",
+  // Intro
+  "The penthouse": "El ático",
+  "A curated retreat": "Un refugio seleccionado",
+  "high above the Mediterranean": "sobre el Mediterráneo",
+  "Size Interior": "Tamaño Interior",
+  "Guests": "Huéspedes",
+  "Bedrooms": "Dormitorios",
+  "Terrace": "Terraza",
+  "Beach": "Playa",
+  "View": "Vista",
+  // Amenities
+  "Amenities": "Servicios",
+  "Everything you could need": "Todo lo que pueda necesitar",
+  "Sea view terrace": "Terraza con vistas al mar",
+  "Fully equipped kitchen": "Cocina totalmente equipada",
+  "Air conditioning": "Aire acondicionado",
+  "High-speed Wi-Fi": "Wi-Fi de alta velocidad",
+  "Smart TV & streaming": "Smart TV y streaming",
+  "King-size beds": "Camas king-size",
+  "Premium linen & towels": "Ropa de cama y toallas premium",
+  "Contactless check-in": "Check-in sin contacto",
+  // Sitges
+  "Sitges awaits": "Sitges le espera",
+  "Step outside and discover one of the Mediterranean's most vibrant and charming towns.": "Salga y descubra uno de los pueblos más vibrantes y encantadores del Mediterráneo.",
+  "Beaches": "Playas",
+  "Seafood & Tapas": "Marisco y Tapas",
+  "Art & Culture": "Arte y Cultura",
+  "Watersports": "Deportes Acuáticos",
+  "Hiking": "Senderismo",
+  "Barcelona": "Barcelona",
+  // Gallery
+  "Take a closer look": "Mire más de cerca",
+  // Floor Plan
+  "Floor Plan": "Plano",
+  "100 m² of refined space": "100 m² de espacio refinado",
+  // Booking
+  "Reserve SeaZen": "Reservar SeaZen",
+  "Select your dates and guests below to check availability and book instantly. No charge until confirmed.": "Seleccione sus fechas y huéspedes a continuación para verificar disponibilidad y reservar al instante. Sin cargo hasta confirmar.",
+  "5 nights": "5 noches",
+  "15:00": "15:00",
+  "11:00": "11:00",
+  "not permitted": "no permitido",
+  // Newsletter
+  "Stay in touch": "Manténgase en contacto",
+  "Be the first to hear about availability and special offers.": "Sea el primero en conocer disponibilidad y ofertas especiales.",
+  "Email address": "Correo electrónico",
+  "Subscribe": "Suscribirse",
+  // Reviews
+  "What our guests say": "Lo que dicen nuestros huéspedes",
+  // Footer
+  "© 2026 SeaZen. All rights reserved.": "© 2026 SeaZen. Todos los derechos reservados."
+};
+
+function translateText(text){
+  if(!text || currentLang === 'en') return text;
+  // Check dictionary first
+  if(translationDict[text]) return translationDict[text];
+  // Try to translate parts
+  for(var key in translationDict){
+    if(text.indexOf(key) !== -1){
+      text = text.split(key).join(translationDict[key]);
+    }
+  }
+  return text;
+}
+
+function translateContent(c){
+  if(currentLang === 'en') return c;
+  
+  // Deep clone and translate
+  var tc = JSON.parse(JSON.stringify(c));
+  
+  // Nav
+  if(tc.nav){
+    tc.nav.apartment = translateText(tc.nav.apartment);
+    tc.nav.amenities = translateText(tc.nav.amenities);
+    tc.nav.gallery = translateText(tc.nav.gallery);
+    tc.nav.floorplan = translateText(tc.nav.floorplan);
+    tc.nav.book = translateText(tc.nav.book);
+  }
+  
+  // Hero
+  if(tc.hero){
+    tc.hero.title1 = translateText(tc.hero.title1);
+    tc.hero.title2 = translateText(tc.hero.title2);
+    tc.hero.subtitle = translateText(tc.hero.subtitle);
+    tc.hero.subtext = translateText(tc.hero.subtext);
+    tc.hero.cta = translateText(tc.hero.cta);
+  }
+  
+  // Intro
+  if(tc.intro){
+    tc.intro.overtitle = translateText(tc.intro.overtitle);
+    tc.intro.heading1 = translateText(tc.intro.heading1);
+    tc.intro.heading2 = translateText(tc.intro.heading2);
+    tc.intro.para1 = translateText(tc.intro.para1);
+    tc.intro.para2 = translateText(tc.intro.para2);
+    if(tc.intro.facts){
+      tc.intro.facts.size = translateText(tc.intro.facts.size);
+      tc.intro.facts.guests = translateText(tc.intro.facts.guests);
+      tc.intro.facts.bedrooms = translateText(tc.intro.facts.bedrooms);
+      tc.intro.facts.terrace = translateText(tc.intro.facts.terrace);
+      tc.intro.facts.beach = translateText(tc.intro.facts.beach);
+      tc.intro.facts.view = translateText(tc.intro.facts.view);
+    }
+  }
+  
+  // Amenities
+  if(tc.amenities){
+    tc.amenities.overtitle = translateText(tc.amenities.overtitle);
+    tc.amenities.heading = translateText(tc.amenities.heading);
+    if(tc.amenities.items){
+      tc.amenities.items = tc.amenities.items.map(function(item){ return translateText(item); });
+    }
+  }
+  
+  // Sitges
+  if(tc.sitges){
+    tc.sitges.heading = translateText(tc.sitges.heading);
+    tc.sitges.subtitle = translateText(tc.sitges.subtitle);
+    if(tc.sitges.items){
+      tc.sitges.items = tc.sitges.items.map(function(item){
+        return {
+          icon: item.icon,
+          title: translateText(item.title),
+          desc: translateText(item.desc)
+        };
+      });
+    }
+  }
+  
+  // Gallery
+  if(tc.gallery){
+    tc.gallery.heading = translateText(tc.gallery.heading);
+  }
+  
+  // Floor Plan
+  if(tc.floorplan){
+    tc.floorplan.overtitle = translateText(tc.floorplan.overtitle);
+    tc.floorplan.heading = translateText(tc.floorplan.heading);
+    tc.floorplan.desc = translateText(tc.floorplan.desc);
+  }
+  
+  // Reviews
+  if(tc.reviews){
+    tc.reviews.heading = translateText(tc.reviews.heading);
+  }
+  
+  // Booking
+  if(tc.booking){
+    tc.booking.heading = translateText(tc.booking.heading);
+    tc.booking.desc = translateText(tc.booking.desc);
+    tc.booking.minStay = translateText(tc.booking.minStay);
+    tc.booking.checkin = tc.booking.checkin;
+    tc.booking.checkout = tc.booking.checkout;
+    tc.booking.pets = translateText(tc.booking.pets);
+    tc.booking.smoking = translateText(tc.booking.smoking);
+  }
+  
+  // Newsletter
+  if(tc.newsletter){
+    tc.newsletter.overtitle = translateText(tc.newsletter.overtitle);
+    tc.newsletter.sub = translateText(tc.newsletter.sub);
+    tc.newsletter.emailPlaceholder = translateText(tc.newsletter.emailPlaceholder);
+    tc.newsletter.buttonLabel = translateText(tc.newsletter.buttonLabel);
+  }
+  
+  // Footer
+  if(tc.footer){
+    tc.footer.copy = translateText(tc.footer.copy);
+  }
+  
+  return tc;
+}
+
+function applyContent(c){
+  /* NAV */
+  if(c.nav){
+    if(c.nav.logo){
+      var navLogoImg = document.querySelector('.nav-logo img');
+      if(navLogoImg) navLogoImg.src = c.nav.logo;
+    }
+    setText('cms-nav-apt',       c.nav.apartment);
+    setText('cms-nav-amenities', c.nav.amenities);
+    setText('cms-nav-gallery',   c.nav.gallery);
+    setText('cms-nav-fp',        c.nav.floorplan);
+    setText('cms-nav-book',      c.nav.book);
+  }
+  /* HERO */
+  setText('cms-hero-title1',   c.hero.title1);
+  setText('cms-hero-title2',   c.hero.title2);
+  setText('cms-hero-subtitle', c.hero.subtitle);
+  setText('cms-hero-subtext',  c.hero.subtext);
+  setText('cms-hero-cta',      c.hero.cta);
+  if(c.hero.image) document.getElementById('hero-img').style.backgroundImage='url('+c.hero.image+')';
+  /* INTRO */
+  setText('cms-intro-overtitle', c.intro.overtitle);
+  setText('cms-intro-h1',        c.intro.heading1);
+  setText('cms-intro-h2',        c.intro.heading2);
+  setText('cms-intro-p1',        c.intro.para1);
+  setText('cms-intro-p2',        c.intro.para2);
+  setText('cms-fact-size',       c.intro.facts.size);
+  setText('cms-fact-guests',     c.intro.facts.guests);
+  setText('cms-fact-beds',       c.intro.facts.bedrooms);
+  setText('cms-fact-terrace',    c.intro.facts.terrace);
+  setText('cms-fact-beach',      c.intro.facts.beach);
+  setText('cms-fact-view',       c.intro.facts.view);
+  /* AMENITIES */
+  setText('cms-am-overtitle', c.amenities.overtitle);
+  setText('cms-am-heading',   c.amenities.heading);
+  if(c.amenities && c.amenities.items){
+    var amList = document.getElementById('cms-am-list');
+    if(amList){
+      amList.innerHTML = c.amenities.items.map(function(item, i){
+        var d = (i % 2 === 0) ? 'd1' : 'd2';
+        return '<div class="am-it rv ' + d + '"><svg class="am-ic" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>' + item + '</div>';
+      }).join('');
+    }
+  }
+  /* SITGES */
+  setText('cms-sitges-heading', c.sitges.heading);
+  setText('cms-sitges-sub',     c.sitges.subtitle);
+  if(c.sitges && c.sitges.items){
+    var sitgesGrid = document.getElementById('cms-sitges-grid');
+    if(sitgesGrid){
+      sitgesGrid.innerHTML = c.sitges.items.map(function(item){
+        return '<div class="sg-item"><div class="sg-icon">' + item.icon + '</div><div class="sg-body"><div class="sg-title">' + item.title + '</div><div class="sg-desc">' + item.desc + '</div></div></div>';
+      }).join('');
+    }
+  }
+  /* GALLERY */
+  setText('cms-gal-heading', c.gallery.heading);
+  /* FLOOR PLAN */
+  if(c.floorplan){
+    setText('cms-fp-overtitle', c.floorplan.overtitle);
+    setText('cms-fp-heading',   c.floorplan.heading);
+    setText('cms-fp-desc',      c.floorplan.desc);
+    if(c.floorplan.image){
+      var fi=document.getElementById('cms-fp-image');
+      if(fi) fi.src=c.floorplan.image;
+    }
+  }
+  /* REVIEWS */
+  setText('cms-rev-heading', c.reviews.heading);
+  if(c.reviews && c.reviews.items){
+    var revList = document.getElementById('cms-rev-list');
+    if(revList){
+      revList.innerHTML = c.reviews.items.map(function(r){
+        var stars = '★'.repeat(r.stars || 5);
+        var initial = r.name ? r.name.charAt(0) : 'G';
+        return '<div class="review-card"><div class="review-stars">' + stars + '</div><p class="review-text">"' + r.text + '"</p><div class="review-author"><div class="review-avatar">' + initial + '</div><div><div class="review-name">' + r.name + '</div><div class="review-meta">' + r.location + ' · ' + r.date + '</div></div></div></div>';
+      }).join('');
+    }
+  }
+  /* BOOKING */
+  setText('cms-bk-heading',  c.booking.heading);
+  setText('cms-bk-desc',     c.booking.desc);
+  setText('cms-bk-minstay',  c.booking.minStay);
+  setText('cms-bk-checkin',  c.booking.checkin);
+  setText('cms-bk-checkout', c.booking.checkout);
+  setText('cms-bk-pets',     c.booking.pets);
+  setText('cms-bk-smoking',  c.booking.smoking);
+  /* LODGIFY */
+  if(c.lodgify){
+    var ldg=document.getElementById('lodgify-book-now-box');
+    if(ldg){
+      if(c.lodgify.rentalId)  ldg.setAttribute('data-rental-id',      c.lodgify.rentalId);
+      if(c.lodgify.websiteId) ldg.setAttribute('data-website-id',     c.lodgify.websiteId);
+      if(c.lodgify.slug)      ldg.setAttribute('data-slug',           c.lodgify.slug);
+      if(c.lodgify.language)  ldg.setAttribute('data-language-code',  c.lodgify.language);
+    }
+  }
+  /* CONTACT */
+  setContact('cms-contact-phone', c.contact.phone, 'tel:'+c.contact.phone.replace(/\s/g,''));
+  setContact('cms-contact-email', c.contact.email, 'mailto:'+c.contact.email);
+  /* NEWSLETTER */
+  setText('cms-nl-overtitle',      c.newsletter.overtitle);
+  setText('cms-nl-sub',            c.newsletter.sub);
+  setText('cms-nl-btn',            c.newsletter.buttonLabel);
+  setPlaceholder('nl-input-email', c.newsletter.emailPlaceholder);
+  /* STRIP IMAGES */
+  if(c.strips){
+    var st1=document.getElementById('s1'); if(st1&&c.strips.strip1) st1.style.backgroundImage='url('+c.strips.strip1+')';
+    var st2=document.getElementById('s2'); if(st2&&c.strips.strip2) st2.style.backgroundImage='url('+c.strips.strip2+')';
+  }
+  /* AMENITIES PHOTOS */
+  if(c.amenities&&c.amenities.photos){
+    var amSlides=document.querySelectorAll('.am-photo');
+    c.amenities.photos.forEach(function(src,i){ if(amSlides[i]) amSlides[i].src=src; });
+  }
+  /* BOOKING CAROUSEL PHOTOS */
+  if(c.booking&&c.booking.photos){
+    var bkSlides=document.querySelectorAll('.bk-car-slide');
+    c.booking.photos.forEach(function(src,i){ if(bkSlides[i]) bkSlides[i].src=src; });
+  }
+  /* FOOTER */
+  if(c.footer){
+    setText('cms-footer-copy', c.footer.copy);
+    if(c.footer.logo){
+      var footerLogoImg = document.querySelector('.f-logo img');
+      if(footerLogoImg) footerLogoImg.src = c.footer.logo;
+    }
+  }
+}
+
+function loadContent(lang){
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.getElementById('lang-switch').textContent = lang === 'es' ? 'EN' : 'ES';
+  
+  if(cachedContent){
+    var translated = translateContent(cachedContent);
+    applyContent(translated);
+  } else {
+    fetch('/content.json')
+      .then(function(r){return r.json();})
+      .then(function(c){
+        cachedContent = c;
+        var translated = translateContent(c);
+        applyContent(translated);
+      })
+      .catch(function(){});
+  }
+}
+
+function toggleLanguage(){
+  var newLang = currentLang === 'es' ? 'en' : 'es';
+  loadContent(newLang);
+}
+
+/* Auto-detect on load */
+var detectedLang = detectLanguage();
+fetch('/content.json')
+  .then(function(r){return r.json();})
+  .then(function(c){
+    cachedContent = c;
+    loadContent(detectedLang);
+  })
+  .catch(function(){});
 
 if(window.netlifyIdentity){
   window.netlifyIdentity.on('init',function(user){
