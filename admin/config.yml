@@ -219,9 +219,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Overtitle", name: "overtitle", widget: "string", default: "Stay in touch" }
-              - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Subtext", name: "sub", widget: "text" }
-              - { label: "Name field placeholder", name: "namePlaceholder", widget: "string", default: "First name" }
               - { label: "Email field placeholder", name: "emailPlaceholder", widget: "string", default: "Email address" }
               - { label: "Subscribe button label", name: "buttonLabel", widget: "string", default: "Subscribe" }
 
