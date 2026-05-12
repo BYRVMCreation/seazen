@@ -107,6 +107,14 @@ collections:
                   - { label: "Beach distance", name: "beach", widget: "string" }
                   - { label: "View", name: "view", widget: "string" }
 
+          # ── STRIPS ────────────────────────────────
+          - label: "Strip Banner Images"
+            name: "strips"
+            widget: "object"
+            fields:
+              - { label: "Strip 1 image (after intro)", name: "strip1", widget: "image" }
+              - { label: "Strip 2 image (after amenities)", name: "strip2", widget: "image" }
+
           # ── AMENITIES ─────────────────────────────
           - label: "Amenities Section"
             name: "amenities"
@@ -114,6 +122,10 @@ collections:
             fields:
               - { label: "Overtitle", name: "overtitle", widget: "string" }
               - { label: "Heading", name: "heading", widget: "string" }
+              - label: "Slideshow photos"
+                name: "photos"
+                widget: "list"
+                field: { label: "Photo", name: "photo", widget: "image" }
               - label: "Amenity items"
                 name: "items"
                 widget: "list"
@@ -185,6 +197,10 @@ collections:
               - { label: "Check-out time", name: "checkout", widget: "string", default: "11:00" }
               - { label: "Pets policy", name: "pets", widget: "string", default: "not permitted" }
               - { label: "Smoking policy", name: "smoking", widget: "string", default: "not permitted" }
+              - label: "Carousel photos"
+                name: "photos"
+                widget: "list"
+                field: { label: "Photo", name: "photo", widget: "image" }
 
           # ── LODGIFY ───────────────────────────────
           - label: "Lodgify Widget"
