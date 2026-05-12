@@ -5,7 +5,7 @@
   },
   "nav": {
     "logo": "/uploads/chatgpt-image-may-12-2026-at-03_13_03-pm.png",
-    "apartment": "The Penthouse",
+    "apartment": "The Apartment",
     "amenities": "Amenities",
     "gallery": "Gallery",
     "floorplan": "Floor Plan",
@@ -15,15 +15,15 @@
     "overtitle": "The penthouse",
     "heading1": "A curated retreat",
     "heading2": "high above the Mediterranean",
-    "para1": "SeaZen is a light-filled beachfront penthouse in the old center of Sitges - one of Barcelona's most beloved coastal towns. Perched above the walking promenade with magnificent sea views, every detail has been considered for those who appreciate quality, peace of mind & dolce farniente.",
-    "para2": "Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect hideaway to experience the best of the Catalan coast.",
+    "para1": "SeaZen is a light-filled seafront penthouse in the old center of Sitges — one of Spain's most beloved coastal towns. Perched above the promenade with uninterrupted sea views, every detail has been considered for those who appreciate quality and peace of mind.",
+    "para2": "Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.",
     "facts": {
-      "size": "56 m²",
-      "guests": "2 guests",
-      "bedrooms": "1 bedroom",
-      "terrace": "56 m²",
-      "beach": "50 m",
-      "view": "immersive sea views"
+      "size": "100 m²",
+      "guests": "2 Guests",
+      "bedrooms": "1 Bedroom",
+      "terrace": "38 m²",
+      "beach": "50 m to beach",
+      "view": "Impressive sea views"
     }
   },
   "gallery": {
@@ -61,8 +61,8 @@
   },
   "floorplan": {
     "overtitle": "Floor Plan",
-    "heading": "112 m² of refined space",
-    "desc": "One bedroom, open-plan living, fully equipped kitchen & a sea-facing shaded terrace with premium lounging furniture.",
+    "heading": "100 m² of refined space",
+    "desc": "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.",
     "image": "/uploads/untitled-2.png"
   },
   "lodgify": {
@@ -87,13 +87,13 @@
       "Air conditioning",
       "High-speed Wi-Fi",
       "Smart TV & streaming",
-      "King-size bed",
+      "King-size beds",
       "Premium linen & towels",
       "Washing machine & dryer",
-      "Daily cleaning optional",
+      "Daily cleaning available",
       "Contactless check-in",
-      "Public parking in the street",
-      "Elevator access"
+      "Private parking",
+      "Lift access"
     ]
   },
   "sitges": {
@@ -103,17 +103,17 @@
       {
         "icon": "🏖",
         "title": "Beaches",
-        "desc": "20 golden sandy beaches within walking distance"
+        "desc": "17 golden sandy beaches within walking distance"
       },
       {
         "icon": "🍷",
         "title": "Seafood & Tapas",
-        "desc": "Plenty of cosy restaurants & bars along the promenade & in the Old Town"
+        "desc": "World-class restaurants along the promenade"
       },
       {
         "icon": "🎨",
         "title": "Art & Culture",
-        "desc": "Museums, galleries, the famous Carnival & Film Festival"
+        "desc": "Museums, galleries and the famous Carnival"
       },
       {
         "icon": "⛵",
@@ -128,13 +128,13 @@
       {
         "icon": "🚂",
         "title": "Barcelona",
-        "desc": "35 min by direct train to the city centre"
+        "desc": "35 min by train to the city centre"
       }
     ]
   },
   "booking": {
     "heading": "Reserve SeaZen",
-    "desc": "Select your dates below to check availability and book instantly. No charge until confirmed by the owner.",
+    "desc": "Select your dates and guests below to check availability and book instantly. No charge until confirmed.",
     "minStay": "5 nights",
     "checkin": "15:00",
     "checkout": "11:00",
@@ -150,7 +150,7 @@
   },
   "newsletter": {
     "overtitle": "Stay in touch",
-    "heading": "...",
+    "heading": "Stay in the loop",
     "sub": "Be the first to hear about availability and special offers.",
     "namePlaceholder": "First name",
     "emailPlaceholder": "Email address",
@@ -160,7 +160,7 @@
     "title1": "high above the sea",
     "title2": "far beyond the ordinary",
     "subtitle": "Sitges (Barcelona) - seafront luxury penthouse",
-    "subtext": "A private penthouse with uninterrupted sea views, where every day is a Sunday",
+    "subtext": "A private penthouse with uninterrupted sea views, designed for those who appreciate the art of doing nothing.",
     "image": "hero.jpg",
     "imageMobile": "hero-mobile.jpg",
     "cta": "Discover the penthouse"
@@ -169,18 +169,18 @@
     "heading": "What our guests say",
     "items": [
       {
-        "name": "Thomas",
-        "location": "United States",
-        "date": "September 2025",
+        "name": "Sophie & James",
+        "location": "London, UK",
+        "date": "March 2025",
         "stars": 5,
-        "text": "This is a perfect unit to enjoy the absolute best of Sitges.\n\nThe unit is breathtakingly beautiful, fully stocked with everything we needed. The deck is stunning. The location is the best in town. It is hard to image a better property in all of Sitges. We enjoyed every minute in this property. Review from Booking.com, before the reform"
+        "text": "An absolutely stunning apartment. The sea views are breathtaking and the space is beautifully designed. We didn't want to leave. Sitges itself is magical — we'll definitely be back."
       },
       {
-        "name": "Steve",
-        "location": "United Kingdom",
-        "date": "August 2025",
-        "stars": 4,
-        "text": "Location Location Location that is what this property is all about, Stunning 180 Deg Views and large terrace make this property an exceptional place to stay."
+        "name": "Marie-Claire D.",
+        "location": "Paris, France",
+        "date": "February 2025",
+        "stars": 5,
+        "text": "Perfect in every way. The apartment is exactly as shown — even better in person. Spotlessly clean, incredibly comfortable, and the location on the seafront is unbeatable. Highly recommend."
       }
     ]
   },
