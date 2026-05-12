@@ -169,18 +169,18 @@
     "heading": "What our guests say",
     "items": [
       {
-        "name": "Sophie & James",
-        "location": "London, UK",
-        "date": "March 2025",
+        "name": "Thomas",
+        "location": "United States",
+        "date": "September 2025",
         "stars": 5,
-        "text": "An absolutely stunning apartment. The sea views are breathtaking and the space is beautifully designed. We didn't want to leave. Sitges itself is magical — we'll definitely be back."
+        "text": "This is a perfect unit to enjoy the absolute best of Sitges.\n\nThe unit is breathtakingly beautiful, fully stocked with everything we needed. The deck is stunning. The location is the best in town. It is hard to image a better property in all of Sitges. We enjoyed every minute in this property. Review from Booking.com, before the reform"
       },
       {
-        "name": "Marie-Claire D.",
-        "location": "Paris, France",
-        "date": "February 2025",
-        "stars": 5,
-        "text": "Perfect in every way. The apartment is exactly as shown — even better in person. Spotlessly clean, incredibly comfortable, and the location on the seafront is unbeatable. Highly recommend."
+        "name": "Steve",
+        "location": "United Kingdom",
+        "date": "August 2025",
+        "stars": 4,
+        "text": "Location Location Location that is what this property is all about, Stunning 180 Deg Views and large terrace make this property an exceptional place to stay."
       }
     ]
   },
