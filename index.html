@@ -535,7 +535,7 @@ h2.sh {
     <p id="cms-fp-desc" class="bt" style="max-width:300px;">One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.</p>
   </div>
   <div class="fp-img rv d1">
-    <img id="cms-fp-image" src="/loft-as-proposed-with-dims-rev-d.jpg" alt="Floor plan" style="width:100%;height:auto;object-fit:contain;">
+    <img id="cms-fp-image" src="/loft-as-proposed-with-dims-rev-d.jpg" alt="Floor plan" style="width:100%;max-height:60vh;height:auto;object-fit:contain;">
     <svg id="cms-fp-svg" viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif" style="display:none">
       <rect x="40" y="40" width="820" height="460" fill="none" stroke="#1c1916" stroke-width="2.5"/>
       <line x1="320" y1="40" x2="320" y2="320" stroke="#1c1916" stroke-width="2"/>
@@ -607,41 +607,28 @@ h2.sh {
         <p id="cms-bk-desc" class="rv d2" style="margin-bottom:28px;">Select your dates and guests below to check availability and book instantly. No charge until confirmed.</p>
         <style>
           :root {
-            --ldg-bnb-background: transparent;
-            --ldg-bnb-border-radius: 0px;
-            --ldg-bnb-box-shadow: none;
-            --ldg-bnb-padding: 0px;
+            --ldg-bnb-background: #ffffff;
+            --ldg-bnb-border-radius: 0.42em;
+            --ldg-bnb-box-shadow: 0px 24px 54px 0px rgba(0, 0, 0, 0.1);
+            --ldg-bnb-padding: 14px;
             --ldg-bnb-input-background: #ffffff;
-            --ldg-bnb-button-border-radius: 0px;
-            --ldg-bnb-color-primary: #66484e;
-            --ldg-bnb-color-primary-lighter: #9e7d82;
-            --ldg-bnb-color-primary-darker: #3e2428;
+            --ldg-bnb-button-border-radius: 0.42em;
+            --ldg-bnb-color-primary: #561029;
+            --ldg-bnb-color-primary-lighter:#ab8894;
+            --ldg-bnb-color-primary-darker: #2b0815;
             --ldg-bnb-color-primary-contrast: #ffffff;
-            --ldg-component-calendar-cell-selection-bg-color: #66484e;
+            --ldg-component-calendar-cell-selection-bg-color: #561029;
             --ldg-component-calendar-cell-selection-color: #ffffff;
-            --ldg-component-calendar-cell-selected-bg-color: #9e7d82;
+            --ldg-component-calendar-cell-selected-bg-color: #ab8894;
             --ldg-component-calendar-cell-selected-color: #ffffff;
-            --ldg-bnb-font-family: 'Inter', sans-serif;
+            --ldg-bnb-font-family: inherit;
           }
-          #lodgify-book-now-box { width: 100%; }
-          #lodgify-book-now-box > *,
-          #lodgify-book-now-box > * > *,
-          #lodgify-book-now-box > * > * > * { margin-left: 0 !important; padding-left: 0 !important; box-shadow: none !important; border-radius: 0 !important; width: 100% !important; max-width: 100% !important; }
-          [class*="BookNowBox"] input,
-          [class*="BookNowBox"] select,
-          [class*="book-now-box"] input,
-          [class*="book-now-box"] select { border: 1px solid rgba(28,25,22,.12) !important; border-radius: 0 !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; font-weight: 300 !important; background: #fff !important; padding: 14px 12px !important; height: auto !important; }
-          [class*="BookNowBox"] [class*="date"],
-          [class*="book-now-box"] [class*="date"] { padding: 4px 0 !important; }
-          [class*="BookNowBox"] button,
-          [class*="book-now-box"] button { background: #66484e !important; border-radius: 0 !important; font-family: 'Inter', sans-serif !important; font-size: 10px !important; letter-spacing: .2em !important; text-transform: uppercase !important; font-weight: 400 !important; }
-          [class*="BookNowBox"] button:hover,
-          [class*="book-now-box"] button:hover { background: #3e2428 !important; }
-          /* #8 — minimum price labels cleared via data attributes (labels set to empty strings) */
-          [class*="BookNowBox"] [class*="error"],
-          [class*="book-now-box"] [class*="error"] { font-family: 'Inter', sans-serif !important; font-size: 11px !important; }
+          #lodgify-book-now-box {    
+            width: 100%;
+            padding: 0 14px;
+            box-sizing: border-box;
+          }
         </style>
-        <div style="margin-left:-14px; width:calc(100% + 28px); overflow:hidden;">
         <div
           id="lodgify-book-now-box"
           data-rental-id="796627"
@@ -650,6 +637,7 @@ h2.sh {
           data-language-code="en"
           data-new-tab="true"
           data-version="stable"
+          data-hide-minimum-price
           data-has-guests-breakdown
           data-check-in-label='Check-in'
           data-check-out-label='Check-out'
@@ -659,8 +647,8 @@ h2.sh {
           data-location-input-label='Location'
           data-total-price-label='Total price:'
           data-select-dates-to-see-price-label='Select dates to see total price'
-          data-minimum-price-per-night-first-label=''
-          data-minimum-price-per-night-second-label=''
+          data-minimum-price-per-night-first-label='From'
+          data-minimum-price-per-night-second-label='per night'
           data-book-button-label='Book Now'
           data-guests-breakdown-label='Guests'
           data-adults-label='{"one":"adult","other":"adults"}'
@@ -675,7 +663,6 @@ h2.sh {
           data-pets-not-allowed-label='Not allowed'
           data-done-label='Done'
         ></div>
-        </div>
         <div class="bk-notice rv" style="margin-top:24px;">
           <strong>Minimum stay:</strong> <span id="cms-bk-minstay">5 nights</span><br>
           <strong>Check-in:</strong> <span id="cms-bk-checkin">15:00</span> &nbsp;·&nbsp; <strong>Check-out:</strong> <span id="cms-bk-checkout">11:00</span><br>
