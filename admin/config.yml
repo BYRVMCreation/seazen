@@ -17,7 +17,7 @@ collections:
         format: json
         fields:
           - { label: "Page title", name: "title", widget: "string", default: "Privacy Policy" }
-          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2025" }
+          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2026" }
           - label: "Sections"
             name: "sections"
             widget: "list"
@@ -31,7 +31,7 @@ collections:
         format: json
         fields:
           - { label: "Page title", name: "title", widget: "string", default: "Terms & Conditions" }
-          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2025" }
+          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2026" }
           - label: "Sections"
             name: "sections"
             widget: "list"
@@ -45,7 +45,7 @@ collections:
         format: json
         fields:
           - { label: "Page title", name: "title", widget: "string", default: "Cancellation Policy" }
-          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2025" }
+          - { label: "Last updated", name: "updated", widget: "string", default: "1 January 2026" }
           - label: "Sections"
             name: "sections"
             widget: "list"
@@ -62,57 +62,69 @@ collections:
         format: json
         fields:
 
+          # ── NAVIGATION ────────────────────────────
+          - label: "Navigation"
+            name: "nav"
+            widget: "object"
+            fields:
+              - { label: "Menu: The Apartment", name: "apartment", widget: "string", default: "The Apartment" }
+              - { label: "Menu: Amenities", name: "amenities", widget: "string", default: "Amenities" }
+              - { label: "Menu: Gallery", name: "gallery", widget: "string", default: "Gallery" }
+              - { label: "Menu: Floor Plan", name: "floorplan", widget: "string", default: "Floor Plan" }
+              - { label: "Menu: Book button", name: "book", widget: "string", default: "Book Now" }
+
           # ── HERO ──────────────────────────────────
           - label: "Hero"
             name: "hero"
             widget: "object"
             fields:
-              - { label: "Title line 1", name: "title1", widget: "string", default: "SeaZen" }
-              - { label: "Title line 2", name: "title2", widget: "string", default: "Sitges" }
-              - { label: "Subtitle", name: "subtitle", widget: "string", default: "Sitges, Spain — Seafront Apartment" }
+              - { label: "Title line 1", name: "title1", widget: "string" }
+              - { label: "Title line 2 (normal, not italic)", name: "title2", widget: "string" }
+              - { label: "Subtitle (above title)", name: "subtitle", widget: "string" }
+              - { label: "Subtext (below title)", name: "subtext", widget: "text" }
               - { label: "Hero image (desktop)", name: "image", widget: "image" }
               - { label: "Hero image (mobile)", name: "imageMobile", widget: "image" }
-              - { label: "CTA button text", name: "cta", widget: "string", default: "Discover the apartment" }
+              - { label: "CTA button text", name: "cta", widget: "string" }
 
           # ── INTRO ─────────────────────────────────
           - label: "Intro Section"
             name: "intro"
             widget: "object"
             fields:
-              - { label: "Overtitle", name: "overtitle", widget: "string", default: "The Apartment" }
-              - { label: "Heading line 1", name: "heading1", widget: "string", default: "A curated retreat" }
-              - { label: "Heading line 2", name: "heading2", widget: "string", default: "above the Mediterranean" }
+              - { label: "Overtitle", name: "overtitle", widget: "string" }
+              - { label: "Heading line 1", name: "heading1", widget: "string" }
+              - { label: "Heading line 2", name: "heading2", widget: "string" }
               - { label: "Paragraph 1", name: "para1", widget: "text" }
               - { label: "Paragraph 2", name: "para2", widget: "text" }
               - label: "Key Facts"
                 name: "facts"
                 widget: "object"
                 fields:
-                  - { label: "Size", name: "size", widget: "string", default: "120 m²" }
-                  - { label: "Guests", name: "guests", widget: "string", default: "4 Guests" }
-                  - { label: "Bedrooms", name: "bedrooms", widget: "string", default: "2 Bedrooms" }
-                  - { label: "Price from", name: "price", widget: "string", default: "€250 / night" }
-                  - { label: "Beach distance", name: "beach", widget: "string", default: "50 m to beach" }
-                  - { label: "View", name: "view", widget: "string", default: "Sea view" }
+                  - { label: "Size Interior", name: "size", widget: "string", default: "100 m²" }
+                  - { label: "Guests", name: "guests", widget: "string", default: "2 Guests" }
+                  - { label: "Bedrooms", name: "bedrooms", widget: "string", default: "1 Bedroom" }
+                  - { label: "Terrace", name: "terrace", widget: "string", default: "38 m²" }
+                  - { label: "Beach distance", name: "beach", widget: "string" }
+                  - { label: "View", name: "view", widget: "string" }
 
           # ── AMENITIES ─────────────────────────────
           - label: "Amenities Section"
             name: "amenities"
             widget: "object"
             fields:
-              - { label: "Overtitle", name: "overtitle", widget: "string", default: "Everything you could need" }
-              - { label: "Heading", name: "heading", widget: "string", default: "Thoughtfully equipped" }
+              - { label: "Overtitle", name: "overtitle", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
               - label: "Amenity items"
                 name: "items"
                 widget: "list"
                 field: { label: "Item", name: "item", widget: "string" }
 
-          # ── THINGS TO DO ──────────────────────────
-          - label: "Things To Do"
+          # ── SITGES ────────────────────────────────
+          - label: "Things To Do (Sitges)"
             name: "sitges"
             widget: "object"
             fields:
-              - { label: "Heading", name: "heading", widget: "string", default: "Sitges awaits" }
+              - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Subtitle", name: "subtitle", widget: "text" }
               - label: "Items"
                 name: "items"
@@ -120,7 +132,7 @@ collections:
                 fields:
                   - { label: "Icon (emoji)", name: "icon", widget: "string" }
                   - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Description", name: "desc", widget: "string" }
+                  - { label: "Description", name: "desc", widget: "text" }
 
           # ── FLOOR PLAN ────────────────────────────
           - label: "Floor Plan"
@@ -128,71 +140,85 @@ collections:
             widget: "object"
             fields:
               - { label: "Overtitle", name: "overtitle", widget: "string", default: "Floor Plan" }
-              - { label: "Heading (e.g. 120 m² of refined space)", name: "heading", widget: "string", default: "120 m² of refined space" }
-              - { label: "Description (right column)", name: "desc", widget: "text", default: "Two bedrooms, open-plan living, full kitchen, and a sea-facing wraparound terrace." }
-              - { label: "Floor plan image", name: "image", widget: "image" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+              - { label: "Floor plan image", name: "image", widget: "image", required: false }
 
           # ── GALLERY ───────────────────────────────
           - label: "Gallery"
             name: "gallery"
             widget: "object"
             fields:
-              - { label: "Section title", name: "heading", widget: "string", default: "Take a closer look" }
-              - label: "Photos"
+              - { label: "Heading", name: "heading", widget: "string" }
+              - label: "Images"
                 name: "images"
                 widget: "list"
                 fields:
                   - { label: "Image", name: "src", widget: "image" }
-                  - { label: "Caption", name: "alt", widget: "string" }
+                  - { label: "Alt text", name: "alt", widget: "string" }
 
           # ── REVIEWS ───────────────────────────────
-          - label: "Reviews"
+          - label: "Guest Reviews"
             name: "reviews"
             widget: "object"
             fields:
-              - { label: "Section heading", name: "heading", widget: "string", default: "What our guests say" }
-              - label: "Reviews"
+              - { label: "Section heading", name: "heading", widget: "string" }
+              - label: "Review cards"
                 name: "items"
                 widget: "list"
                 fields:
-                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Guest name", name: "name", widget: "string" }
                   - { label: "Location", name: "location", widget: "string" }
                   - { label: "Date", name: "date", widget: "string" }
-                  - { label: "Stars (1-5)", name: "stars", widget: "number", min: 1, max: 5, default: 5 }
+                  - { label: "Stars (1–5)", name: "stars", widget: "number", default: 5 }
                   - { label: "Review text", name: "text", widget: "text" }
 
           # ── BOOKING ───────────────────────────────
-          - label: "Booking Info"
+          - label: "Booking Section"
             name: "booking"
             widget: "object"
             fields:
-              - { label: "Minimum stay", name: "minStay", widget: "string", default: "3 nights" }
-              - { label: "Check-in from", name: "checkin", widget: "string", default: "15:00" }
-              - { label: "Check-out before", name: "checkout", widget: "string", default: "11:00" }
+              - { label: "Section heading", name: "heading", widget: "string", default: "Reserve SeaZen" }
+              - { label: "Description text", name: "desc", widget: "text" }
+              - { label: "Minimum stay", name: "minStay", widget: "string", default: "5 nights" }
+              - { label: "Check-in time", name: "checkin", widget: "string", default: "15:00" }
+              - { label: "Check-out time", name: "checkout", widget: "string", default: "11:00" }
               - { label: "Pets policy", name: "pets", widget: "string", default: "not permitted" }
-              - { label: "Smoking policy", name: "smoking", widget: "string", default: "outside only" }
+              - { label: "Smoking policy", name: "smoking", widget: "string", default: "not permitted" }
+
+          # ── LODGIFY ───────────────────────────────
+          - label: "Lodgify Widget"
+            name: "lodgify"
+            widget: "object"
+            fields:
+              - { label: "Rental ID", name: "rentalId", widget: "string" }
+              - { label: "Website ID", name: "websiteId", widget: "string" }
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Language code", name: "language", widget: "string", default: "en" }
+
+          # ── NEWSLETTER ────────────────────────────
+          - label: "Newsletter Section"
+            name: "newsletter"
+            widget: "object"
+            fields:
+              - { label: "Overtitle", name: "overtitle", widget: "string", default: "Stay in touch" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Subtext", name: "sub", widget: "text" }
+              - { label: "Name field placeholder", name: "namePlaceholder", widget: "string", default: "First name" }
+              - { label: "Email field placeholder", name: "emailPlaceholder", widget: "string", default: "Email address" }
+              - { label: "Subscribe button label", name: "buttonLabel", widget: "string", default: "Subscribe" }
 
           # ── CONTACT ───────────────────────────────
           - label: "Contact"
             name: "contact"
             widget: "object"
             fields:
-              - { label: "Phone", name: "phone", widget: "string", default: "+34 600 000 000" }
-              - { label: "Email", name: "email", widget: "string", default: "hello@seazen.com" }
-              - { label: "Instagram handle", name: "instagram", widget: "string", default: "@seazen.sitges" }
-              - { label: "Instagram URL", name: "instagramUrl", widget: "string", default: "https://instagram.com" }
-
-          # ── NEWSLETTER ────────────────────────────
-          - label: "Newsletter / CTA"
-            name: "newsletter"
-            widget: "object"
-            fields:
-              - { label: "Heading", name: "heading", widget: "string", default: "Stay in the loop" }
-              - { label: "Subtext", name: "sub", widget: "string", default: "Be the first to hear about availability and special offers." }
+              - { label: "Phone", name: "phone", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
 
           # ── FOOTER ────────────────────────────────
           - label: "Footer"
             name: "footer"
             widget: "object"
             fields:
-              - { label: "Copyright text", name: "copy", widget: "string", default: "© 2025 SeaZen. All rights reserved." }
+              - { label: "Copyright text", name: "copy", widget: "string", default: "© 2026 SeaZen. All rights reserved." }
