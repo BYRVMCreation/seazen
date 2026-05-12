@@ -238,4 +238,5 @@ collections:
             name: "footer"
             widget: "object"
             fields:
+              - { label: "Logo image (white version)", name: "logo", widget: "image" }
               - { label: "Copyright text", name: "copy", widget: "string", default: "© 2026 SeaZen. All rights reserved." }
