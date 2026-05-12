@@ -1,14 +1,14 @@
 {
+  "contact": {
+    "phone": "+34 646 37 42 79",
+    "email": "stay@seazen.es"
+  },
   "nav": {
     "apartment": "The Apartment",
     "amenities": "Amenities",
     "gallery": "Gallery",
     "floorplan": "Floor Plan",
     "book": "Book Now"
-  },
-  "contact": {
-    "phone": "+34 646 37 42 79",
-    "email": "stay@seazen.es"
   },
   "intro": {
     "overtitle": "The penthouse",
@@ -28,35 +28,51 @@
   "gallery": {
     "heading": "Take a closer look",
     "images": [
-      { "src": "bedroom.jpg", "alt": "Master bedroom" },
-      { "src": "bathroom.jpg", "alt": "Bathroom" },
-      { "src": "dining.jpg", "alt": "Dining area" },
-      { "src": "kitchen.jpg", "alt": "Kitchen" },
-      { "src": "office.jpg", "alt": "Home office" },
-      { "src": "bedroom2.jpg", "alt": "Second bedroom" },
-      { "src": "kitchen2.jpg", "alt": "Kitchen island" }
+      {
+        "src": "bedroom.jpg",
+        "alt": "Master bedroom"
+      },
+      {
+        "src": "bathroom.jpg",
+        "alt": "Bathroom"
+      },
+      {
+        "src": "dining.jpg",
+        "alt": "Dining area"
+      },
+      {
+        "src": "kitchen.jpg",
+        "alt": "Kitchen"
+      },
+      {
+        "src": "office.jpg",
+        "alt": "Home office"
+      },
+      {
+        "src": "bedroom2.jpg",
+        "alt": "Second bedroom"
+      },
+      {
+        "src": "kitchen2.jpg",
+        "alt": "Kitchen island"
+      }
     ]
   },
   "floorplan": {
     "overtitle": "Floor Plan",
     "heading": "100 m² of refined space",
     "desc": "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.",
-    "image": "/loft-as-proposed-with-dims-rev-d.jpg"
+    "image": "/hf_20260512_122444_b1f395f8-413c-4ac4-ad3b-51ac5bc6a5f4.png"
   },
-  "strips": {
-    "strip1": "dining.jpg",
-    "strip2": "bedroom.jpg"
+  "lodgify": {
+    "rentalId": "796627",
+    "websiteId": "648843",
+    "slug": "didier-dewyn",
+    "language": "en"
   },
   "amenities": {
     "overtitle": "Amenities",
     "heading": "Everything you could need",
-    "photos": [
-      "kitchen2.jpg",
-      "bathroom.jpg",
-      "bedroom.jpg",
-      "dining.jpg",
-      "kitchen.jpg"
-    ],
     "items": [
       "Sea view terrace",
       "Fully equipped kitchen",
@@ -76,12 +92,36 @@
     "heading": "Sitges awaits",
     "subtitle": "Step outside and discover one of the Mediterranean's most vibrant and charming towns.",
     "items": [
-      { "icon": "🏖", "title": "Beaches", "desc": "17 golden sandy beaches within walking distance" },
-      { "icon": "🍷", "title": "Seafood & Tapas", "desc": "World-class restaurants along the promenade" },
-      { "icon": "🎨", "title": "Art & Culture", "desc": "Museums, galleries and the famous Carnival" },
-      { "icon": "⛵", "title": "Watersports", "desc": "Sailing, paddleboarding and diving" },
-      { "icon": "🌿", "title": "Hiking", "desc": "Scenic trails through Garraf Natural Park" },
-      { "icon": "🚂", "title": "Barcelona", "desc": "35 min by train to the city centre" }
+      {
+        "icon": "🏖",
+        "title": "Beaches",
+        "desc": "17 golden sandy beaches within walking distance"
+      },
+      {
+        "icon": "🍷",
+        "title": "Seafood & Tapas",
+        "desc": "World-class restaurants along the promenade"
+      },
+      {
+        "icon": "🎨",
+        "title": "Art & Culture",
+        "desc": "Museums, galleries and the famous Carnival"
+      },
+      {
+        "icon": "⛵",
+        "title": "Watersports",
+        "desc": "Sailing, paddleboarding and diving"
+      },
+      {
+        "icon": "🌿",
+        "title": "Hiking",
+        "desc": "Scenic trails through Garraf Natural Park"
+      },
+      {
+        "icon": "🚂",
+        "title": "Barcelona",
+        "desc": "35 min by train to the city centre"
+      }
     ]
   },
   "booking": {
@@ -91,20 +131,7 @@
     "checkin": "15:00",
     "checkout": "11:00",
     "pets": "not permitted",
-    "smoking": "not permitted",
-    "photos": [
-      "bedroom.jpg",
-      "bathroom.jpg",
-      "dining.jpg",
-      "kitchen.jpg",
-      "office.jpg"
-    ]
-  },
-  "lodgify": {
-    "rentalId": "796627",
-    "websiteId": "648843",
-    "slug": "didier-dewyn",
-    "language": "en"
+    "smoking": "not permitted"
   },
   "newsletter": {
     "overtitle": "Stay in touch",
