@@ -624,8 +624,13 @@ h2.sh {
             --ldg-bnb-font-family: inherit;
           }
           #lodgify-book-now-box {    
-            width: calc(100% - 28px);
-            margin: 0 14px;
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+          #lodgify-book-now-box > div,
+          #lodgify-book-now-box > div > div {
+            max-width: 100% !important;
+            width: 100% !important;
           }
         </style>
         <div
