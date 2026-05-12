@@ -725,7 +725,7 @@ h2.sh {
 <footer id="footer">
   <div class="w">
     <div class="f-logo">
-      <a href="#hero">SeaZen</a>
+      <a href="#hero"><img src="logo-white.png" alt="SeaZen" style="height: 48px; width: auto; display: block; margin: 0 auto;"></a>
     </div>
     <div class="f-bot">
       <span id="cms-footer-copy">&copy; 2026 SeaZen. All rights reserved.</span>
@@ -904,7 +904,13 @@ fetch('/content.json')
       c.booking.photos.forEach(function(src,i){ if(bkSlides[i]) bkSlides[i].src=src; });
     }
     /* #13 — FOOTER */
-    setText('cms-footer-copy', c.footer.copy);
+    if(c.footer){
+      setText('cms-footer-copy', c.footer.copy);
+      if(c.footer.logo){
+        var footerLogoImg = document.querySelector('.f-logo img');
+        if(footerLogoImg) footerLogoImg.src = c.footer.logo;
+      }
+    }
   })
   .catch(function(){});
 
