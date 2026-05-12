@@ -363,7 +363,7 @@ h2.sh {
     <li><a class="nlink" id="cms-nav-amenities" href="#amenities">Amenities</a></li>
     <li><a class="nlink" id="cms-nav-gallery" href="#gal-section">Gallery</a></li>
   </ul>
-  <a class="nav-logo" href="#hero">SeaZen</a>
+  <a class="nav-logo" href="#hero"><img src="logo.png" alt="SeaZen" style="height: 28px; width: auto; display: block;"></a>
   <ul class="nl-right">
     <li><a class="nlink" id="cms-nav-fp" href="#fp">Floor Plan</a></li>
     <li><a class="nlink pill" id="cms-nav-book" href="#booking">Book Now</a></li>
@@ -810,6 +810,10 @@ fetch('/content.json')
   .then(function(c){
     /* #1 — NAV */
     if(c.nav){
+      if(c.nav.logo){
+        var navLogoImg = document.querySelector('.nav-logo img');
+        if(navLogoImg) navLogoImg.src = c.nav.logo;
+      }
       setText('cms-nav-apt',       c.nav.apartment);
       setText('cms-nav-amenities', c.nav.amenities);
       setText('cms-nav-gallery',   c.nav.gallery);
