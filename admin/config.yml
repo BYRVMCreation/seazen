@@ -67,6 +67,7 @@ collections:
             name: "nav"
             widget: "object"
             fields:
+              - { label: "Logo image", name: "logo", widget: "image" }
               - { label: "Menu: The Apartment", name: "apartment", widget: "string", default: "The Apartment" }
               - { label: "Menu: Amenities", name: "amenities", widget: "string", default: "Amenities" }
               - { label: "Menu: Gallery", name: "gallery", widget: "string", default: "Gallery" }
