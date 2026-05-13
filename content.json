@@ -18,11 +18,11 @@
     "para1": "SeaZen is a light-filled seafront penthouse in the old center of Sitges — one of Spain's most beloved coastal towns. Perched above the promenade with uninterrupted sea views, every detail has been considered for those who appreciate quality and peace of mind.",
     "para2": "Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.",
     "facts": {
-      "size": "100 m²",
+      "size": "56 m²",
       "guests": "2 Guests",
       "bedrooms": "1 Bedroom",
-      "terrace": "38 m²",
-      "beach": "50 m to beach",
+      "terrace": "56 m²",
+      "beach": "50 m",
       "view": "Impressive sea views"
     }
   },
@@ -61,8 +61,8 @@
   },
   "floorplan": {
     "overtitle": "Floor Plan",
-    "heading": "100 m² of refined space",
-    "desc": "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.",
+    "heading": "56 m² of refined space",
+    "desc": "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing large terrace.",
     "image": "/uploads/screenshot-2026-05-12-at-19.37.24.png"
   },
   "lodgify": {
