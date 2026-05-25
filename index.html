@@ -1293,7 +1293,7 @@ function applyContent(c){
 /* Render Overlay Functions */
 function addRenderOverlays(text){
   removeRenderOverlays();
-  var containers = document.querySelectorAll('.am-slider, .gp, .strip, .fp-img, .bk-carousel, #hero-img');
+  var containers = document.querySelectorAll('.am-slider, .gp, .strip, .fp-img, .bk-carousel');
   containers.forEach(function(container){
     if(!container.querySelector('.render-overlay')){
       var overlay = document.createElement('div');
