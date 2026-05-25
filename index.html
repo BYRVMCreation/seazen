@@ -1318,6 +1318,7 @@ function loadContent(lang){
   if(cachedContent){
     var translated = translateContent(cachedContent);
     applyContent(translated);
+    showCookieConsent();
   } else {
     fetch('/content.json')
       .then(function(r){return r.json();})
@@ -1343,8 +1344,11 @@ fetch('/content.json')
   .then(function(c){
     cachedContent = c;
     loadContent(detectedLang);
+    showCookieConsent();
   })
-  .catch(function(){});
+  .catch(function(){
+    showCookieConsent();
+  });
 
 if(window.netlifyIdentity){
   window.netlifyIdentity.on('init',function(user){
