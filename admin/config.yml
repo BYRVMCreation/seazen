@@ -238,3 +238,31 @@ collections:
             fields:
               - { label: "Logo image (white version)", name: "logo", widget: "image" }
               - { label: "Copyright text", name: "copy", widget: "string", default: "© 2026 SeaZen. All rights reserved." }
+
+          # ── COOKIE CONSENT ────────────────────────
+          - label: "Cookie Consent Popup"
+            name: "cookie"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string", default: "We value your privacy" }
+              - { label: "Message", name: "message", widget: "text", default: "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies." }
+
+          # ── WHATSAPP BUTTON ──────────────────────
+          - label: "WhatsApp Button"
+            name: "whatsapp"
+            widget: "object"
+            fields:
+              - { label: "Show WhatsApp button", name: "show", widget: "boolean", default: true }
+              - { label: "Phone number (with country code)", name: "phone", widget: "string", default: "+34 604 24 37 46" }
+
+          # ── FLOOR PLAN ────────────────────────────
+          - label: "Floor Plan"
+            name: "floorplan"
+            widget: "object"
+            fields:
+              - { label: "Overtitle", name: "overtitle", widget: "string", default: "Floor Plan" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
+              - { label: "Floor plan image", name: "image", widget: "image", required: false }
+              - { label: "Show 'Render' label on image", name: "showRenderLabel", widget: "boolean", default: true }
+              - { label: "Render label text", name: "renderLabel", widget: "string", default: "Render" }
