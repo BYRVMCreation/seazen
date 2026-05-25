@@ -129,18 +129,20 @@ a, button, input, select, textarea { cursor: auto; }
   fill: #fff;
 }
 
-/* ── FLOOR PLAN RENDER LABEL ────────────── */
-.fp-render-label {
+/* ── RENDER ONLY OVERLAY ───────────────── */
+.render-overlay {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
+  background: rgba(255,255,255,0.9);
+  color: var(--tx);
   padding: 6px 12px;
-  font-size: 11px;
-  letter-spacing: .1em;
+  font-size: 10px;
+  letter-spacing: .15em;
   text-transform: uppercase;
   border-radius: 4px;
+  font-weight: 400;
+  z-index: 10;
 }
 
 /* ── NAV ───────────────────────────────── */
@@ -628,9 +630,6 @@ h2.sh {
     <p id="cms-fp-desc" class="bt" style="max-width:300px;">One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.</p>
   </div>
   <div class="fp-img rv d1" style="position:relative;">
-    <div id="fp-render-label" class="fp-render-label" style="display:none;">
-      <span id="fp-render-text">Render</span>
-    </div>
     <img id="cms-fp-image" src="/loft-as-proposed-with-dims-rev-d.jpg" alt="Floor plan" style="width:100%;max-height:60vh;height:auto;object-fit:contain;">
     <svg id="cms-fp-svg" viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif" style="display:none">
       <rect x="40" y="40" width="820" height="460" fill="none" stroke="#1c1916" stroke-width="2.5"/>
@@ -1271,18 +1270,44 @@ function applyContent(c){
       }
     }
   }
-  /* FLOOR PLAN RENDER LABEL */
-  if(c.floorplan){
-    var fpLabel = document.getElementById('fp-render-label');
-    if(fpLabel){
-      if(c.floorplan.showRenderLabel){
-        fpLabel.style.display = 'block';
-        setText('fp-render-text', c.floorplan.renderLabel || 'Render');
-      } else {
-        fpLabel.style.display = 'none';
-      }
+  /* RENDER OVERLAY */
+  if(c.settings && c.settings.showRenderOverlay){
+    addRenderOverlays(c.settings.renderOverlayText || 'Render only');
+  } else {
+    removeRenderOverlays();
+  }
+  /* WHATSAPP BUTTON */
+  var waBtn = document.getElementById('whatsapp-btn');
+  if(waBtn && c.whatsapp){
+    var isMobile = window.innerWidth <= 768;
+    var shouldShow = isMobile ? c.whatsapp.showMobile : c.whatsapp.showDesktop;
+    if(shouldShow){
+      waBtn.style.display = 'flex';
+      waBtn.href = 'https://wa.me/' + c.whatsapp.phone.replace(/\D/g,'');
+    } else {
+      waBtn.style.display = 'none';
     }
   }
+}
+
+/* Render Overlay Functions */
+function addRenderOverlays(text){
+  removeRenderOverlays();
+  var containers = document.querySelectorAll('.am-slider, .gp, .strip, .fp-img, .bk-carousel, #hero-img');
+  containers.forEach(function(container){
+    if(!container.querySelector('.render-overlay')){
+      var overlay = document.createElement('div');
+      overlay.className = 'render-overlay';
+      overlay.textContent = text;
+      container.style.position = 'relative';
+      container.appendChild(overlay);
+    }
+  });
+}
+function removeRenderOverlays(){
+  document.querySelectorAll('.render-overlay').forEach(function(el){
+    el.remove();
+  });
 }
 
 function loadContent(lang){
