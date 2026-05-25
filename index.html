@@ -50,6 +50,99 @@ body { cursor: auto; }
 #cur { display: none; }
 a, button, input, select, textarea { cursor: auto; }
 
+/* ── COOKIE CONSENT ─────────────────────── */
+#cookie-consent {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 600px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  padding: 28px 32px;
+  z-index: 9500;
+  display: none;
+}
+#cookie-consent.show { display: block; }
+#cookie-consent h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--tx);
+  margin-bottom: 12px;
+}
+#cookie-consent p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--mid);
+  margin-bottom: 20px;
+}
+.cookie-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cookie-btn {
+  padding: 12px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+}
+.cookie-btn-accept {
+  background: var(--a);
+  color: #fff;
+}
+.cookie-btn-accept:hover { background: #2a181b; }
+.cookie-btn-reject {
+  background: transparent;
+  color: var(--tx);
+  border: 1px solid var(--bdr);
+}
+.cookie-btn-reject:hover { background: var(--bg); }
+
+/* ── WHATSAPP BUTTON ───────────────────── */
+#whatsapp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 900;
+  transition: transform .2s;
+}
+#whatsapp-btn:hover { transform: scale(1.05); }
+#whatsapp-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
+
+/* ── FLOOR PLAN RENDER LABEL ────────────── */
+.fp-render-label {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
 /* ── NAV ───────────────────────────────── */
 #nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 800;
@@ -534,7 +627,10 @@ h2.sh {
     </div>
     <p id="cms-fp-desc" class="bt" style="max-width:300px;">One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.</p>
   </div>
-  <div class="fp-img rv d1">
+  <div class="fp-img rv d1" style="position:relative;">
+    <div id="fp-render-label" class="fp-render-label" style="display:none;">
+      <span id="fp-render-text">Render</span>
+    </div>
     <img id="cms-fp-image" src="/loft-as-proposed-with-dims-rev-d.jpg" alt="Floor plan" style="width:100%;max-height:60vh;height:auto;object-fit:contain;">
     <svg id="cms-fp-svg" viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg" font-family="Inter,sans-serif" style="display:none">
       <rect x="40" y="40" width="820" height="460" fill="none" stroke="#1c1916" stroke-width="2.5"/>
@@ -712,6 +808,16 @@ h2.sh {
   </div>
 </section>
 
+<!-- COOKIE CONSENT -->
+<div id="cookie-consent">
+  <h3 id="cms-cookie-title">We value your privacy</h3>
+  <p id="cms-cookie-message">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+  <div class="cookie-buttons">
+    <button class="cookie-btn cookie-btn-reject" onclick="rejectCookies()">Reject All</button>
+    <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Accept All</button>
+  </div>
+</div>
+
 <!-- FOOTER — #11 logo same size as nav (22px), centered -->
 <footer id="footer">
   <div class="w">
@@ -799,6 +905,25 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList
 function setText(id,val){var el=document.getElementById(id);if(el&&val!=null)el.textContent=val;}
 function setContact(id,text,href){var el=document.getElementById(id);if(el){if(text)el.textContent=text;if(href)el.href=href;}}
 function setPlaceholder(id,val){var el=document.getElementById(id);if(el&&val)el.placeholder=val;}
+
+/* COOKIE CONSENT */
+function showCookieConsent(){
+  var consent = localStorage.getItem('cookie-consent');
+  if(!consent){
+    var el = document.getElementById('cookie-consent');
+    if(el) el.classList.add('show');
+  }
+}
+function acceptCookies(){
+  localStorage.setItem('cookie-consent', 'accepted');
+  var el = document.getElementById('cookie-consent');
+  if(el) el.classList.remove('show');
+}
+function rejectCookies(){
+  localStorage.setItem('cookie-consent', 'rejected');
+  var el = document.getElementById('cookie-consent');
+  if(el) el.classList.remove('show');
+}
 
 /* LANGUAGE SWITCHER WITH AUTO-TRANSLATION */
 var currentLang = localStorage.getItem('lang') || 'en';
@@ -1129,6 +1254,35 @@ function applyContent(c){
       if(footerLogoImg) footerLogoImg.src = c.footer.logo;
     }
   }
+  /* COOKIE CONSENT */
+  if(c.cookie){
+    setText('cms-cookie-title', c.cookie.title);
+    setText('cms-cookie-message', c.cookie.message);
+  }
+  /* WHATSAPP */
+  if(c.whatsapp){
+    var waBtn = document.getElementById('whatsapp-btn');
+    if(waBtn){
+      if(c.whatsapp.show){
+        waBtn.style.display = 'flex';
+        waBtn.href = 'https://wa.me/' + c.whatsapp.phone.replace(/\D/g,'');
+      } else {
+        waBtn.style.display = 'none';
+      }
+    }
+  }
+  /* FLOOR PLAN RENDER LABEL */
+  if(c.floorplan){
+    var fpLabel = document.getElementById('fp-render-label');
+    if(fpLabel){
+      if(c.floorplan.showRenderLabel){
+        fpLabel.style.display = 'block';
+        setText('fp-render-text', c.floorplan.renderLabel || 'Render');
+      } else {
+        fpLabel.style.display = 'none';
+      }
+    }
+  }
 }
 
 function loadContent(lang){
@@ -1146,6 +1300,7 @@ function loadContent(lang){
         cachedContent = c;
         var translated = translateContent(c);
         applyContent(translated);
+        showCookieConsent();
       })
       .catch(function(){});
   }
@@ -1174,5 +1329,10 @@ if(window.netlifyIdentity){
 
 
 </script>
+<!-- WHATSAPP BUTTON -->
+<a id="whatsapp-btn" href="https://wa.me/34604243746" target="_blank" rel="noopener" style="display:none;">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 </body>
 </html>
