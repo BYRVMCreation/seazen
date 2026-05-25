@@ -106,6 +106,26 @@ a, button, input, select, textarea { cursor: auto; }
 }
 .cookie-btn-reject:hover { background: var(--bg); }
 
+/* Cookie Language Switcher */
+.cookie-lang-switch {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: 1px solid var(--bdr);
+  color: var(--mid);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: .1em;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.cookie-lang-switch:hover {
+  border-color: var(--tx);
+  color: var(--tx);
+}
+
 /* ── WHATSAPP BUTTON ───────────────────── */
 #whatsapp-btn {
   position: fixed;
@@ -809,6 +829,7 @@ h2.sh {
 
 <!-- COOKIE CONSENT -->
 <div id="cookie-consent">
+  <button class="cookie-lang-switch" onclick="toggleCookieLang()">ES</button>
   <h3 id="cms-cookie-title">We value your privacy</h3>
   <p id="cms-cookie-message">We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
   <div class="cookie-buttons">
@@ -906,18 +927,53 @@ function setContact(id,text,href){var el=document.getElementById(id);if(el){if(t
 function setPlaceholder(id,val){var el=document.getElementById(id);if(el&&val)el.placeholder=val;}
 
 /* COOKIE CONSENT */
+var cookieLang = 'en';
+var cookieTexts = {
+  en: {
+    title: 'We value your privacy',
+    message: 'We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.',
+    reject: 'Reject All',
+    accept: 'Accept All'
+  },
+  es: {
+    title: 'Valoramos su privacidad',
+    message: 'Utilizamos cookies para mejorar su experiencia de navegación, servir anuncios o contenido personalizado y analizar nuestro tráfico. Al hacer clic en "Aceptar todo", usted consiente nuestro uso de cookies.',
+    reject: 'Rechazar todo',
+    accept: 'Aceptar todo'
+  }
+};
+
 function showCookieConsent(){
   var consent = localStorage.getItem('cookie-consent');
   if(!consent){
     var el = document.getElementById('cookie-consent');
-    if(el) el.classList.add('show');
+    if(el) {
+      el.classList.add('show');
+      updateCookieText();
+    }
   }
 }
+
+function updateCookieText(){
+  var t = cookieTexts[cookieLang];
+  document.getElementById('cms-cookie-title').textContent = t.title;
+  document.getElementById('cms-cookie-message').textContent = t.message;
+  document.querySelector('.cookie-btn-reject').textContent = t.reject;
+  document.querySelector('.cookie-btn-accept').textContent = t.accept;
+  document.querySelector('.cookie-lang-switch').textContent = cookieLang === 'en' ? 'ES' : 'EN';
+}
+
+function toggleCookieLang(){
+  cookieLang = cookieLang === 'en' ? 'es' : 'en';
+  updateCookieText();
+}
+
 function acceptCookies(){
   localStorage.setItem('cookie-consent', 'accepted');
   var el = document.getElementById('cookie-consent');
   if(el) el.classList.remove('show');
 }
+
 function rejectCookies(){
   localStorage.setItem('cookie-consent', 'rejected');
   var el = document.getElementById('cookie-consent');
