@@ -156,8 +156,6 @@ collections:
               - { label: "Heading", name: "heading", widget: "string" }
               - { label: "Description", name: "desc", widget: "text" }
               - { label: "Floor plan image", name: "image", widget: "image", required: false }
-              - { label: "Show 'Render' label on image", name: "showRenderLabel", widget: "boolean", default: true }
-              - { label: "Render label text", name: "renderLabel", widget: "string", default: "Render" }
 
           # ── GALLERY ───────────────────────────────
           - label: "Gallery"
@@ -254,5 +252,14 @@ collections:
             name: "whatsapp"
             widget: "object"
             fields:
-              - { label: "Show WhatsApp button", name: "show", widget: "boolean", default: true }
+              - { label: "Show on Desktop", name: "showDesktop", widget: "boolean", default: true }
+              - { label: "Show on Mobile", name: "showMobile", widget: "boolean", default: true }
               - { label: "Phone number (with country code)", name: "phone", widget: "string", default: "+34 604 24 37 46" }
+
+          # ── SETTINGS ─────────────────────────────
+          - label: "Global Settings"
+            name: "settings"
+            widget: "object"
+            fields:
+              - { label: "Show 'Render only' overlay on images", name: "showRenderOverlay", widget: "boolean", default: true }
+              - { label: "Render overlay text", name: "renderOverlayText", widget: "string", default: "Render only" }
