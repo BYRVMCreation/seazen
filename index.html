@@ -981,6 +981,7 @@ function rejectCookies(){
 /* LANGUAGE SWITCHER WITH AUTO-TRANSLATION */
 var currentLang = localStorage.getItem('lang') || 'en';
 var cachedContent = null;
+var isTranslating = false;
 
 function detectLanguage(){
   var saved = localStorage.getItem('lang');
@@ -1029,6 +1030,14 @@ async function translateWithGoogle(text) {
 async function translateContent(c){
   if(currentLang === 'en') return c;
   
+  // Check if we have cached Spanish translation
+  var cacheKey = 'es_translation_' + JSON.stringify(c).length;
+  var cachedSpanish = localStorage.getItem(cacheKey);
+  if(cachedSpanish) {
+    console.log('Using cached Spanish translation');
+    return JSON.parse(cachedSpanish);
+  }
+  
   // Deep clone
   var tc = JSON.parse(JSON.stringify(c));
   
@@ -1068,6 +1077,11 @@ async function translateContent(c){
   };
   
   await translateFields(tc);
+  
+  // Cache the Spanish translation
+  localStorage.setItem(cacheKey, JSON.stringify(tc));
+  console.log('Spanish translation cached');
+  
   return tc;
 }
 
@@ -1252,6 +1266,10 @@ function removeRenderOverlays(){
 }
 
 function loadContent(lang){
+  // Prevent multiple simultaneous translations
+  if(isTranslating) return;
+  isTranslating = true;
+  
   currentLang = lang;
   localStorage.setItem('lang', lang);
   
@@ -1259,7 +1277,7 @@ function loadContent(lang){
   var langBtn = document.getElementById('lang-switch');
   if(langBtn) {
     langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
-    langBtn.disabled = true; // Disable during translation
+    langBtn.disabled = true;
     langBtn.style.opacity = '0.5';
   }
   
@@ -1270,12 +1288,17 @@ function loadContent(lang){
     if (lang === 'es') {
       translateContent(cachedContent).then(function(translated) {
         applyContent(translated);
-        // Add render overlays AFTER translation
         if(translated.settings && translated.settings.showRenderOverlay){
           addRenderOverlays(translated.settings.renderOverlayText || 'Render only');
         }
         showCookieConsent();
-        // Re-enable button
+        isTranslating = false;
+        if(langBtn) {
+          langBtn.disabled = false;
+          langBtn.style.opacity = '1';
+        }
+      }).catch(function(e) {
+        isTranslating = false;
         if(langBtn) {
           langBtn.disabled = false;
           langBtn.style.opacity = '1';
@@ -1283,12 +1306,11 @@ function loadContent(lang){
       });
     } else {
       applyContent(cachedContent);
-      // Add render overlays for English
       if(cachedContent.settings && cachedContent.settings.showRenderOverlay){
         addRenderOverlays(cachedContent.settings.renderOverlayText || 'Render only');
       }
       showCookieConsent();
-      // Re-enable button
+      isTranslating = false;
       if(langBtn) {
         langBtn.disabled = false;
         langBtn.style.opacity = '1';
@@ -1306,19 +1328,18 @@ function loadContent(lang){
       })
       .then(function(translated){
         applyContent(translated);
-        // Add render overlays after applying content
         if(translated.settings && translated.settings.showRenderOverlay){
           addRenderOverlays(translated.settings.renderOverlayText || 'Render only');
         }
         showCookieConsent();
-        // Re-enable button
+        isTranslating = false;
         if(langBtn) {
           langBtn.disabled = false;
           langBtn.style.opacity = '1';
         }
       })
-      .catch(function(){
-        // Re-enable button on error
+      .catch(function(e){
+        isTranslating = false;
         if(langBtn) {
           langBtn.disabled = false;
           langBtn.style.opacity = '1';
@@ -1328,6 +1349,7 @@ function loadContent(lang){
 }
 
 function toggleLanguage(){
+  if(isTranslating) return; // Prevent multiple clicks while translating
   var newLang = currentLang === 'es' ? 'en' : 'es';
   loadContent(newLang);
 }
