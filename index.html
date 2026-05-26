@@ -990,16 +990,13 @@ function detectLanguage(){
   return 'en';
 }
 
-// Google Translate API configuration
+// Google Translate API - ONLY method, no dictionary fallback
 var GOOGLE_TRANSLATE_API_KEY = 'AIzaSyCapYYpsJwrTjzqqjdjbJcDap5G7vWY9Nk';
-var translationCache = JSON.parse(localStorage.getItem('translationCache') || '{}');
 
 async function translateWithGoogle(text) {
-  if (!text || typeof text !== 'string') return text;
-  if (translationCache[text]) return translationCache[text];
+  if (!text || typeof text !== 'string' || text.length === 0) return text;
   
   try {
-    console.log('Translating:', text.substring(0, 50) + '...');
     const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_TRANSLATE_API_KEY}`, {
       method: 'POST',
       headers: {
@@ -1014,33 +1011,20 @@ async function translateWithGoogle(text) {
     });
     
     if (!response.ok) {
-      console.error('Translation API error:', response.status, response.statusText);
-      throw new Error('Translation failed');
+      console.error('Translation API error:', response.status);
+      return text; // Return original if API fails
     }
     
     const data = await response.json();
-    const translated = data.data.translations[0].translatedText;
-    console.log('Translated to:', translated.substring(0, 50) + '...');
-    
-    // Cache the translation
-    translationCache[text] = translated;
-    localStorage.setItem('translationCache', JSON.stringify(translationCache));
-    
-    return translated;
+    return data.data.translations[0].translatedText;
   } catch (e) {
     console.error('Translation error:', e);
-    // Fallback to dictionary
-    return translationDict[text] || text;
+    return text; // Return original if error
   }
 }
 
-async function translateTextAsync(text) {
-  if (!text || currentLang === 'en') return text;
-  return await translateWithGoogle(text);
-}
-
-async function translateContentAsync(c) {
-  if (currentLang === 'en') return c;
+async function translateContent(c){
+  if(currentLang === 'en') return c;
   
   // Deep clone
   var tc = JSON.parse(JSON.stringify(c));
@@ -1048,13 +1032,13 @@ async function translateContentAsync(c) {
   // Translate all text fields
   const translateFields = async (obj) => {
     for (let key in obj) {
-      if (typeof obj[key] === 'string') {
+      if (typeof obj[key] === 'string' && obj[key].length > 0) {
         obj[key] = await translateWithGoogle(obj[key]);
       } else if (Array.isArray(obj[key])) {
         for (let i = 0; i < obj[key].length; i++) {
-          if (typeof obj[key][i] === 'string') {
+          if (typeof obj[key][i] === 'string' && obj[key][i].length > 0) {
             obj[key][i] = await translateWithGoogle(obj[key][i]);
-          } else if (typeof obj[key][i] === 'object') {
+          } else if (typeof obj[key][i] === 'object' && obj[key][i] !== null) {
             await translateFields(obj[key][i]);
           }
         }
@@ -1065,145 +1049,6 @@ async function translateContentAsync(c) {
   };
   
   await translateFields(tc);
-  return tc;
-}
-
-// Simple translation dictionary for common phrases (fallback)
-var translationDict = {
-  "The Apartment": "El Apartamento",
-  "Amenities": "Servicios", 
-  "Gallery": "Galería",
-  "Floor Plan": "Plano",
-  "Book Now": "Reservar"
-};
-
-function translateText(text){
-  if(!text || currentLang === 'en') return text;
-  if(translationDict[text]) return translationDict[text];
-  // Try partial matches for longer text
-  for(var key in translationDict){
-    if(key.length > 20 && text.indexOf(key) !== -1){
-      text = text.split(key).join(translationDict[key]);
-    }
-  }
-  return text;
-}
-
-function translateContent(c){
-  if(currentLang === 'en') return c;
-  
-  // Deep clone and translate
-  var tc = JSON.parse(JSON.stringify(c));
-  
-  // Nav
-  if(tc.nav){
-    tc.nav.apartment = translateText(tc.nav.apartment);
-    tc.nav.amenities = translateText(tc.nav.amenities);
-    tc.nav.gallery = translateText(tc.nav.gallery);
-    tc.nav.floorplan = translateText(tc.nav.floorplan);
-    tc.nav.book = translateText(tc.nav.book);
-  }
-  
-  // Hero
-  if(tc.hero){
-    tc.hero.title1 = translateText(tc.hero.title1);
-    tc.hero.title2 = translateText(tc.hero.title2);
-    tc.hero.subtitle = translateText(tc.hero.subtitle);
-    tc.hero.subtext = translateText(tc.hero.subtext);
-    tc.hero.cta = translateText(tc.hero.cta);
-  }
-  
-  // Intro
-  if(tc.intro){
-    tc.intro.overtitle = translateText(tc.intro.overtitle);
-    tc.intro.heading1 = translateText(tc.intro.heading1);
-    tc.intro.heading2 = translateText(tc.intro.heading2);
-    tc.intro.para1 = translateText(tc.intro.para1);
-    tc.intro.para2 = translateText(tc.intro.para2);
-    if(tc.intro.facts){
-      tc.intro.facts.size = translateText(tc.intro.facts.size);
-      tc.intro.facts.guests = translateText(tc.intro.facts.guests);
-      tc.intro.facts.bedrooms = translateText(tc.intro.facts.bedrooms);
-      tc.intro.facts.terrace = translateText(tc.intro.facts.terrace);
-      tc.intro.facts.beach = translateText(tc.intro.facts.beach);
-      tc.intro.facts.view = translateText(tc.intro.facts.view);
-    }
-  }
-  
-  // Amenities
-  if(tc.amenities){
-    tc.amenities.overtitle = translateText(tc.amenities.overtitle);
-    tc.amenities.heading = translateText(tc.amenities.heading);
-    if(tc.amenities.items){
-      tc.amenities.items = tc.amenities.items.map(function(item){ return translateText(item); });
-    }
-  }
-  
-  // Sitges
-  if(tc.sitges){
-    tc.sitges.heading = translateText(tc.sitges.heading);
-    tc.sitges.subtitle = translateText(tc.sitges.subtitle);
-    if(tc.sitges.items){
-      tc.sitges.items = tc.sitges.items.map(function(item){
-        return {
-          icon: item.icon,
-          title: translateText(item.title),
-          desc: translateText(item.desc)
-        };
-      });
-    }
-  }
-  
-  // Gallery
-  if(tc.gallery){
-    tc.gallery.heading = translateText(tc.gallery.heading);
-  }
-  
-  // Floor Plan
-  if(tc.floorplan){
-    tc.floorplan.overtitle = translateText(tc.floorplan.overtitle);
-    tc.floorplan.heading = translateText(tc.floorplan.heading);
-    tc.floorplan.desc = translateText(tc.floorplan.desc);
-  }
-  
-  // Reviews
-  if(tc.reviews){
-    tc.reviews.heading = translateText(tc.reviews.heading);
-    if(tc.reviews.items){
-      tc.reviews.items = tc.reviews.items.map(function(r){
-        return {
-          name: r.name,
-          location: r.location,
-          date: r.date,
-          stars: r.stars,
-          text: translateText(r.text)
-        };
-      });
-    }
-  }
-  
-  // Booking
-  if(tc.booking){
-    tc.booking.heading = translateText(tc.booking.heading);
-    tc.booking.desc = translateText(tc.booking.desc);
-    tc.booking.minStay = translateText(tc.booking.minStay);
-    tc.booking.pets = translateText(tc.booking.pets);
-    tc.booking.smoking = translateText(tc.booking.smoking);
-  }
-  
-  // Newsletter
-  if(tc.newsletter){
-    tc.newsletter.overtitle = translateText(tc.newsletter.overtitle);
-    tc.newsletter.sub = translateText(tc.newsletter.sub);
-    tc.newsletter.emailPlaceholder = translateText(tc.newsletter.emailPlaceholder);
-    tc.newsletter.buttonLabel = translateText(tc.newsletter.buttonLabel);
-  }
-  
-  // Footer
-  if(tc.footer){
-    tc.footer.copy = translateText(tc.footer.copy);
-  }
-  
   return tc;
 }
 
@@ -1399,7 +1244,7 @@ function loadContent(lang){
   
   if(cachedContent){
     if (lang === 'es') {
-      translateContentAsync(cachedContent).then(function(translated) {
+      translateContent(cachedContent).then(function(translated) {
         applyContent(translated);
         showCookieConsent();
       });
@@ -1413,7 +1258,7 @@ function loadContent(lang){
       .then(function(c){
         cachedContent = c;
         if (lang === 'es') {
-          return translateContentAsync(c);
+          return translateContent(c);
         }
         return c;
       })
