@@ -1409,6 +1409,7 @@ function loadContent(lang){
 function toggleLanguage(){
   var newLang = currentLang === 'es' ? 'en' : 'es';
   loadContent(newLang);
+  window.location.reload();
 }
 
 /* Auto-detect on load */
