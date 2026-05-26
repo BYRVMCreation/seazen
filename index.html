@@ -1202,7 +1202,10 @@ function applyContent(c){
   }
   /* RENDER OVERLAY */
   if(c.settings && c.settings.showRenderOverlay){
-    addRenderOverlays(c.settings.renderOverlayText || 'Render only');
+    // Don't add overlays in Spanish mode to avoid conflicts
+    if(currentLang !== 'es'){
+      addRenderOverlays(c.settings.renderOverlayText || 'Render only');
+    }
   } else {
     removeRenderOverlays();
   }
