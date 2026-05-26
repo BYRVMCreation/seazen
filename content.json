@@ -26,10 +26,10 @@
     "para1": "SeaZen is a light-filled seafront penthouse in the old center of Sitges — one of Spain's most beloved coastal towns. Perched above the promenade with uninterrupted sea views, every detail has been considered for those who appreciate quality and peace of mind.",
     "para2": "Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.",
     "facts": {
-      "size": "100 m²",
+      "size": "55 m²",
       "guests": "2 Guests",
       "bedrooms": "1 Bedroom",
-      "terrace": "38 m²",
+      "terrace": "55 m²",
       "beach": "50 m to beach",
       "view": "Impressive sea views"
     }
@@ -74,7 +74,7 @@
   },
   "floorplan": {
     "overtitle": "Floor Plan",
-    "heading": "100 m² of refined space",
+    "heading": "110 m² of refined space",
     "desc": "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.",
     "image": "/uploads/plano-de-distribucion-44-.png"
   },
@@ -176,18 +176,18 @@
     "heading": "What our guests say",
     "items": [
       {
-        "name": "Sophie & James",
-        "location": "London, UK",
-        "date": "March 2025",
+        "name": "Thomas",
+        "location": "US",
+        "date": "Sept 2025",
         "stars": 5,
-        "text": "An absolutely stunning apartment. The sea views are breathtaking and the space is beautifully designed. We didn't want to leave. Sitges itself is magical — we'll definitely be back."
+        "text": "This is a perfect unit to enjoy the absolute best of Sitges.\n\nThe unit is breathtakingly beautiful, fully stocked with everything we needed. The deck is stunning. The location is the best in town. It is hard to image a better property in all of Sitges. We enjoyed every minute in this property."
       },
       {
-        "name": "Marie-Claire D.",
-        "location": "Paris, France",
-        "date": "February 2025",
+        "name": "Steve",
+        "location": "UK",
+        "date": "Aug 2025",
         "stars": 5,
-        "text": "Perfect in every way. The apartment is exactly as shown — even better in person. Spotlessly clean, incredibly comfortable, and the location on the seafront is unbeatable. Highly recommend."
+        "text": "Location Location Location that is what this property is all about,\n\nStunning 180 Deg Views and large terrace make this property an exceptional place to stay."
       }
     ]
   },
