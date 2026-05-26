@@ -929,18 +929,8 @@ function setPlaceholder(id,val){var el=document.getElementById(id);if(el&&val)el
 /* COOKIE CONSENT */
 var cookieLang = 'en';
 var cookieTexts = {
-  en: {
-    title: 'We value your privacy',
-    message: 'We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.',
-    reject: 'Reject All',
-    accept: 'Accept All'
-  },
-  es: {
-    title: 'Valoramos su privacidad',
-    message: 'Utilizamos cookies para mejorar su experiencia de navegación, servir anuncios o contenido personalizado y analizar nuestro tráfico. Al hacer clic en "Aceptar todo", usted consiente nuestro uso de cookies.',
-    reject: 'Rechazar todo',
-    accept: 'Aceptar todo'
-  }
+  en: { reject: 'Reject All', accept: 'Accept All' },
+  es: { reject: 'Rechazar todo', accept: 'Aceptar todo' }
 };
 
 function showCookieConsent(){
@@ -949,15 +939,13 @@ function showCookieConsent(){
     var el = document.getElementById('cookie-consent');
     if(el) {
       el.classList.add('show');
-      updateCookieText();
+      updateCookieButtons();
     }
   }
 }
 
-function updateCookieText(){
+function updateCookieButtons(){
   var t = cookieTexts[cookieLang];
-  document.getElementById('cms-cookie-title').textContent = t.title;
-  document.getElementById('cms-cookie-message').textContent = t.message;
   document.querySelector('.cookie-btn-reject').textContent = t.reject;
   document.querySelector('.cookie-btn-accept').textContent = t.accept;
   document.querySelector('.cookie-lang-switch').textContent = cookieLang === 'en' ? 'ES' : 'EN';
@@ -965,7 +953,17 @@ function updateCookieText(){
 
 function toggleCookieLang(){
   cookieLang = cookieLang === 'en' ? 'es' : 'en';
-  updateCookieText();
+  // Update cookie text from CMS based on language
+  var titleEl = document.getElementById('cms-cookie-title');
+  var msgEl = document.getElementById('cms-cookie-message');
+  if(cookieLang === 'es'){
+    if(titleEl) titleEl.textContent = 'Valoramos su privacidad';
+    if(msgEl) msgEl.textContent = 'Utilizamos cookies para mejorar su experiencia de navegación, servir anuncios o contenido personalizado y analizar nuestro tráfico. Al hacer clic en "Aceptar todo", usted consiente nuestro uso de cookies.';
+  } else {
+    if(titleEl) titleEl.textContent = 'We value your privacy';
+    if(msgEl) msgEl.textContent = 'We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.';
+  }
+  updateCookieButtons();
 }
 
 function acceptCookies(){
@@ -1181,115 +1179,6 @@ function translateContent(c){
     tc.booking.heading = translateText(tc.booking.heading);
     tc.booking.desc = translateText(tc.booking.desc);
     tc.booking.minStay = translateText(tc.booking.minStay);
-    tc.booking.pets = translateText(tc.booking.pets);
-    tc.booking.smoking = translateText(tc.booking.smoking);
-  }
-  
-  // Newsletter
-  if(tc.newsletter){
-    tc.newsletter.overtitle = translateText(tc.newsletter.overtitle);
-    tc.newsletter.sub = translateText(tc.newsletter.sub);
-    tc.newsletter.emailPlaceholder = translateText(tc.newsletter.emailPlaceholder);
-    tc.newsletter.buttonLabel = translateText(tc.newsletter.buttonLabel);
-  }
-  
-  // Footer
-  if(tc.footer){
-    tc.footer.copy = translateText(tc.footer.copy);
-  }
-  
-  return tc;
-}
-
-function translateContent(c){
-  if(currentLang === 'en') return c;
-  
-  // Deep clone and translate
-  var tc = JSON.parse(JSON.stringify(c));
-  
-  // Nav
-  if(tc.nav){
-    tc.nav.apartment = translateText(tc.nav.apartment);
-    tc.nav.amenities = translateText(tc.nav.amenities);
-    tc.nav.gallery = translateText(tc.nav.gallery);
-    tc.nav.floorplan = translateText(tc.nav.floorplan);
-    tc.nav.book = translateText(tc.nav.book);
-  }
-  
-  // Hero
-  if(tc.hero){
-    tc.hero.title1 = translateText(tc.hero.title1);
-    tc.hero.title2 = translateText(tc.hero.title2);
-    tc.hero.subtitle = translateText(tc.hero.subtitle);
-    tc.hero.subtext = translateText(tc.hero.subtext);
-    tc.hero.cta = translateText(tc.hero.cta);
-  }
-  
-  // Intro
-  if(tc.intro){
-    tc.intro.overtitle = translateText(tc.intro.overtitle);
-    tc.intro.heading1 = translateText(tc.intro.heading1);
-    tc.intro.heading2 = translateText(tc.intro.heading2);
-    tc.intro.para1 = translateText(tc.intro.para1);
-    tc.intro.para2 = translateText(tc.intro.para2);
-    if(tc.intro.facts){
-      tc.intro.facts.size = translateText(tc.intro.facts.size);
-      tc.intro.facts.guests = translateText(tc.intro.facts.guests);
-      tc.intro.facts.bedrooms = translateText(tc.intro.facts.bedrooms);
-      tc.intro.facts.terrace = translateText(tc.intro.facts.terrace);
-      tc.intro.facts.beach = translateText(tc.intro.facts.beach);
-      tc.intro.facts.view = translateText(tc.intro.facts.view);
-    }
-  }
-  
-  // Amenities
-  if(tc.amenities){
-    tc.amenities.overtitle = translateText(tc.amenities.overtitle);
-    tc.amenities.heading = translateText(tc.amenities.heading);
-    if(tc.amenities.items){
-      tc.amenities.items = tc.amenities.items.map(function(item){ return translateText(item); });
-    }
-  }
-  
-  // Sitges
-  if(tc.sitges){
-    tc.sitges.heading = translateText(tc.sitges.heading);
-    tc.sitges.subtitle = translateText(tc.sitges.subtitle);
-    if(tc.sitges.items){
-      tc.sitges.items = tc.sitges.items.map(function(item){
-        return {
-          icon: item.icon,
-          title: translateText(item.title),
-          desc: translateText(item.desc)
-        };
-      });
-    }
-  }
-  
-  // Gallery
-  if(tc.gallery){
-    tc.gallery.heading = translateText(tc.gallery.heading);
-  }
-  
-  // Floor Plan
-  if(tc.floorplan){
-    tc.floorplan.overtitle = translateText(tc.floorplan.overtitle);
-    tc.floorplan.heading = translateText(tc.floorplan.heading);
-    tc.floorplan.desc = translateText(tc.floorplan.desc);
-  }
-  
-  // Reviews
-  if(tc.reviews){
-    tc.reviews.heading = translateText(tc.reviews.heading);
-  }
-  
-  // Booking
-  if(tc.booking){
-    tc.booking.heading = translateText(tc.booking.heading);
-    tc.booking.desc = translateText(tc.booking.desc);
-    tc.booking.minStay = translateText(tc.booking.minStay);
-    tc.booking.checkin = tc.booking.checkin;
-    tc.booking.checkout = tc.booking.checkout;
     tc.booking.pets = translateText(tc.booking.pets);
     tc.booking.smoking = translateText(tc.booking.smoking);
   }
