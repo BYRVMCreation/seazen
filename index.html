@@ -1255,10 +1255,12 @@ function loadContent(lang){
   currentLang = lang;
   localStorage.setItem('lang', lang);
   
-  // Update button to show the OPPOSITE language (what you can switch TO)
+  // Update button IMMEDIATELY to show the OPPOSITE language
   var langBtn = document.getElementById('lang-switch');
   if(langBtn) {
     langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
+    langBtn.disabled = true; // Disable during translation
+    langBtn.style.opacity = '0.5';
   }
   
   // Remove any existing render overlays first
@@ -1268,11 +1270,16 @@ function loadContent(lang){
     if (lang === 'es') {
       translateContent(cachedContent).then(function(translated) {
         applyContent(translated);
-        // Add render overlays AFTER translation with translated text
+        // Add render overlays AFTER translation
         if(translated.settings && translated.settings.showRenderOverlay){
           addRenderOverlays(translated.settings.renderOverlayText || 'Render only');
         }
         showCookieConsent();
+        // Re-enable button
+        if(langBtn) {
+          langBtn.disabled = false;
+          langBtn.style.opacity = '1';
+        }
       });
     } else {
       applyContent(cachedContent);
@@ -1281,6 +1288,11 @@ function loadContent(lang){
         addRenderOverlays(cachedContent.settings.renderOverlayText || 'Render only');
       }
       showCookieConsent();
+      // Re-enable button
+      if(langBtn) {
+        langBtn.disabled = false;
+        langBtn.style.opacity = '1';
+      }
     }
   } else {
     fetch('/content.json')
@@ -1299,8 +1311,19 @@ function loadContent(lang){
           addRenderOverlays(translated.settings.renderOverlayText || 'Render only');
         }
         showCookieConsent();
+        // Re-enable button
+        if(langBtn) {
+          langBtn.disabled = false;
+          langBtn.style.opacity = '1';
+        }
       })
-      .catch(function(){});
+      .catch(function(){
+        // Re-enable button on error
+        if(langBtn) {
+          langBtn.disabled = false;
+          langBtn.style.opacity = '1';
+        }
+      });
   }
 }
 
