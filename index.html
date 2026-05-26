@@ -617,10 +617,10 @@ h2.sh {
   <div id="gal-sticky">
     <div id="gal-head">
       <div>
-        <span class="ot">Gallery</span>
+        <span id="cms-gal-ot" class="ot">Gallery</span>
         <h2 id="cms-gal-heading" class="sh">Take a closer look</h2>
       </div>
-      <a class="ctal" href="#booking">Book now &rarr;</a>
+      <a id="cms-gal-cta" class="ctal" href="#booking">Book now &rarr;</a>
     </div>
     <div id="gal-mask">
       <div id="cms-gal-track">
@@ -675,13 +675,13 @@ h2.sh {
   <div class="w">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px;flex-wrap:wrap;gap:20px;">
       <div>
-        <span class="ot rv">Guest Reviews</span>
+        <span id="cms-rev-ot" class="ot rv">Guest Reviews</span>
         <span class="rule rv d1"></span>
         <h2 id="cms-rev-heading" class="sh rv d1">What our guests say</h2>
       </div>
       <div class="rv d2" style="display:flex;align-items:center;gap:6px;">
         <span style="color:var(--a);font-size:16px;">★★★★★</span>
-        <span style="font-size:12px;color:var(--mid);letter-spacing:.1em;">5.0 · 2 reviews</span>
+        <span id="cms-rev-summary" style="font-size:12px;color:var(--mid);letter-spacing:.1em;">5.0 · 2 reviews</span>
       </div>
     </div>
     <div id="cms-rev-list" class="reviews-grid rv d2">
@@ -1141,6 +1141,26 @@ function applyContent(c){
     }
   }
   /* GALLERY */
+  // Translate overtitle
+  var galOt = document.getElementById('cms-gal-ot');
+  if(galOt) {
+    if(currentLang === 'es') {
+      galOt.textContent = 'Galería';
+    } else {
+      galOt.textContent = 'Gallery';
+    }
+  }
+  
+  // Translate CTA button
+  var galCta = document.getElementById('cms-gal-cta');
+  if(galCta) {
+    if(currentLang === 'es') {
+      galCta.textContent = 'Reservar →';
+    } else {
+      galCta.textContent = 'Book now →';
+    }
+  }
+  
   setText('cms-gal-heading', c.gallery.heading);
   /* FLOOR PLAN */
   if(c.floorplan){
@@ -1153,7 +1173,27 @@ function applyContent(c){
     }
   }
   /* REVIEWS */
+  // Translate overtitle
+  var revOt = document.getElementById('cms-rev-ot');
+  if(revOt) {
+    if(currentLang === 'es') {
+      revOt.textContent = 'Reseñas de Huéspedes';
+    } else {
+      revOt.textContent = 'Guest Reviews';
+    }
+  }
+  
   setText('cms-rev-heading', c.reviews.heading);
+  
+  // Translate review summary
+  var revSummary = document.getElementById('cms-rev-summary');
+  if(revSummary) {
+    if(currentLang === 'es') {
+      revSummary.textContent = '5,0 · 2 reseñas';
+    } else {
+      revSummary.textContent = '5.0 · 2 reviews';
+    }
+  }
   if(c.reviews && c.reviews.items){
     var revList = document.getElementById('cms-rev-list');
     if(revList){
@@ -1180,6 +1220,27 @@ function applyContent(c){
       if(c.lodgify.websiteId) ldg.setAttribute('data-website-id',     c.lodgify.websiteId);
       if(c.lodgify.slug)      ldg.setAttribute('data-slug',           c.lodgify.slug);
       if(c.lodgify.language)  ldg.setAttribute('data-language-code',  c.lodgify.language);
+      
+      // Update widget labels based on language
+      if(currentLang === 'es') {
+        ldg.setAttribute('data-check-in-label', 'Llegada');
+        ldg.setAttribute('data-check-out-label', 'Salida');
+        ldg.setAttribute('data-guests-label', 'Huéspedes');
+        ldg.setAttribute('data-book-button-label', 'Reservar');
+        ldg.setAttribute('data-total-price-label', 'Precio total:');
+        ldg.setAttribute('data-select-dates-to-see-price-label', 'Seleccione fechas para ver el precio');
+        ldg.setAttribute('data-minimum-price-per-night-first-label', 'Desde');
+        ldg.setAttribute('data-minimum-price-per-night-second-label', 'por noche');
+      } else {
+        ldg.setAttribute('data-check-in-label', 'Check-in');
+        ldg.setAttribute('data-check-out-label', 'Check-out');
+        ldg.setAttribute('data-guests-label', 'Guests');
+        ldg.setAttribute('data-book-button-label', 'Book Now');
+        ldg.setAttribute('data-total-price-label', 'Total price:');
+        ldg.setAttribute('data-select-dates-to-see-price-label', 'Select dates to see total price');
+        ldg.setAttribute('data-minimum-price-per-night-first-label', 'From');
+        ldg.setAttribute('data-minimum-price-per-night-second-label', 'per night');
+      }
     }
   }
   /* CONTACT */
