@@ -992,91 +992,213 @@ function detectLanguage(){
   return 'en';
 }
 
-// Simple translation dictionary for common phrases (fallback)
+// Translation dictionary - all text must be added here
 var translationDict = {
+  // Navigation
   "The Apartment": "El Apartamento",
-  "Amenities": "Servicios",
+  "Amenities": "Servicios", 
   "Gallery": "Galería",
   "Floor Plan": "Plano",
-  "Book Now": "Reservar"
+  "Book Now": "Reservar",
+  // Hero
+  "high above the sea": "sobre el mar",
+  "far beyond the ordinary": "más allá de lo ordinario",
+  "Sitges (Barcelona) - seafront luxury penthouse - direct from the owner": "Sitges (Barcelona) - ático de lujo frente al mar - directo del propietario",
+  "A private penthouse with uninterrupted sea views, designed for those who appreciate the art of doing nothing.": "Un ático privado con vistas ininterrumpidas al mar, diseñado para quienes aprecian el arte de no hacer nada.",
+  "Discover the penthouse": "Descubra el ático",
+  // Intro
+  "The penthouse": "El ático",
+  "A curated retreat": "Un refugio seleccionado",
+  "high above the Mediterranean": "sobre el Mediterráneo",
+  "55 m²": "55 m²",
+  "2 Guests": "2 Huéspedes",
+  "1 Bedroom": "1 Dormitorio",
+  "55 m² terrace": "55 m² terraza",
+  "50 m to beach": "50 m a la playa",
+  "Impressive sea views": "Impresionantes vistas al mar",
+  "SeaZen is a light-filled seafront penthouse in the old center of Sitges — one of Spain's most beloved coastal towns. Perched above the promenade with uninterrupted sea views, every detail has been considered for those who appreciate quality and peace of mind.": "SeaZen es un ático luminoso frente al mar en el centro antiguo de Sitges, uno de los pueblos costeros más queridos de España. Situado sobre el paseo marítimo con vistas ininterrumpidas al mar, cada detalle ha sido considerado para quienes aprecian la calidad y la tranquilidad.",
+  "Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.": "Ya sea que busque una escapada romántica, un retiro familiar o una recarga creativa, SeaZen ofrece la base perfecta para experimentar lo mejor de la costa catalana.",
+  // Amenities
+  "Everything you could need": "Todo lo que pueda necesitar",
+  "Sea view terrace": "Terraza con vistas al mar",
+  "Fully equipped kitchen": "Cocina totalmente equipada",
+  "Air conditioning": "Aire acondicionado",
+  "High-speed Wi-Fi": "Wi-Fi de alta velocidad",
+  "Smart TV & streaming": "Smart TV y streaming",
+  "King-size beds": "Camas king-size",
+  "Premium linen & towels": "Ropa de cama y toallas premium",
+  "Contactless check-in": "Check-in sin contacto",
+  // Sitges
+  "Sitges awaits": "Sitges le espera",
+  "Step outside and discover one of the Mediterranean's most vibrant and charming towns.": "Salga y descubra uno de los pueblos más vibrantes y encantadores del Mediterráneo.",
+  "Beaches": "Playas",
+  "17 golden sandy beaches within walking distance": "17 playas de arena dorada a poca distancia",
+  "Seafood & Tapas": "Marisco y Tapas",
+  "World-class restaurants along the promenade": "Restaurantes de clase mundial a lo largo del paseo marítimo",
+  "Art & Culture": "Arte y Cultura",
+  "Museums, galleries and the famous Carnival": "Museos, galerías y el famoso Carnaval",
+  "Watersports": "Deportes Acuáticos",
+  "Sailing, paddleboarding and diving": "Vela, paddle surf y buceo",
+  "Hiking": "Senderismo",
+  "Scenic trails through Garraf Natural Park": "Rutas escénicas por el Parque Natural del Garraf",
+  "Barcelona": "Barcelona",
+  "35 min by train to the city centre": "35 min en tren al centro de la ciudad",
+  // Gallery
+  "Take a closer look": "Mire más de cerca",
+  // Floor Plan
+  "110 m² of refined space": "110 m² de espacio refinado",
+  "One bedroom, open-plan living, fully equipped kitchen, and a sea-facing huge terrace.": "Un dormitorio, sala de estar de planta abierta, cocina totalmente equipada y una gran terraza frente al mar.",
+  // Booking
+  "Reserve SeaZen": "Reservar SeaZen",
+  "Select your dates and guests below to check availability and book instantly. No charge until confirmed.": "Seleccione sus fechas y huéspedes a continuación para verificar disponibilidad y reservar al instante. Sin cargo hasta confirmar.",
+  "5 nights": "5 noches",
+  "not permitted": "no permitido",
+  // Newsletter
+  "Stay in touch": "Manténgase en contacto",
+  "Be the first to hear about availability and special offers.": "Sea el primero en conocer disponibilidad y ofertas especiales.",
+  "Email address": "Correo electrónico",
+  "Subscribe": "Suscribirse",
+  // Reviews
+  "What our guests say": "Lo que dicen nuestros huéspedes",
+  "This is a perfect unit to enjoy the absolute best of Sitges. The unit is breathtakingly beautiful, fully stocked with everything we needed. The deck is stunning. The location is the best in town. It is hard to image a better property in all of Sitges. We enjoyed every minute in this property.": "Esta es una unidad perfecta para disfrutar de lo mejor de Sitges. La unidad es deslumbrante, completamente equipada con todo lo que necesitábamos. La terraza es impresionante. La ubicación es la mejor de la ciudad. Es difícil imaginar una mejor propiedad en todo Sitges. Disfrutamos cada minuto en esta propiedad.",
+  "Location Location Location that is what this property is all about, Stunning 180 Deg Views and large terrace make this property an exceptional place to stay.": "Ubicación Ubicación Ubicación eso es lo que es esta propiedad, Impresionantes vistas de 180 grados y una gran terraza hacen de esta propiedad un lugar excepcional para alojarse.",
+  // Footer
+  "© 2026 SeaZen. All rights reserved.": "© 2026 SeaZen. Todos los derechos reservados.",
+  // Cookie
+  "We value your privacy": "Valoramos su privacidad",
+  "We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.": "Utilizamos cookies para mejorar su experiencia de navegación, servir anuncios o contenido personalizado y analizar nuestro tráfico. Al hacer clic en \"Aceptar todo\", usted consiente nuestro uso de cookies.",
+  "Reject All": "Rechazar todo",
+  "Accept All": "Aceptar todo"
 };
 
-// LibreTranslate API for automatic translation
-var translationCache = JSON.parse(localStorage.getItem('translationCache') || '{}');
-
-async function translateWithLibre(text) {
-  if (!text || typeof text !== 'string') return text;
-  if (translationCache[text]) return translationCache[text];
-  
-  try {
-    const response = await fetch('https://libretranslate.de/translate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        q: text,
-        source: 'en',
-        target: 'es',
-        format: 'text'
-      })
-    });
-    
-    if (!response.ok) throw new Error('Translation failed');
-    
-    const data = await response.json();
-    const translated = data.translatedText;
-    
-    // Cache the translation
-    translationCache[text] = translated;
-    localStorage.setItem('translationCache', JSON.stringify(translationCache));
-    
-    return translated;
-  } catch (e) {
-    // Fallback to dictionary
-    return translationDict[text] || text;
+function translateText(text){
+  if(!text || currentLang === 'en') return text;
+  if(translationDict[text]) return translationDict[text];
+  // Try partial matches for longer text
+  for(var key in translationDict){
+    if(key.length > 20 && text.indexOf(key) !== -1){
+      text = text.split(key).join(translationDict[key]);
+    }
   }
+  return text;
 }
 
-async function translateTextAsync(text) {
-  if (!text || currentLang === 'en') return text;
-  return await translateWithLibre(text);
-}
-
-async function translateContentAsync(c) {
-  if (currentLang === 'en') return c;
+function translateContent(c){
+  if(currentLang === 'en') return c;
   
-  // Deep clone
+  // Deep clone and translate
   var tc = JSON.parse(JSON.stringify(c));
   
-  // Translate all text fields
-  const translateFields = async (obj) => {
-    for (let key in obj) {
-      if (typeof obj[key] === 'string') {
-        obj[key] = await translateWithLibre(obj[key]);
-      } else if (Array.isArray(obj[key])) {
-        for (let i = 0; i < obj[key].length; i++) {
-          if (typeof obj[key][i] === 'string') {
-            obj[key][i] = await translateWithLibre(obj[key][i]);
-          } else if (typeof obj[key][i] === 'object') {
-            await translateFields(obj[key][i]);
-          }
-        }
-      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-        await translateFields(obj[key]);
-      }
-    }
-  };
+  // Nav
+  if(tc.nav){
+    tc.nav.apartment = translateText(tc.nav.apartment);
+    tc.nav.amenities = translateText(tc.nav.amenities);
+    tc.nav.gallery = translateText(tc.nav.gallery);
+    tc.nav.floorplan = translateText(tc.nav.floorplan);
+    tc.nav.book = translateText(tc.nav.book);
+  }
   
-  await translateFields(tc);
+  // Hero
+  if(tc.hero){
+    tc.hero.title1 = translateText(tc.hero.title1);
+    tc.hero.title2 = translateText(tc.hero.title2);
+    tc.hero.subtitle = translateText(tc.hero.subtitle);
+    tc.hero.subtext = translateText(tc.hero.subtext);
+    tc.hero.cta = translateText(tc.hero.cta);
+  }
+  
+  // Intro
+  if(tc.intro){
+    tc.intro.overtitle = translateText(tc.intro.overtitle);
+    tc.intro.heading1 = translateText(tc.intro.heading1);
+    tc.intro.heading2 = translateText(tc.intro.heading2);
+    tc.intro.para1 = translateText(tc.intro.para1);
+    tc.intro.para2 = translateText(tc.intro.para2);
+    if(tc.intro.facts){
+      tc.intro.facts.size = translateText(tc.intro.facts.size);
+      tc.intro.facts.guests = translateText(tc.intro.facts.guests);
+      tc.intro.facts.bedrooms = translateText(tc.intro.facts.bedrooms);
+      tc.intro.facts.terrace = translateText(tc.intro.facts.terrace);
+      tc.intro.facts.beach = translateText(tc.intro.facts.beach);
+      tc.intro.facts.view = translateText(tc.intro.facts.view);
+    }
+  }
+  
+  // Amenities
+  if(tc.amenities){
+    tc.amenities.overtitle = translateText(tc.amenities.overtitle);
+    tc.amenities.heading = translateText(tc.amenities.heading);
+    if(tc.amenities.items){
+      tc.amenities.items = tc.amenities.items.map(function(item){ return translateText(item); });
+    }
+  }
+  
+  // Sitges
+  if(tc.sitges){
+    tc.sitges.heading = translateText(tc.sitges.heading);
+    tc.sitges.subtitle = translateText(tc.sitges.subtitle);
+    if(tc.sitges.items){
+      tc.sitges.items = tc.sitges.items.map(function(item){
+        return {
+          icon: item.icon,
+          title: translateText(item.title),
+          desc: translateText(item.desc)
+        };
+      });
+    }
+  }
+  
+  // Gallery
+  if(tc.gallery){
+    tc.gallery.heading = translateText(tc.gallery.heading);
+  }
+  
+  // Floor Plan
+  if(tc.floorplan){
+    tc.floorplan.overtitle = translateText(tc.floorplan.overtitle);
+    tc.floorplan.heading = translateText(tc.floorplan.heading);
+    tc.floorplan.desc = translateText(tc.floorplan.desc);
+  }
+  
+  // Reviews
+  if(tc.reviews){
+    tc.reviews.heading = translateText(tc.reviews.heading);
+    if(tc.reviews.items){
+      tc.reviews.items = tc.reviews.items.map(function(r){
+        return {
+          name: r.name,
+          location: r.location,
+          date: r.date,
+          stars: r.stars,
+          text: translateText(r.text)
+        };
+      });
+    }
+  }
+  
+  // Booking
+  if(tc.booking){
+    tc.booking.heading = translateText(tc.booking.heading);
+    tc.booking.desc = translateText(tc.booking.desc);
+    tc.booking.minStay = translateText(tc.booking.minStay);
+    tc.booking.pets = translateText(tc.booking.pets);
+    tc.booking.smoking = translateText(tc.booking.smoking);
+  }
+  
+  // Newsletter
+  if(tc.newsletter){
+    tc.newsletter.overtitle = translateText(tc.newsletter.overtitle);
+    tc.newsletter.sub = translateText(tc.newsletter.sub);
+    tc.newsletter.emailPlaceholder = translateText(tc.newsletter.emailPlaceholder);
+    tc.newsletter.buttonLabel = translateText(tc.newsletter.buttonLabel);
+  }
+  
+  // Footer
+  if(tc.footer){
+    tc.footer.copy = translateText(tc.footer.copy);
+  }
+  
   return tc;
-}
-
-// Legacy sync function for compatibility
-function translateText(text) {
-  if (!text || currentLang === 'en') return text;
-  if (translationDict[text]) return translationDict[text];
-  return text;
 }
 
 function translateContent(c){
@@ -1379,26 +1501,15 @@ function loadContent(lang){
   document.getElementById('lang-switch').textContent = lang === 'es' ? 'EN' : 'ES';
   
   if(cachedContent){
-    if (lang === 'es') {
-      translateContentAsync(cachedContent).then(function(translated) {
-        applyContent(translated);
-        showCookieConsent();
-      });
-    } else {
-      applyContent(cachedContent);
-      showCookieConsent();
-    }
+    var translated = translateContent(cachedContent);
+    applyContent(translated);
+    showCookieConsent();
   } else {
     fetch('/content.json')
       .then(function(r){return r.json();})
       .then(function(c){
         cachedContent = c;
-        if (lang === 'es') {
-          return translateContentAsync(c);
-        }
-        return c;
-      })
-      .then(function(translated){
+        var translated = translateContent(c);
         applyContent(translated);
         showCookieConsent();
       })
