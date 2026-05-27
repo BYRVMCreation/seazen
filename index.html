@@ -514,12 +514,12 @@ h2.sh {
         <p id="cms-intro-p2" class="bt rv d3" style="margin-top:13px;">Whether you're seeking a romantic escape, a family retreat, or a creative recharge, SeaZen offers the perfect base to experience the best of the Catalan coast.</p>
         <!-- #5 — "Size" → "Size Interior", price replaced by "Terrace" -->
         <div class="facts rv d4">
-          <div class="fc"><div class="fc-l">Size Interior</div><div id="cms-fact-size" class="fc-v">100 m²</div></div>
-          <div class="fc"><div class="fc-l">Guests</div><div id="cms-fact-guests" class="fc-v">2 Guests</div></div>
-          <div class="fc"><div class="fc-l">Bedrooms</div><div id="cms-fact-beds" class="fc-v">1 Bedroom</div></div>
-          <div class="fc"><div class="fc-l">Terrace</div><div id="cms-fact-terrace" class="fc-v">38 m²</div></div>
-          <div class="fc"><div class="fc-l">Beach</div><div id="cms-fact-beach" class="fc-v">50 m to beach</div></div>
-          <div class="fc"><div class="fc-l">View</div><div id="cms-fact-view" class="fc-v">Impressive sea views</div></div>
+          <div class="fc"><div id="cms-fact-size-label" class="fc-l">Size Interior</div><div id="cms-fact-size" class="fc-v">100 m²</div></div>
+          <div class="fc"><div id="cms-fact-guests-label" class="fc-l">Guests</div><div id="cms-fact-guests" class="fc-v">2 Guests</div></div>
+          <div class="fc"><div id="cms-fact-beds-label" class="fc-l">Bedrooms</div><div id="cms-fact-beds" class="fc-v">1 Bedroom</div></div>
+          <div class="fc"><div id="cms-fact-terrace-label" class="fc-l">Terrace</div><div id="cms-fact-terrace" class="fc-v">38 m²</div></div>
+          <div class="fc"><div id="cms-fact-beach-label" class="fc-l">Beach</div><div id="cms-fact-beach" class="fc-v">50 m to beach</div></div>
+          <div class="fc"><div id="cms-fact-view-label" class="fc-l">View</div><div id="cms-fact-view" class="fc-v">Impressive sea views</div></div>
         </div>
       </div>
     </div>
@@ -716,7 +716,7 @@ h2.sh {
   <div class="w">
     <div class="bk-cols">
       <div class="bk-side">
-        <span class="ot rv">Book Your Stay</span>
+        <span id="cms-bk-ot" class="ot rv">Book Your Stay</span>
         <span class="rule rv d1"></span>
         <h2 id="cms-bk-heading" class="sh rv d1">Reserve SeaZen</h2>
         <p id="cms-bk-desc" class="rv d2" style="margin-bottom:28px;">Select your dates and guests below to check availability and book instantly. No charge until confirmed.</p>
@@ -783,9 +783,9 @@ h2.sh {
           data-done-label='Done'
         ></div>
         <div class="bk-notice rv" style="margin-top:24px;">
-          <strong>Minimum stay:</strong> <span id="cms-bk-minstay">5 nights</span><br>
-          <strong>Check-in:</strong> <span id="cms-bk-checkin">15:00</span> &nbsp;·&nbsp; <strong>Check-out:</strong> <span id="cms-bk-checkout">11:00</span><br>
-          <strong>Pets:</strong> <span id="cms-bk-pets">not permitted</span> &nbsp;·&nbsp; <strong>Smoking:</strong> <span id="cms-bk-smoking">not permitted</span>
+          <strong id="cms-bk-minstay-label">Minimum stay:</strong> <span id="cms-bk-minstay">5 nights</span><br>
+          <strong id="cms-bk-checkin-label">Check-in:</strong> <span id="cms-bk-checkin">15:00</span> &nbsp;·&nbsp; <strong id="cms-bk-checkout-label">Check-out:</strong> <span id="cms-bk-checkout">11:00</span><br>
+          <strong id="cms-bk-pets-label">Pets:</strong> <span id="cms-bk-pets">not permitted</span> &nbsp;·&nbsp; <strong id="cms-bk-smoking-label">Smoking:</strong> <span id="cms-bk-smoking">not permitted</span>
         </div>
       </div>
 
@@ -847,9 +847,9 @@ h2.sh {
     <div class="f-bot">
       <span id="cms-footer-copy">&copy; 2026 SeaZen. All rights reserved.</span>
       <ul class="f-lks">
-        <li><a href="privacy.html" target="_blank">Privacy Policy</a></li>
-        <li><a href="terms.html" target="_blank">Terms &amp; Conditions</a></li>
-        <li><a href="cancellation.html" target="_blank">Cancellation Policy</a></li>
+        <li><a id="cms-footer-privacy" href="privacy.html" target="_blank">Privacy Policy</a></li>
+        <li><a id="cms-footer-terms" href="terms.html" target="_blank">Terms &amp; Conditions</a></li>
+        <li><a id="cms-footer-cancellation" href="cancellation.html" target="_blank">Cancellation Policy</a></li>
       </ul>
     </div>
   </div>
@@ -1117,6 +1117,20 @@ function applyContent(c){
   setText('cms-fact-terrace',    c.intro.facts.terrace);
   setText('cms-fact-beach',      c.intro.facts.beach);
   setText('cms-fact-view',       c.intro.facts.view);
+  
+  // Translate fact labels
+  var factLabels = {
+    'cms-fact-size-label': currentLang === 'es' ? 'Tamaño Interior' : 'Size Interior',
+    'cms-fact-guests-label': currentLang === 'es' ? 'Huéspedes' : 'Guests',
+    'cms-fact-beds-label': currentLang === 'es' ? 'Dormitorios' : 'Bedrooms',
+    'cms-fact-terrace-label': currentLang === 'es' ? 'Terraza' : 'Terrace',
+    'cms-fact-beach-label': currentLang === 'es' ? 'Playa' : 'Beach',
+    'cms-fact-view-label': currentLang === 'es' ? 'Vista' : 'View'
+  };
+  for(var id in factLabels) {
+    var el = document.getElementById(id);
+    if(el) el.textContent = factLabels[id];
+  }
   /* AMENITIES */
   setText('cms-am-overtitle', c.amenities.overtitle);
   setText('cms-am-heading',   c.amenities.heading);
@@ -1205,6 +1219,12 @@ function applyContent(c){
     }
   }
   /* BOOKING */
+  // Translate overtitle
+  var bkOt = document.getElementById('cms-bk-ot');
+  if(bkOt) {
+    bkOt.textContent = currentLang === 'es' ? 'Reserva Tu Estancia' : 'Book Your Stay';
+  }
+  
   setText('cms-bk-heading',  c.booking.heading);
   setText('cms-bk-desc',     c.booking.desc);
   setText('cms-bk-minstay',  c.booking.minStay);
@@ -1212,6 +1232,19 @@ function applyContent(c){
   setText('cms-bk-checkout', c.booking.checkout);
   setText('cms-bk-pets',     c.booking.pets);
   setText('cms-bk-smoking',  c.booking.smoking);
+  
+  // Translate booking labels
+  var bkLabels = {
+    'cms-bk-minstay-label': currentLang === 'es' ? 'Estancia mínima:' : 'Minimum stay:',
+    'cms-bk-checkin-label': currentLang === 'es' ? 'Llegada:' : 'Check-in:',
+    'cms-bk-checkout-label': currentLang === 'es' ? 'Salida:' : 'Check-out:',
+    'cms-bk-pets-label': currentLang === 'es' ? 'Mascotas:' : 'Pets:',
+    'cms-bk-smoking-label': currentLang === 'es' ? 'Fumar:' : 'Smoking:'
+  };
+  for(var id in bkLabels) {
+    var el = document.getElementById(id);
+    if(el) el.textContent = bkLabels[id];
+  }
   /* LODGIFY */
   if(c.lodgify){
     var ldg=document.getElementById('lodgify-book-now-box');
@@ -1272,6 +1305,22 @@ function applyContent(c){
     if(c.footer.logo){
       var footerLogoImg = document.querySelector('.f-logo img');
       if(footerLogoImg) footerLogoImg.src = c.footer.logo;
+    }
+    
+    // Translate footer policy links
+    var privacyLink = document.getElementById('cms-footer-privacy');
+    if(privacyLink) {
+      privacyLink.textContent = currentLang === 'es' ? 'Política de Privacidad' : 'Privacy Policy';
+    }
+    
+    var termsLink = document.getElementById('cms-footer-terms');
+    if(termsLink) {
+      termsLink.textContent = currentLang === 'es' ? 'Términos y Condiciones' : 'Terms & Conditions';
+    }
+    
+    var cancellationLink = document.getElementById('cms-footer-cancellation');
+    if(cancellationLink) {
+      cancellationLink.textContent = currentLang === 'es' ? 'Política de Cancelación' : 'Cancellation Policy';
     }
   }
   /* COOKIE CONSENT */
