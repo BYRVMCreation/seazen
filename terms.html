@@ -10,10 +10,11 @@
   :root { --a:#66484e; --tx:#1c1916; --mid:#6d6260; --bg:#f5f5f5; --bdr:rgba(28,25,22,.1); }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.75; color: var(--tx); background: var(--bg); }
-  .back-bar { position: sticky; top: 0; z-index: 100; background: rgba(245,245,245,.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--bdr); padding: 14px 48px; }
+  .back-bar { position: sticky; top: 0; z-index: 100; background: rgba(245,245,245,.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--bdr); padding: 14px 48px; display: flex; justify-content: space-between; align-items: center; }
   .back-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--a); text-decoration: none; transition: gap .2s; }
   .back-btn:hover { gap: 12px; }
   .back-btn svg { width: 14px; height: 14px; }
+  .lang-btn { background: none; border: 1px solid var(--bdr); color: var(--tx); font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .1em; padding: 6px 12px; cursor: pointer; }
   .wrap { max-width: 720px; margin: 0 auto; padding: clamp(40px,6vw,80px) 24px clamp(60px,8vw,120px); }
   .ot { font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: var(--a); display: block; margin-bottom: 16px; }
   h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(32px,4vw,52px); line-height: 1.15; margin-bottom: 8px; }
@@ -30,41 +31,129 @@
 <div class="back-bar">
   <a class="back-btn" href="index.html">
     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
-    Back to SeaZen
+    <span id="back-text">Back to SeaZen</span>
   </a>
+  <button id="lang-switch" class="lang-btn">ES</button>
 </div>
 <div class="wrap">
-  <span class="ot">Legal</span>
-  <h1>Terms &amp; Conditions</h1>
-  <p class="updated">Last updated: 1 January 2026</p>
-  <h2>1. Booking &amp; Confirmation</h2>
-  <p>All reservations are treated as enquiries until confirmed in writing by SeaZen. A booking is only confirmed upon receipt of the agreed deposit. SeaZen reserves the right to decline any booking request.</p>
-  <h2>2. Payment</h2>
-  <p>A deposit of 30% of the total rental fee is due within 7 days of confirmation. The remaining balance is due 60 days before the arrival date. Payment methods: bank transfer or credit card (processing fees may apply).</p>
-  <h2>3. Minimum Stay</h2>
-  <p>A minimum stay of 3 nights applies during standard periods. A minimum of 7 nights applies during high season (July, August, and public holidays). Shorter stays may be available on request.</p>
-  <h2>4. Guest Responsibilities</h2>
-  <p>Guests are responsible for the property and its contents during their stay. Any damage beyond normal wear and tear will be charged to the guest. The property is non-smoking. Pets are permitted only with prior written consent.</p>
-  <h2>5. Occupancy</h2>
-  <p>The maximum occupancy stated in the property listing must not be exceeded. Unauthorised guests or events are strictly prohibited.</p>
-  <h2>6. Check-in &amp; Check-out</h2>
-  <p>Check-in: from 16:00. Check-out: by 11:00. Early check-in and late check-out may be arranged subject to availability.</p>
-  <h2>7. Liability</h2>
-  <p>SeaZen shall not be liable for any loss, injury, or damage to persons or property during the rental period. Guests are advised to arrange appropriate travel and personal insurance.</p>
-  <h2>8. Governing Law</h2>
-  <p>These terms are governed by the laws of Spain. Any disputes shall be subject to the exclusive jurisdiction of the courts of Catalonia.</p>
-  <h2>9. Contact</h2>
-  <p>SeaZen · Sitges, Spain · <a href="mailto:stay@seazen.es">stay@seazen.es</a></p>
+  <span id="page-ot" class="ot">Legal</span>
+  <h1 id="page-title">Terms &amp; Conditions</h1>
+  <p id="page-updated" class="updated">Last updated: 1 January 2026</p>
+  
+  <h2 id="section-1">1. Booking &amp; Confirmation</h2>
+  <p id="content-1">All reservations are treated as enquiries until confirmed in writing by SeaZen. A booking is only confirmed upon receipt of the agreed deposit. SeaZen reserves the right to decline any booking request.</p>
+  
+  <h2 id="section-2">2. Payment</h2>
+  <p id="content-2">A deposit of 30% of the total rental fee is due within 7 days of confirmation. The remaining balance is due 60 days before the arrival date. Payment methods: bank transfer or credit card (processing fees may apply).</p>
+  
+  <h2 id="section-3">3. Minimum Stay</h2>
+  <p id="content-3">A minimum stay of 3 nights applies during standard periods. A minimum of 7 nights applies during high season (July, August, and public holidays). Shorter stays may be available on request.</p>
+  
+  <h2 id="section-4">4. Guest Responsibilities</h2>
+  <p id="content-4">Guests are responsible for the property and its contents during their stay. Any damage beyond normal wear and tear will be charged to the guest. The property is non-smoking. Pets are permitted only with prior written consent.</p>
+  
+  <h2 id="section-5">5. Occupancy</h2>
+  <p id="content-5">The maximum occupancy stated in the property listing must not be exceeded. Unauthorised guests or events are strictly prohibited.</p>
+  
+  <h2 id="section-6">6. Check-in &amp; Check-out</h2>
+  <p id="content-6">Check-in: from 16:00. Check-out: by 11:00. Early check-in and late check-out may be arranged subject to availability.</p>
+  
+  <h2 id="section-7">7. Liability</h2>
+  <p id="content-7">SeaZen shall not be liable for any loss, injury, or damage to persons or property during the rental period. Guests are advised to arrange appropriate travel and personal insurance.</p>
+  
+  <h2 id="section-8">8. Governing Law</h2>
+  <p id="content-8">These terms are governed by the laws of Spain. Any disputes shall be subject to the exclusive jurisdiction of the courts of Catalonia.</p>
+  
+  <h2 id="section-9">9. Contact</h2>
+  <p id="content-9">SeaZen · Sitges, Spain · <a href="mailto:stay@seazen.es">stay@seazen.es</a></p>
 </div>
 <div class="footer-note">
   <span id="footer-copy">&copy; 2026 SeaZen. All rights reserved.</span>
   &nbsp;&middot;&nbsp;
-  <a href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="cancellation.html">Cancellation</a>
+  <a id="footer-privacy" href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp; <a id="footer-cancellation" href="cancellation.html">Cancellation</a>
 </div>
+
 <script>
+// Google Translate API
+var GOOGLE_TRANSLATE_API_KEY = 'AIzaSyCapYYpsJwrTjzqqjdjbJcDap5G7vWY9Nk';
+var currentLang = localStorage.getItem('lang') || 'en';
+
+async function translateWithGoogle(text) {
+  if (!text || typeof text !== 'string') return text;
+  try {
+    const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_TRANSLATE_API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ q: text, source: 'en', target: 'es', format: 'text' })
+    });
+    if (!response.ok) return text;
+    const data = await response.json();
+    return data.data.translations[0].translatedText;
+  } catch (e) { return text; }
+}
+
+async function translatePage() {
+  if (currentLang !== 'es') return;
+  
+  const elements = [
+    { id: 'back-text', text: 'Back to SeaZen' },
+    { id: 'page-ot', text: 'Legal' },
+    { id: 'page-title', text: 'Terms & Conditions' },
+    { id: 'page-updated', text: 'Last updated: 1 January 2026' },
+    { id: 'section-1', text: '1. Booking & Confirmation' },
+    { id: 'content-1', text: 'All reservations are treated as enquiries until confirmed in writing by SeaZen. A booking is only confirmed upon receipt of the agreed deposit. SeaZen reserves the right to decline any booking request.' },
+    { id: 'section-2', text: '2. Payment' },
+    { id: 'content-2', text: 'A deposit of 30% of the total rental fee is due within 7 days of confirmation. The remaining balance is due 60 days before the arrival date. Payment methods: bank transfer or credit card (processing fees may apply).' },
+    { id: 'section-3', text: '3. Minimum Stay' },
+    { id: 'content-3', text: 'A minimum stay of 3 nights applies during standard periods. A minimum of 7 nights applies during high season (July, August, and public holidays). Shorter stays may be available on request.' },
+    { id: 'section-4', text: '4. Guest Responsibilities' },
+    { id: 'content-4', text: 'Guests are responsible for the property and its contents during their stay. Any damage beyond normal wear and tear will be charged to the guest. The property is non-smoking. Pets are permitted only with prior written consent.' },
+    { id: 'section-5', text: '5. Occupancy' },
+    { id: 'content-5', text: 'The maximum occupancy stated in the property listing must not be exceeded. Unauthorised guests or events are strictly prohibited.' },
+    { id: 'section-6', text: '6. Check-in & Check-out' },
+    { id: 'content-6', text: 'Check-in: from 16:00. Check-out: by 11:00. Early check-in and late check-out may be arranged subject to availability.' },
+    { id: 'section-7', text: '7. Liability' },
+    { id: 'content-7', text: 'SeaZen shall not be liable for any loss, injury, or damage to persons or property during the rental period. Guests are advised to arrange appropriate travel and personal insurance.' },
+    { id: 'section-8', text: '8. Governing Law' },
+    { id: 'content-8', text: 'These terms are governed by the laws of Spain. Any disputes shall be subject to the exclusive jurisdiction of the courts of Catalonia.' },
+    { id: 'section-9', text: '9. Contact' },
+    { id: 'content-9', text: 'SeaZen · Sitges, Spain · stay@seazen.es' }
+  ];
+  
+  for (let el of elements) {
+    const element = document.getElementById(el.id);
+    if (element) {
+      element.textContent = await translateWithGoogle(el.text);
+    }
+  }
+  
+  // Translate footer links
+  document.getElementById('footer-privacy').textContent = 'Privacidad';
+  document.getElementById('footer-cancellation').textContent = 'Cancelación';
+}
+
+function updateLangButton() {
+  document.getElementById('lang-switch').textContent = currentLang === 'es' ? 'EN' : 'ES';
+}
+
+function toggleLanguage() {
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  localStorage.setItem('lang', currentLang);
+  location.reload();
+}
+
+document.getElementById('lang-switch').addEventListener('click', toggleLanguage);
+
+// Load footer copy from CMS
 fetch('./content.json').then(function(r){return r.json();}).then(function(c){
-  if(c.footer&&c.footer.copy) document.getElementById('footer-copy').textContent=c.footer.copy;
+  if(c.footer && c.footer.copy) document.getElementById('footer-copy').textContent = c.footer.copy;
 }).catch(function(){});
+
+// Initialize
+updateLangButton();
+if (currentLang === 'es') {
+  translatePage();
+}
 </script>
 </body>
 </html>
