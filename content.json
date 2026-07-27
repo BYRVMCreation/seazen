@@ -43,31 +43,31 @@
     "heading": "Take a closer look",
     "images": [
       {
-        "src": "bedroom.jpg",
+        "src": "/uploads/photo-2026-07-24-18-17-53-6.jpg",
         "alt": "Master bedroom"
       },
       {
-        "src": "bathroom.jpg",
+        "src": "/uploads/photo-2026-07-24-18-17-53-7.jpg",
         "alt": "Bathroom"
       },
       {
-        "src": "dining.jpg",
+        "src": "/uploads/photo-2026-07-24-18-21-45-4.jpg",
         "alt": "Dining area"
       },
       {
-        "src": "kitchen.jpg",
+        "src": "/uploads/photo-2026-07-24-18-17-53.jpg",
         "alt": "Kitchen"
       },
       {
-        "src": "office.jpg",
+        "src": "/uploads/photo-2026-07-24-18-17-53-2.jpg",
         "alt": "Home office"
       },
       {
-        "src": "bedroom2.jpg",
+        "src": "/uploads/photo-2026-07-24-18-17-53-3.jpg",
         "alt": "Second bedroom"
       },
       {
-        "src": "kitchen2.jpg",
+        "src": "/uploads/photo-2026-07-24-18-17-53-5.jpg",
         "alt": "Kitchen island"
       }
     ]
@@ -88,11 +88,11 @@
     "overtitle": "Amenities",
     "heading": "Everything you could need",
     "photos": [
-      "kitchen2.jpg",
-      "bathroom.jpg",
-      "bedroom.jpg",
-      "dining.jpg",
-      "kitchen.jpg"
+      "/uploads/photo-2026-07-24-18-21-47-2.jpg",
+      "/uploads/photo-2026-07-24-18-21-47-3.jpg",
+      "/uploads/photo-2026-07-24-18-17-53-2.jpg",
+      "/uploads/photo-2026-07-24-18-17-53.jpg",
+      "/uploads/photo-2026-07-24-18-17-53-4.jpg"
     ],
     "items": [
       "Sea view terrace",
@@ -150,11 +150,11 @@
     "pets": "not permitted",
     "smoking": "not permitted",
     "photos": [
-      "bedroom.jpg",
-      "bathroom.jpg",
-      "dining.jpg",
-      "kitchen.jpg",
-      "office.jpg"
+      "/uploads/photo-2026-07-24-18-21-46-8.jpg",
+      "/uploads/photo-2026-07-24-18-21-47.jpg",
+      "/uploads/photo-2026-07-24-18-17-52-2.jpg",
+      "/uploads/photo-2026-07-24-18-21-46-4.jpg",
+      "/uploads/photo-2026-07-24-18-21-46-3.jpg"
     ]
   },
   "newsletter": {
@@ -168,8 +168,8 @@
     "title2": "far beyond the ordinary",
     "subtitle": "Sitges (Barcelona) - seafront luxury penthouse - direct from the owner",
     "subtext": "A private penthouse with uninterrupted sea views, designed for those who appreciate the art of doing nothing.",
-    "image": "hero.jpg",
-    "imageMobile": "hero-mobile.jpg",
+    "image": "/uploads/photo-2026-07-24-18-21-45-6.jpg",
+    "imageMobile": "/uploads/photo-2026-07-24-18-21-45-6.jpg",
     "cta": "Discover the penthouse"
   },
   "reviews": {
@@ -192,8 +192,8 @@
     ]
   },
   "strips": {
-    "strip1": "dining.jpg",
-    "strip2": "bedroom.jpg"
+    "strip1": "/uploads/photo-2026-07-24-18-17-52.jpg",
+    "strip2": "/uploads/photo-2026-07-24-18-21-45-3.jpg"
   },
   "footer": {
     "copy": "© 2026 SeaZen. All rights reserved.",
