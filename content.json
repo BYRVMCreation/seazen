@@ -4,7 +4,7 @@
     "email": "stay@seazen.es"
   },
   "settings": {
-    "showRenderOverlay": true,
+    "showRenderOverlay": false,
     "renderOverlayText": "Render only"
   },
   "nav": {
