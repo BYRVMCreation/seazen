@@ -1176,6 +1176,16 @@ function applyContent(c){
   }
   
   setText('cms-gal-heading', c.gallery.heading);
+  
+  // Load gallery images from CMS
+  if(c.gallery && c.gallery.images && c.gallery.images.length > 0){
+    var galTrackEl = document.getElementById('cms-gal-track');
+    if(galTrackEl){
+      galTrackEl.innerHTML = c.gallery.images.map(function(img){
+        return '<div class="gp"><img src="' + img.src + '" alt="' + (img.alt || '') + '" data-full="' + img.src + '"></div>';
+      }).join('');
+    }
+  }
   /* FLOOR PLAN */
   if(c.floorplan){
     setText('cms-fp-overtitle', c.floorplan.overtitle);
