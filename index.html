@@ -1104,7 +1104,16 @@ function applyContent(c){
   setText('cms-hero-subtitle', c.hero.subtitle);
   setText('cms-hero-subtext',  c.hero.subtext);
   setText('cms-hero-cta',      c.hero.cta);
-  if(c.hero.image) document.getElementById('hero-img').style.backgroundImage='url('+c.hero.image+')';
+  if(c.hero.image){
+    var heroEl = document.getElementById('hero-img');
+    if(heroEl){
+      if(window.innerWidth <= 768 && c.hero.imageMobile){
+        heroEl.style.setProperty('background-image', 'url(' + c.hero.imageMobile + ')', 'important');
+      } else {
+        heroEl.style.setProperty('background-image', 'url(' + c.hero.image + ')', 'important');
+      }
+    }
+  }
   /* INTRO */
   setText('cms-intro-overtitle', c.intro.overtitle);
   setText('cms-intro-h1',        c.intro.heading1);
