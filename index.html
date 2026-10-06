@@ -1459,7 +1459,11 @@ function loadContent(lang){
 }
 
 function switchLanguage(lang){
-  isTranslating = false; // Reset flag to allow switching
+  isTranslating = false;
+  // Clear translation caches to force fresh translation
+  Object.keys(localStorage).forEach(function(key) {
+    if (key.indexOf('_translation_') !== -1) localStorage.removeItem(key);
+  });
   loadContent(lang);
 }
 
