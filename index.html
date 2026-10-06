@@ -482,7 +482,11 @@ h2.sh {
   <ul class="nl-right">
     <li><a class="nlink" id="cms-nav-fp" href="#fp">Floor Plan</a></li>
     <li><a class="nlink pill" id="cms-nav-book" href="#booking">Book Now</a></li>
-    <li><button id="lang-switch" class="lang-btn" onclick="toggleLanguage()" style="background:none;border:1px solid var(--bdr);color:var(--tx);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;padding:6px 12px;cursor:pointer;margin-left:10px;">ES</button></li>
+    <li><select id="lang-switch" onchange="switchLanguage(this.value)" style="background:none;border:1px solid var(--bdr);color:var(--tx);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;padding:6px 12px;cursor:pointer;margin-left:10px;-webkit-appearance:none;appearance:none;">
+      <option value="en">EN</option>
+      <option value="es">ES</option>
+      <option value="fr">FR</option>
+    </select></li>
   </ul>
 </nav>
 
@@ -929,9 +933,11 @@ function setPlaceholder(id,val){var el=document.getElementById(id);if(el&&val)el
 /* COOKIE CONSENT */
 var cookieLang = 'en';
 var cookieTexts = {
-  en: { reject: 'Reject All', accept: 'Accept All' },
-  es: { reject: 'Rechazar todo', accept: 'Aceptar todo' }
+  en: { reject: 'Reject All', accept: 'Accept All', title: 'We value your privacy', message: 'We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.' },
+  es: { reject: 'Rechazar todo', accept: 'Aceptar todo', title: 'Valoramos su privacidad', message: 'Utilizamos cookies para mejorar su experiencia de navegación, servir anuncios o contenido personalizado y analizar nuestro tráfico. Al hacer clic en "Aceptar todo", usted consiente nuestro uso de cookies.' },
+  fr: { reject: 'Tout refuser', accept: 'Tout accepter', title: 'Nous respectons votre vie privée', message: 'Nous utilisons des cookies pour améliorer votre expérience de navigation, diffuser des publicités ou du contenu personnalisé et analyser notre trafic. En cliquant sur "Tout accepter", vous consentez à notre utilisation des cookies.' }
 };
+var cookieLangs = ['en', 'es', 'fr'];
 
 function showCookieConsent(){
   var consent = localStorage.getItem('cookie-consent');
@@ -939,30 +945,26 @@ function showCookieConsent(){
     var el = document.getElementById('cookie-consent');
     if(el) {
       el.classList.add('show');
+      cookieLang = currentLang;
       updateCookieButtons();
     }
   }
 }
 
 function updateCookieButtons(){
-  var t = cookieTexts[cookieLang];
+  var t = cookieTexts[cookieLang] || cookieTexts.en;
   document.querySelector('.cookie-btn-reject').textContent = t.reject;
   document.querySelector('.cookie-btn-accept').textContent = t.accept;
-  document.querySelector('.cookie-lang-switch').textContent = cookieLang === 'en' ? 'ES' : 'EN';
+  document.getElementById('cms-cookie-title').textContent = t.title;
+  document.getElementById('cms-cookie-message').textContent = t.message;
+  // Show next language in cycle
+  var nextIdx = (cookieLangs.indexOf(cookieLang) + 1) % cookieLangs.length;
+  document.querySelector('.cookie-lang-switch').textContent = cookieLangs[nextIdx].toUpperCase();
 }
 
 function toggleCookieLang(){
-  cookieLang = cookieLang === 'en' ? 'es' : 'en';
-  // Update cookie text from CMS based on language
-  var titleEl = document.getElementById('cms-cookie-title');
-  var msgEl = document.getElementById('cms-cookie-message');
-  if(cookieLang === 'es'){
-    if(titleEl) titleEl.textContent = 'Valoramos su privacidad';
-    if(msgEl) msgEl.textContent = 'Utilizamos cookies para mejorar su experiencia de navegación, servir anuncios o contenido personalizado y analizar nuestro tráfico. Al hacer clic en "Aceptar todo", usted consiente nuestro uso de cookies.';
-  } else {
-    if(titleEl) titleEl.textContent = 'We value your privacy';
-    if(msgEl) msgEl.textContent = 'We use cookies to enhance your browsing experience, serve personalized ads or content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.';
-  }
+  var nextIdx = (cookieLangs.indexOf(cookieLang) + 1) % cookieLangs.length;
+  cookieLang = cookieLangs[nextIdx];
   updateCookieButtons();
 }
 
@@ -988,41 +990,37 @@ function detectLanguage(){
   if(saved) return saved;
   var userLang = navigator.language || navigator.userLanguage;
   if(userLang && userLang.toLowerCase().startsWith('es')) return 'es';
+  if(userLang && userLang.toLowerCase().startsWith('fr')) return 'fr';
   return 'en';
 }
 
-// Google Translate API - ONLY method, no dictionary fallback
+// Google Translate API with per-text + per-language caching
 var GOOGLE_TRANSLATE_API_KEY = 'AIzaSyCapYYpsJwrTjzqqjdjbJcDap5G7vWY9Nk';
+var textCache = JSON.parse(localStorage.getItem('textCache') || '{}');
 
-async function translateWithGoogle(text) {
+async function translateWithGoogle(text, targetLang) {
   if (!text || typeof text !== 'string' || text.length === 0) return text;
   
-  console.log('Translating:', text.substring(0, 50));
+  var cacheKey = targetLang + ':' + text;
+  if (textCache[cacheKey]) return textCache[cacheKey];
   
   try {
-    const response = await fetch(`https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_TRANSLATE_API_KEY}`, {
+    const response = await fetch('https://translation.googleapis.com/language/translate/v2?key=' + GOOGLE_TRANSLATE_API_KEY, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        q: text,
-        source: 'en',
-        target: 'es',
-        format: 'text'
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ q: text, source: 'en', target: targetLang, format: 'text' })
     });
     
-    if (!response.ok) {
-      console.error('API error:', response.status, await response.text());
-      return text;
-    }
+    if (!response.ok) return text;
     
     const data = await response.json();
-    console.log('Translated:', data.data.translations[0].translatedText.substring(0, 50));
-    return data.data.translations[0].translatedText;
+    var translated = data.data.translations[0].translatedText;
+    
+    textCache[cacheKey] = translated;
+    localStorage.setItem('textCache', JSON.stringify(textCache));
+    
+    return translated;
   } catch (e) {
-    console.error('Translation error:', e);
     return text;
   }
 }
@@ -1030,42 +1028,39 @@ async function translateWithGoogle(text) {
 async function translateContent(c){
   if(currentLang === 'en') return c;
   
-  // Check if we have cached Spanish translation
-  var cacheKey = 'es_translation_' + JSON.stringify(c).length;
-  var cachedSpanish = localStorage.getItem(cacheKey);
-  if(cachedSpanish) {
-    console.log('Using cached Spanish translation');
-    return JSON.parse(cachedSpanish);
+  var targetLang = currentLang;
+  
+  // Check full page cache
+  var fullCacheKey = targetLang + '_translation_' + JSON.stringify(c).length;
+  var cached = localStorage.getItem(fullCacheKey);
+  if(cached) {
+    return JSON.parse(cached);
   }
   
   // Deep clone
   var tc = JSON.parse(JSON.stringify(c));
   
-  // Fields to skip (image URLs, file paths, etc.)
-  var skipFields = ['logo', 'image', 'src', 'imageMobile', 'photos', 'strip1', 'strip2'];
+  var skipFields = ['logo', 'image', 'src', 'imageMobile', 'photos', 'strip1', 'strip2', 'icon', 'rentalId', 'websiteId', 'slug', 'language', 'phone', 'email', 'show', 'showDesktop', 'showMobile', 'showRenderOverlay', 'stars', 'date'];
   
-  // Translate all text fields
   const translateFields = async (obj) => {
     for (let key in obj) {
-      // Skip certain fields that contain URLs/paths
       if (skipFields.includes(key)) continue;
       
       if (typeof obj[key] === 'string' && obj[key].length > 0) {
-        // Skip if it looks like a file path or URL
         if (obj[key].match(/\.(jpg|jpeg|png|gif|svg|webp|pdf)$/i)) continue;
         if (obj[key].startsWith('http')) continue;
         if (obj[key].startsWith('/')) continue;
+        if (obj[key].match(/^[\d\s:+.·©€@,]+$/)) continue;
         
-        obj[key] = await translateWithGoogle(obj[key]);
+        obj[key] = await translateWithGoogle(obj[key], targetLang);
       } else if (Array.isArray(obj[key])) {
         for (let i = 0; i < obj[key].length; i++) {
           if (typeof obj[key][i] === 'string' && obj[key][i].length > 0) {
-            // Skip if it looks like a file path or URL
             if (obj[key][i].match(/\.(jpg|jpeg|png|gif|svg|webp|pdf)$/i)) continue;
             if (obj[key][i].startsWith('http')) continue;
             if (obj[key][i].startsWith('/')) continue;
             
-            obj[key][i] = await translateWithGoogle(obj[key][i]);
+            obj[key][i] = await translateWithGoogle(obj[key][i], targetLang);
           } else if (typeof obj[key][i] === 'object' && obj[key][i] !== null) {
             await translateFields(obj[key][i]);
           }
@@ -1078,9 +1073,8 @@ async function translateContent(c){
   
   await translateFields(tc);
   
-  // Cache the Spanish translation
-  localStorage.setItem(cacheKey, JSON.stringify(tc));
-  console.log('Spanish translation cached');
+  // Cache full translation
+  localStorage.setItem(fullCacheKey, JSON.stringify(tc));
   
   return tc;
 }
@@ -1128,13 +1122,19 @@ function applyContent(c){
   setText('cms-fact-view',       c.intro.facts.view);
   
   // Translate fact labels
+  var factTranslations = {
+    en: { size: 'Size Interior', guests: 'Guests', beds: 'Bedrooms', terrace: 'Terrace', beach: 'Beach', view: 'View' },
+    es: { size: 'Tamaño Interior', guests: 'Huéspedes', beds: 'Dormitorios', terrace: 'Terraza', beach: 'Playa', view: 'Vista' },
+    fr: { size: 'Taille Intérieure', guests: 'Invités', beds: 'Chambres', terrace: 'Terrasse', beach: 'Plage', view: 'Vue' }
+  };
+  var fl = factTranslations[currentLang] || factTranslations.en;
   var factLabels = {
-    'cms-fact-size-label': currentLang === 'es' ? 'Tamaño Interior' : 'Size Interior',
-    'cms-fact-guests-label': currentLang === 'es' ? 'Huéspedes' : 'Guests',
-    'cms-fact-beds-label': currentLang === 'es' ? 'Dormitorios' : 'Bedrooms',
-    'cms-fact-terrace-label': currentLang === 'es' ? 'Terraza' : 'Terrace',
-    'cms-fact-beach-label': currentLang === 'es' ? 'Playa' : 'Beach',
-    'cms-fact-view-label': currentLang === 'es' ? 'Vista' : 'View'
+    'cms-fact-size-label': fl.size,
+    'cms-fact-guests-label': fl.guests,
+    'cms-fact-beds-label': fl.beds,
+    'cms-fact-terrace-label': fl.terrace,
+    'cms-fact-beach-label': fl.beach,
+    'cms-fact-view-label': fl.view
   };
   for(var id in factLabels) {
     var el = document.getElementById(id);
@@ -1166,23 +1166,13 @@ function applyContent(c){
   /* GALLERY */
   // Translate overtitle
   var galOt = document.getElementById('cms-gal-ot');
-  if(galOt) {
-    if(currentLang === 'es') {
-      galOt.textContent = 'Galería';
-    } else {
-      galOt.textContent = 'Gallery';
-    }
-  }
+  var galOtTexts = { en: 'Gallery', es: 'Galería', fr: 'Galerie' };
+  if(galOt) galOt.textContent = galOtTexts[currentLang] || galOtTexts.en;
   
   // Translate CTA button
   var galCta = document.getElementById('cms-gal-cta');
-  if(galCta) {
-    if(currentLang === 'es') {
-      galCta.textContent = 'Reservar →';
-    } else {
-      galCta.textContent = 'Book now →';
-    }
-  }
+  var galCtaTexts = { en: 'Book now →', es: 'Reservar →', fr: 'Réserver →' };
+  if(galCta) galCta.textContent = galCtaTexts[currentLang] || galCtaTexts.en;
   
   setText('cms-gal-heading', c.gallery.heading);
   
@@ -1208,25 +1198,15 @@ function applyContent(c){
   /* REVIEWS */
   // Translate overtitle
   var revOt = document.getElementById('cms-rev-ot');
-  if(revOt) {
-    if(currentLang === 'es') {
-      revOt.textContent = 'Reseñas de Huéspedes';
-    } else {
-      revOt.textContent = 'Guest Reviews';
-    }
-  }
+  var revOtTexts = { en: 'Guest Reviews', es: 'Reseñas de Huéspedes', fr: 'Avis des Clients' };
+  if(revOt) revOt.textContent = revOtTexts[currentLang] || revOtTexts.en;
   
   setText('cms-rev-heading', c.reviews.heading);
   
   // Translate review summary
   var revSummary = document.getElementById('cms-rev-summary');
-  if(revSummary) {
-    if(currentLang === 'es') {
-      revSummary.textContent = '5,0 · 2 reseñas';
-    } else {
-      revSummary.textContent = '5.0 · 2 reviews';
-    }
-  }
+  var revSumTexts = { en: '5.0 · 2 reviews', es: '5,0 · 2 reseñas', fr: '5,0 · 2 avis' };
+  if(revSummary) revSummary.textContent = revSumTexts[currentLang] || revSumTexts.en;
   if(c.reviews && c.reviews.items){
     var revList = document.getElementById('cms-rev-list');
     if(revList){
@@ -1240,9 +1220,8 @@ function applyContent(c){
   /* BOOKING */
   // Translate overtitle
   var bkOt = document.getElementById('cms-bk-ot');
-  if(bkOt) {
-    bkOt.textContent = currentLang === 'es' ? 'Reserva Tu Estancia' : 'Book Your Stay';
-  }
+  var bkOtTexts = { en: 'Book Your Stay', es: 'Reserva Tu Estancia', fr: 'Réservez Votre Séjour' };
+  if(bkOt) bkOt.textContent = bkOtTexts[currentLang] || bkOtTexts.en;
   
   setText('cms-bk-heading',  c.booking.heading);
   setText('cms-bk-desc',     c.booking.desc);
@@ -1253,12 +1232,18 @@ function applyContent(c){
   setText('cms-bk-smoking',  c.booking.smoking);
   
   // Translate booking labels
+  var bkLabelTranslations = {
+    en: { minstay: 'Minimum stay:', checkin: 'Check-in:', checkout: 'Check-out:', pets: 'Pets:', smoking: 'Smoking:' },
+    es: { minstay: 'Estancia mínima:', checkin: 'Llegada:', checkout: 'Salida:', pets: 'Mascotas:', smoking: 'Fumar:' },
+    fr: { minstay: 'Séjour minimum:', checkin: 'Arrivée:', checkout: 'Départ:', pets: 'Animaux:', smoking: 'Fumeur:' }
+  };
+  var bl = bkLabelTranslations[currentLang] || bkLabelTranslations.en;
   var bkLabels = {
-    'cms-bk-minstay-label': currentLang === 'es' ? 'Estancia mínima:' : 'Minimum stay:',
-    'cms-bk-checkin-label': currentLang === 'es' ? 'Llegada:' : 'Check-in:',
-    'cms-bk-checkout-label': currentLang === 'es' ? 'Salida:' : 'Check-out:',
-    'cms-bk-pets-label': currentLang === 'es' ? 'Mascotas:' : 'Pets:',
-    'cms-bk-smoking-label': currentLang === 'es' ? 'Fumar:' : 'Smoking:'
+    'cms-bk-minstay-label': bl.minstay,
+    'cms-bk-checkin-label': bl.checkin,
+    'cms-bk-checkout-label': bl.checkout,
+    'cms-bk-pets-label': bl.pets,
+    'cms-bk-smoking-label': bl.smoking
   };
   for(var id in bkLabels) {
     var el = document.getElementById(id);
@@ -1274,25 +1259,20 @@ function applyContent(c){
       if(c.lodgify.language)  ldg.setAttribute('data-language-code',  c.lodgify.language);
       
       // Update widget labels based on language
-      if(currentLang === 'es') {
-        ldg.setAttribute('data-check-in-label', 'Llegada');
-        ldg.setAttribute('data-check-out-label', 'Salida');
-        ldg.setAttribute('data-guests-label', 'Huéspedes');
-        ldg.setAttribute('data-book-button-label', 'Reservar');
-        ldg.setAttribute('data-total-price-label', 'Precio total:');
-        ldg.setAttribute('data-select-dates-to-see-price-label', 'Seleccione fechas para ver el precio');
-        ldg.setAttribute('data-minimum-price-per-night-first-label', 'Desde');
-        ldg.setAttribute('data-minimum-price-per-night-second-label', 'por noche');
-      } else {
-        ldg.setAttribute('data-check-in-label', 'Check-in');
-        ldg.setAttribute('data-check-out-label', 'Check-out');
-        ldg.setAttribute('data-guests-label', 'Guests');
-        ldg.setAttribute('data-book-button-label', 'Book Now');
-        ldg.setAttribute('data-total-price-label', 'Total price:');
-        ldg.setAttribute('data-select-dates-to-see-price-label', 'Select dates to see total price');
-        ldg.setAttribute('data-minimum-price-per-night-first-label', 'From');
-        ldg.setAttribute('data-minimum-price-per-night-second-label', 'per night');
-      }
+      var ldgLabels = {
+        en: { checkin: 'Check-in', checkout: 'Check-out', guests: 'Guests', book: 'Book Now', total: 'Total price:', select: 'Select dates to see total price', from: 'From', per: 'per night' },
+        es: { checkin: 'Llegada', checkout: 'Salida', guests: 'Huéspedes', book: 'Reservar', total: 'Precio total:', select: 'Seleccione fechas para ver el precio', from: 'Desde', per: 'por noche' },
+        fr: { checkin: 'Arrivée', checkout: 'Départ', guests: 'Voyageurs', book: 'Réserver', total: 'Prix total:', select: 'Sélectionnez les dates pour voir le prix', from: 'À partir de', per: 'par nuit' }
+      };
+      var ll = ldgLabels[currentLang] || ldgLabels.en;
+      ldg.setAttribute('data-check-in-label', ll.checkin);
+      ldg.setAttribute('data-check-out-label', ll.checkout);
+      ldg.setAttribute('data-guests-label', ll.guests);
+      ldg.setAttribute('data-book-button-label', ll.book);
+      ldg.setAttribute('data-total-price-label', ll.total);
+      ldg.setAttribute('data-select-dates-to-see-price-label', ll.select);
+      ldg.setAttribute('data-minimum-price-per-night-first-label', ll.from);
+      ldg.setAttribute('data-minimum-price-per-night-second-label', ll.per);
     }
   }
   /* CONTACT */
@@ -1327,20 +1307,21 @@ function applyContent(c){
     }
     
     // Translate footer policy links
+    var policyTranslations = {
+      en: { privacy: 'Privacy Policy', terms: 'Terms & Conditions', cancellation: 'Cancellation Policy' },
+      es: { privacy: 'Política de Privacidad', terms: 'Términos y Condiciones', cancellation: 'Política de Cancelación' },
+      fr: { privacy: 'Politique de Confidentialité', terms: 'Conditions Générales', cancellation: 'Politique d\'Annulation' }
+    };
+    var pl = policyTranslations[currentLang] || policyTranslations.en;
+    
     var privacyLink = document.getElementById('cms-footer-privacy');
-    if(privacyLink) {
-      privacyLink.textContent = currentLang === 'es' ? 'Política de Privacidad' : 'Privacy Policy';
-    }
+    if(privacyLink) privacyLink.textContent = pl.privacy;
     
     var termsLink = document.getElementById('cms-footer-terms');
-    if(termsLink) {
-      termsLink.textContent = currentLang === 'es' ? 'Términos y Condiciones' : 'Terms & Conditions';
-    }
+    if(termsLink) termsLink.textContent = pl.terms;
     
     var cancellationLink = document.getElementById('cms-footer-cancellation');
-    if(cancellationLink) {
-      cancellationLink.textContent = currentLang === 'es' ? 'Política de Cancelación' : 'Cancellation Policy';
-    }
+    if(cancellationLink) cancellationLink.textContent = pl.cancellation;
   }
   /* COOKIE CONSENT */
   if(c.cookie){
@@ -1402,12 +1383,12 @@ function loadContent(lang){
   currentLang = lang;
   localStorage.setItem('lang', lang);
   
-  // Update button IMMEDIATELY to show the OPPOSITE language
-  var langBtn = document.getElementById('lang-switch');
-  if(langBtn) {
-    langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
-    langBtn.disabled = true;
-    langBtn.style.opacity = '0.5';
+  // Update dropdown IMMEDIATELY
+  var langSelect = document.getElementById('lang-switch');
+  if(langSelect) {
+    langSelect.value = lang;
+    langSelect.disabled = true;
+    langSelect.style.opacity = '0.5';
   }
   
   // Remove any existing render overlays first
@@ -1422,15 +1403,15 @@ function loadContent(lang){
         }
         showCookieConsent();
         isTranslating = false;
-        if(langBtn) {
-          langBtn.disabled = false;
-          langBtn.style.opacity = '1';
+        if(langSelect) {
+          langSelect.disabled = false;
+          langSelect.style.opacity = '1';
         }
       }).catch(function(e) {
         isTranslating = false;
-        if(langBtn) {
-          langBtn.disabled = false;
-          langBtn.style.opacity = '1';
+        if(langSelect) {
+          langSelect.disabled = false;
+          langSelect.style.opacity = '1';
         }
       });
     } else {
@@ -1440,9 +1421,9 @@ function loadContent(lang){
       }
       showCookieConsent();
       isTranslating = false;
-      if(langBtn) {
-        langBtn.disabled = false;
-        langBtn.style.opacity = '1';
+      if(langSelect) {
+        langSelect.disabled = false;
+        langSelect.style.opacity = '1';
       }
     }
   } else {
@@ -1462,29 +1443,32 @@ function loadContent(lang){
         }
         showCookieConsent();
         isTranslating = false;
-        if(langBtn) {
-          langBtn.disabled = false;
-          langBtn.style.opacity = '1';
+        if(langSelect) {
+          langSelect.disabled = false;
+          langSelect.style.opacity = '1';
         }
       })
       .catch(function(e){
         isTranslating = false;
-        if(langBtn) {
-          langBtn.disabled = false;
-          langBtn.style.opacity = '1';
+        if(langSelect) {
+          langSelect.disabled = false;
+          langSelect.style.opacity = '1';
         }
       });
   }
 }
 
-function toggleLanguage(){
-  if(isTranslating) return; // Prevent multiple clicks while translating
-  var newLang = currentLang === 'es' ? 'en' : 'es';
-  loadContent(newLang);
+function switchLanguage(lang){
+  if(isTranslating) return;
+  loadContent(lang);
 }
 
 /* Auto-detect on load */
 var detectedLang = detectLanguage();
+// Set dropdown to current language
+var langSelect = document.getElementById('lang-switch');
+if(langSelect) langSelect.value = detectedLang;
+
 fetch('/content.json')
   .then(function(r){return r.json();})
   .then(function(c){
