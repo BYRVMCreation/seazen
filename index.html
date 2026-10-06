@@ -1395,7 +1395,7 @@ function loadContent(lang){
   removeRenderOverlays();
   
   if(cachedContent){
-    if (lang === 'es') {
+    if (lang !== 'en') {
       translateContent(cachedContent).then(function(translated) {
         applyContent(translated);
         if(translated.settings && translated.settings.showRenderOverlay){
@@ -1431,7 +1431,7 @@ function loadContent(lang){
       .then(function(r){return r.json();})
       .then(function(c){
         cachedContent = c;
-        if (lang === 'es') {
+        if (lang !== 'en') {
           return translateContent(c);
         }
         return c;
