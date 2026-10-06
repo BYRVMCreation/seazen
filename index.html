@@ -1459,7 +1459,7 @@ function loadContent(lang){
 }
 
 function switchLanguage(lang){
-  if(isTranslating) return;
+  isTranslating = false; // Reset flag to allow switching
   loadContent(lang);
 }
 
