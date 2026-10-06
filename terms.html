@@ -14,7 +14,6 @@
   .back-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--a); text-decoration: none; transition: gap .2s; }
   .back-btn:hover { gap: 12px; }
   .back-btn svg { width: 14px; height: 14px; }
-  .lang-btn { background: none; border: 1px solid var(--bdr); color: var(--tx); font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .1em; padding: 6px 12px; cursor: pointer; }
   .wrap { max-width: 720px; margin: 0 auto; padding: clamp(40px,6vw,80px) 24px clamp(60px,8vw,120px); }
   .ot { font-size: 9px; letter-spacing: .26em; text-transform: uppercase; color: var(--a); display: block; margin-bottom: 16px; }
   h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(32px,4vw,52px); line-height: 1.15; margin-bottom: 8px; }
@@ -33,7 +32,11 @@
     <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
     <span id="back-text">Back to SeaZen</span>
   </a>
-  <button id="lang-switch" class="lang-btn">ES</button>
+  <select id="lang-switch" onchange="switchLanguage(this.value)" style="background:none;border:1px solid var(--bdr);color:var(--tx);font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.1em;padding:6px 12px;cursor:pointer;-webkit-appearance:none;appearance:none;">
+    <option value="en">EN</option>
+    <option value="es">ES</option>
+    <option value="fr">FR</option>
+  </select>
 </div>
 <div class="wrap">
   <span id="page-ot" class="ot">Legal</span>
@@ -50,25 +53,30 @@
 <script>
 var GOOGLE_TRANSLATE_API_KEY = 'AIzaSyCapYYpsJwrTjzqqjdjbJcDap5G7vWY9Nk';
 var currentLang = localStorage.getItem('lang') || 'en';
+var textCache = JSON.parse(localStorage.getItem('textCache') || '{}');
 
 async function translateWithGoogle(text) {
   if (!text || typeof text !== 'string') return text;
+  var cacheKey = currentLang + ':' + text;
+  if (textCache[cacheKey]) return textCache[cacheKey];
   try {
     var response = await fetch('https://translation.googleapis.com/language/translate/v2?key=' + GOOGLE_TRANSLATE_API_KEY, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ q: text, source: 'en', target: 'es', format: 'text' })
+      body: JSON.stringify({ q: text, source: 'en', target: currentLang, format: 'text' })
     });
     if (!response.ok) return text;
     var data = await response.json();
-    return data.data.translations[0].translatedText;
+    var translated = data.data.translations[0].translatedText;
+    textCache[cacheKey] = translated;
+    localStorage.setItem('textCache', JSON.stringify(textCache));
+    return translated;
   } catch (e) { return text; }
 }
 
 function renderContent(data) {
   document.getElementById('page-title').textContent = data.title;
   document.getElementById('page-updated').textContent = 'Last updated: ' + data.updated;
-  
   var html = '';
   data.sections.forEach(function(section) {
     html += '<h2>' + section.heading + '</h2>';
@@ -77,15 +85,22 @@ function renderContent(data) {
   document.getElementById('page-content').innerHTML = html;
 }
 
+var footerLabels = {
+  en: { privacy: 'Privacy', cancellation: 'Cancellation', back: 'Back to SeaZen' },
+  es: { privacy: 'Privacidad', cancellation: 'Cancelación', back: 'Volver a SeaZen' },
+  fr: { privacy: 'Confidentialité', cancellation: 'Annulation', back: 'Retour à SeaZen' }
+};
+
 async function translatePage(data) {
-  if (currentLang !== 'es') return;
+  if (currentLang === 'en') return;
   
-  document.getElementById('back-text').textContent = await translateWithGoogle('Back to SeaZen');
+  var fl = footerLabels[currentLang] || footerLabels.en;
+  document.getElementById('back-text').textContent = fl.back;
   document.getElementById('page-ot').textContent = await translateWithGoogle('Legal');
   document.getElementById('page-title').textContent = await translateWithGoogle(data.title);
   document.getElementById('page-updated').textContent = await translateWithGoogle('Last updated: ' + data.updated);
-  document.getElementById('footer-privacy').textContent = 'Privacidad';
-  document.getElementById('footer-cancellation').textContent = 'Cancelación';
+  document.getElementById('footer-privacy').textContent = fl.privacy;
+  document.getElementById('footer-cancellation').textContent = fl.cancellation;
   
   var sections = document.getElementById('page-content').querySelectorAll('h2, p');
   for (var i = 0; i < sections.length; i++) {
@@ -93,36 +108,28 @@ async function translatePage(data) {
   }
 }
 
-function updateLangButton() {
-  document.getElementById('lang-switch').textContent = currentLang === 'es' ? 'EN' : 'ES';
-}
-
-function toggleLanguage() {
-  currentLang = currentLang === 'es' ? 'en' : 'es';
-  localStorage.setItem('lang', currentLang);
+function switchLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
   location.reload();
 }
 
-document.getElementById('lang-switch').addEventListener('click', toggleLanguage);
+document.getElementById('lang-switch').value = currentLang;
 
-// Load content from CMS JSON
 fetch('./terms.json')
   .then(function(r) { return r.json(); })
   .then(function(data) {
     renderContent(data);
-    if (currentLang === 'es') translatePage(data);
+    if (currentLang !== 'en') translatePage(data);
   })
   .catch(function() {});
 
-// Load footer copy
 fetch('./content.json')
   .then(function(r) { return r.json(); })
   .then(function(c) {
     if (c.footer && c.footer.copy) document.getElementById('footer-copy').textContent = c.footer.copy;
   })
   .catch(function() {});
-
-updateLangButton();
 </script>
 </body>
 </html>
